@@ -2,12 +2,7 @@
 source: tests/asm_snapshots.rs
 expression: asm
 ---
-.section .text.<bigints::u256::Uint256 as core::ops::arith::Mul>::mul,"ax",@progbits
-	.globl	<bigints::u256::Uint256 as core::ops::arith::Mul>::mul
-	.p2align	1
-.type	<bigints::u256::Uint256 as core::ops::arith::Mul>::mul,@function
 <bigints::u256::Uint256 as core::ops::arith::Mul>::mul:
-	.cfi_startproc
 	ld a3, 0(a1)
 	ld t6, 8(a1)
 	ld t0, 16(a1)
@@ -33,17 +28,11 @@ expression: asm
 	sltu t4, t5, a4
 .LBB_2:
 	addi sp, sp, -48
-	.cfi_def_cfa_offset 48
 	sd s0, 40(sp)
 	sd s1, 32(sp)
 	sd s2, 24(sp)
 	sd s3, 16(sp)
 	sd s4, 8(sp)
-	.cfi_offset s0, -8
-	.cfi_offset s1, -16
-	.cfi_offset s2, -24
-	.cfi_offset s3, -32
-	.cfi_offset s4, -40
 	mulhu s2, t2, a3
 	mul s3, t2, a3
 	mul s0, a5, t6
@@ -79,11 +68,5 @@ expression: asm
 	ld s2, 24(sp)
 	ld s3, 16(sp)
 	ld s4, 8(sp)
-	.cfi_restore s0
-	.cfi_restore s1
-	.cfi_restore s2
-	.cfi_restore s3
-	.cfi_restore s4
 	addi sp, sp, 48
-	.cfi_def_cfa_offset 0
 	ret

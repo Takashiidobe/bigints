@@ -2,48 +2,29 @@
 source: tests/asm_snapshots.rs
 expression: asm
 ---
-.section .text.<bigints::u64::Uint64 as core::ops::arith::Div>::div,"ax",@progbits
-	.globl	<bigints::u64::Uint64 as core::ops::arith::Div>::div
-	.p2align	4
-.type	<bigints::u64::Uint64 as core::ops::arith::Div>::div,@function
 <bigints::u64::Uint64 as core::ops::arith::Div>::div:
-	.cfi_startproc
 	push ebx
-	.cfi_def_cfa_offset 8
 	sub esp, 8
-	.cfi_def_cfa_offset 16
-	.cfi_offset ebx, -8
 	mov eax, dword ptr [esp + 24]
 	mov ecx, dword ptr [esp + 28]
 	call .L67$pb
-	.cfi_adjust_cfa_offset 4
 .L67$pb:
 	pop ebx
-	.cfi_adjust_cfa_offset -4
-.Ltmp1145:
-	add ebx, offset _GLOBAL_OFFSET_TABLE_+(.Ltmp1145-.L67$pb)
+.Ltmp:
+	add ebx, offset _GLOBAL_OFFSET_TABLE_+(.Ltmp-.L67$pb)
 	mov edx, eax
 	or edx, ecx
 	je .LBB_2
 	push ecx
-	.cfi_adjust_cfa_offset 4
 	push eax
-	.cfi_adjust_cfa_offset 4
 	push dword ptr [esp + 28]
-	.cfi_adjust_cfa_offset 4
 	push dword ptr [esp + 28]
-	.cfi_adjust_cfa_offset 4
 	call __udivdi3@PLT
 	add esp, 24
-	.cfi_adjust_cfa_offset -24
 	pop ebx
-	.cfi_def_cfa_offset 4
 	ret
 .LBB_2:
-	.cfi_def_cfa_offset 16
 	sub esp, 12
-	.cfi_adjust_cfa_offset 12
 	lea eax, [ebx + .Lanon.12@GOTOFF]
 	push eax
-	.cfi_adjust_cfa_offset 4
 	call core::panicking::panic_const::panic_const_div_by_zero@PLT

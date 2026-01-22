@@ -2,25 +2,13 @@
 source: tests/asm_snapshots.rs
 expression: asm
 ---
-.section .text.<bigints::i256::Int256 as core::ops::arith::Div>::div,"ax",@progbits
-	.globl	<bigints::i256::Int256 as core::ops::arith::Div>::div
-	.p2align	1
-.type	<bigints::i256::Int256 as core::ops::arith::Div>::div,@function
 <bigints::i256::Int256 as core::ops::arith::Div>::div:
-	.cfi_startproc
 	addi sp, sp, -144
-	.cfi_def_cfa_offset 144
 	sd ra, 136(sp)
 	sd s0, 128(sp)
 	sd s1, 120(sp)
 	sd s2, 112(sp)
 	sd s3, 104(sp)
-	.cfi_offset ra, -8
-	.cfi_offset s0, -16
-	.cfi_offset s1, -24
-	.cfi_offset s2, -32
-	.cfi_offset s3, -40
-	.cfi_remember_state
 	ld a5, 0(a2)
 	ld t0, 8(a2)
 	ld a6, 16(a2)
@@ -82,16 +70,9 @@ expression: asm
 	ld s1, 120(sp)
 	ld s2, 112(sp)
 	ld s3, 104(sp)
-	.cfi_restore ra
-	.cfi_restore s0
-	.cfi_restore s1
-	.cfi_restore s2
-	.cfi_restore s3
 	addi sp, sp, 144
-	.cfi_def_cfa_offset 0
 	ret
 .LBB_9:
-	.cfi_restore_state
 	snez a3, s0
 	neg s0, s0
 	neg a4, s1

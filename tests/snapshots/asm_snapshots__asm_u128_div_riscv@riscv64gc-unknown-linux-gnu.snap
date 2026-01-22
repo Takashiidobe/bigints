@@ -2,27 +2,16 @@
 source: tests/asm_snapshots.rs
 expression: asm
 ---
-.section .text.<bigints::u128::Uint128 as core::ops::arith::Div>::div,"ax",@progbits
-	.globl	<bigints::u128::Uint128 as core::ops::arith::Div>::div
-	.p2align	1
-.type	<bigints::u128::Uint128 as core::ops::arith::Div>::div,@function
 <bigints::u128::Uint128 as core::ops::arith::Div>::div:
-	.cfi_startproc
 	addi sp, sp, -16
-	.cfi_def_cfa_offset 16
 	sd ra, 8(sp)
-	.cfi_offset ra, -8
-	.cfi_remember_state
 	or a4, a2, a3
 	beqz a4, .LBB_2
 	call __udivti3
 	ld ra, 8(sp)
-	.cfi_restore ra
 	addi sp, sp, 16
-	.cfi_def_cfa_offset 0
 	ret
 .LBB_2:
-	.cfi_restore_state
 .Lpcrel_hi8:
 	auipc a0, %pcrel_hi(.Lanon.14)
 	addi a0, a0, %pcrel_lo(.Lpcrel_hi8)

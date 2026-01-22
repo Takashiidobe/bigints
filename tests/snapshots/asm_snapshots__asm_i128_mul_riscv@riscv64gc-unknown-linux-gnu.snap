@@ -2,12 +2,7 @@
 source: tests/asm_snapshots.rs
 expression: asm
 ---
-.section .text.<bigints::i128::Int128 as core::ops::arith::Mul>::mul,"ax",@progbits
-	.globl	<bigints::i128::Int128 as core::ops::arith::Mul>::mul
-	.p2align	1
-.type	<bigints::i128::Int128 as core::ops::arith::Mul>::mul,@function
 <bigints::i128::Int128 as core::ops::arith::Mul>::mul:
-	.cfi_startproc
 	slli a7, a0, 32
 	srli a6, a0, 32
 	slli a5, a2, 32

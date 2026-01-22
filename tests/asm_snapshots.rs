@@ -1,18 +1,18 @@
-use std::process::Command;
 use regex::Regex;
+use std::process::Command;
 
 fn cargo_asm(symbol: &str, target: &str) -> String {
-    let output = Command::new("cargo")
-        .args([
-            "asm",
-            "--lib",
-            symbol,
-            "--release",
-            "--target",
-            target,
-        ])
-        .output()
-        .expect("failed to run cargo asm");
+    let mut cmd = Command::new("cargo");
+    cmd.args([
+        "asm",
+        "--lib",
+        symbol,
+        "--simplify",
+        "--release",
+        "--target",
+        target,
+    ]);
+    let output = cmd.output().expect("failed to run cargo asm");
     if !output.status.success() {
         let stderr = String::from_utf8_lossy(&output.stderr);
         panic!("cargo asm failed for {symbol}: {stderr}");
@@ -32,6 +32,9 @@ fn normalize_asm(asm: &str) -> String {
     // Normalize .Lanon.<hash>.<N> labels - strip the hash, keep the suffix
     let anon_re = Regex::new(r"\.Lanon\.[a-f0-9]+\.(\d+)").unwrap();
     let result = anon_re.replace_all(&result, ".Lanon.$1");
+
+    let ltmp_re = Regex::new(r"\.Ltmp\d+").unwrap();
+    let result = ltmp_re.replace_all(&result, ".Ltmp");
 
     result.into_owned()
 }

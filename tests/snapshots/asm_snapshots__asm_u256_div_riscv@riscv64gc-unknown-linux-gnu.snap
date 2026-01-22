@@ -2,14 +2,8 @@
 source: tests/asm_snapshots.rs
 expression: asm
 ---
-.section .text.<bigints::u256::Uint256 as core::ops::arith::Div>::div,"ax",@progbits
-	.globl	<bigints::u256::Uint256 as core::ops::arith::Div>::div
-	.p2align	1
-.type	<bigints::u256::Uint256 as core::ops::arith::Div>::div,@function
 <bigints::u256::Uint256 as core::ops::arith::Div>::div:
-	.cfi_startproc
 	addi sp, sp, -224
-	.cfi_def_cfa_offset 224
 	sd ra, 216(sp)
 	sd s0, 208(sp)
 	sd s1, 200(sp)
@@ -23,20 +17,6 @@ expression: asm
 	sd s9, 136(sp)
 	sd s10, 128(sp)
 	sd s11, 120(sp)
-	.cfi_offset ra, -8
-	.cfi_offset s0, -16
-	.cfi_offset s1, -24
-	.cfi_offset s2, -32
-	.cfi_offset s3, -40
-	.cfi_offset s4, -48
-	.cfi_offset s5, -56
-	.cfi_offset s6, -64
-	.cfi_offset s7, -72
-	.cfi_offset s8, -80
-	.cfi_offset s9, -88
-	.cfi_offset s10, -96
-	.cfi_offset s11, -104
-	.cfi_remember_state
 	ld s4, 16(a2)
 	ld a5, 24(a2)
 	or a3, a5, s4
@@ -975,24 +955,9 @@ expression: asm
 	ld s9, 136(sp)
 	ld s10, 128(sp)
 	ld s11, 120(sp)
-	.cfi_restore ra
-	.cfi_restore s0
-	.cfi_restore s1
-	.cfi_restore s2
-	.cfi_restore s3
-	.cfi_restore s4
-	.cfi_restore s5
-	.cfi_restore s6
-	.cfi_restore s7
-	.cfi_restore s8
-	.cfi_restore s9
-	.cfi_restore s10
-	.cfi_restore s11
 	addi sp, sp, 224
-	.cfi_def_cfa_offset 0
 	ret
 .LBB_120:
-	.cfi_restore_state
 	li a5, 8
 	add a5, a5, a4
 	sd t3, 0(a5)

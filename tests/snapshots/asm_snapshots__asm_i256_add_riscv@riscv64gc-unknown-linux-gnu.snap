@@ -2,12 +2,7 @@
 source: tests/asm_snapshots.rs
 expression: asm
 ---
-.section .text.<bigints::i256::Int256 as core::ops::arith::Add>::add,"ax",@progbits
-	.globl	<bigints::i256::Int256 as core::ops::arith::Add>::add
-	.p2align	1
-.type	<bigints::i256::Int256 as core::ops::arith::Add>::add,@function
 <bigints::i256::Int256 as core::ops::arith::Add>::add:
-	.cfi_startproc
 	ld a6, 0(a1)
 	ld a7, 8(a1)
 	ld t0, 16(a1)

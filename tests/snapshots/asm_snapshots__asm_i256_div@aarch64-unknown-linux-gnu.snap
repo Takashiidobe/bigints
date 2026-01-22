@@ -2,23 +2,11 @@
 source: tests/asm_snapshots.rs
 expression: asm
 ---
-.section .text.<bigints::i256::Int256 as core::ops::arith::Div>::div,"ax",@progbits
-	.globl	<bigints::i256::Int256 as core::ops::arith::Div>::div
-	.p2align	2
-.type	<bigints::i256::Int256 as core::ops::arith::Div>::div,@function
 <bigints::i256::Int256 as core::ops::arith::Div>::div:
-	.cfi_startproc
 	sub sp, sp, #128
-	.cfi_def_cfa_offset 128
 	stp x29, x30, [sp, #96]
 	stp x20, x19, [sp, #112]
 	add x29, sp, #96
-	.cfi_def_cfa w29, 32
-	.cfi_offset w19, -8
-	.cfi_offset w20, -16
-	.cfi_offset w30, -24
-	.cfi_offset w29, -32
-	.cfi_remember_state
 	ldp x10, x12, [x1]
 	mov x19, x8
 	ldp x11, x9, [x1, #16]
@@ -68,18 +56,11 @@ expression: asm
 .LBB_8:
 	stp x9, x11, [x19]
 	stp x10, x8, [x19, #16]
-	.cfi_def_cfa wsp, 128
 	ldp x20, x19, [sp, #112]
 	ldp x29, x30, [sp, #96]
 	add sp, sp, #128
-	.cfi_def_cfa_offset 0
-	.cfi_restore w19
-	.cfi_restore w20
-	.cfi_restore w30
-	.cfi_restore w29
 	ret
 .LBB_9:
-	.cfi_restore_state
 	cmp x15, #0
 	neg x18, x17
 	neg x15, x15
