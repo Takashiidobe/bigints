@@ -1,0 +1,20 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::u64::Uint64 as core::ops::arith::Mul>::mul,"ax",@progbits
+	.globl	<bigints::u64::Uint64 as core::ops::arith::Mul>::mul
+	.p2align	4
+.type	<bigints::u64::Uint64 as core::ops::arith::Mul>::mul,@function
+<bigints::u64::Uint64 as core::ops::arith::Mul>::mul:
+	.cfi_startproc
+	mov r8d, edi
+	mov eax, edx
+	imul rax, r8
+	mov r8, rax
+	shr r8, 32
+	imul ecx, edi
+	imul edx, esi
+	add edx, ecx
+	add edx, r8d
+	ret

@@ -13,7 +13,7 @@ expression: asm
 	shl rcx, 32
 	mov r8d, edx
 	or r8, rcx
-	je .LBB66_6
+	je .LBB_6
 	shl rsi, 32
 	mov eax, edi
 	or rax, rsi
@@ -22,11 +22,11 @@ expression: asm
 	movabs rdx, -9223372036854775808
 	xor rdx, rax
 	or rdx, rcx
-	je .LBB66_7
+	je .LBB_7
 	mov rcx, rax
 	or rcx, r8
 	shr rcx, 32
-	je .LBB66_5
+	je .LBB_5
 	cqo
 	idiv r8
 	mov rdx, rax
@@ -34,7 +34,7 @@ expression: asm
 	pop rcx
 	.cfi_def_cfa_offset 8
 	ret
-.LBB66_5:
+.LBB_5:
 	.cfi_def_cfa_offset 16
 	xor edx, edx
 	div r8d
@@ -43,10 +43,10 @@ expression: asm
 	pop rcx
 	.cfi_def_cfa_offset 8
 	ret
-.LBB66_6:
+.LBB_6:
 	.cfi_def_cfa_offset 16
-	lea rdi, [rip + .Lanon.8a0de8f2d308581a9d48e9cda43cb528.15]
+	lea rdi, [rip + .Lanon.15]
 	call qword ptr [rip + core::panicking::panic_const::panic_const_div_by_zero@GOTPCREL]
-.LBB66_7:
-	lea rdi, [rip + .Lanon.8a0de8f2d308581a9d48e9cda43cb528.15]
+.LBB_7:
+	lea rdi, [rip + .Lanon.15]
 	call qword ptr [rip + core::panicking::panic_const::panic_const_div_overflow@GOTPCREL]

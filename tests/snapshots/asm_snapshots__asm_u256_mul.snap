@@ -1,0 +1,90 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::u256::Uint256 as core::ops::arith::Mul>::mul,"ax",@progbits
+	.globl	<bigints::u256::Uint256 as core::ops::arith::Mul>::mul
+	.p2align	4
+.type	<bigints::u256::Uint256 as core::ops::arith::Mul>::mul,@function
+<bigints::u256::Uint256 as core::ops::arith::Mul>::mul:
+	.cfi_startproc
+	push rbp
+	.cfi_def_cfa_offset 16
+	push r15
+	.cfi_def_cfa_offset 24
+	push r14
+	.cfi_def_cfa_offset 32
+	push r13
+	.cfi_def_cfa_offset 40
+	push r12
+	.cfi_def_cfa_offset 48
+	push rbx
+	.cfi_def_cfa_offset 56
+	.cfi_offset rbx, -56
+	.cfi_offset r12, -48
+	.cfi_offset r13, -40
+	.cfi_offset r14, -32
+	.cfi_offset r15, -24
+	.cfi_offset rbp, -16
+	mov r9, rdx
+	mov r10, rsi
+	mov rax, rdi
+	mov rbx, qword ptr [rsi]
+	mov rbp, qword ptr [rsi + 8]
+	mov rcx, qword ptr [rdx]
+	mov r8, qword ptr [rdx + 8]
+	mov rdi, qword ptr [rdx + 16]
+	mov rdx, rcx
+	mulx r12, rdx, rbx
+	mov qword ptr [rsp - 8], rdx
+	mov rdx, r8
+	mulx r15, r11, rbx
+	mov rdx, rcx
+	mulx rdx, r13, rbp
+	add r11, r12
+	adc r15, 0
+	add r11, r13
+	adc r15, rdx
+	mov rdx, rdi
+	mulx rdx, rsi, rbx
+	mov qword ptr [rsp - 24], rsi
+	mov qword ptr [rsp - 16], rdx
+	mov rdx, r8
+	mulx r14, rsi, rbp
+	mov r13, qword ptr [r10 + 16]
+	mov rdx, rcx
+	mulx r12, rdx, r13
+	setb byte ptr [rsp - 25]
+	add rdx, rsi
+	adc r12, r14
+	add rdx, qword ptr [rsp - 24]
+	adc r12, qword ptr [rsp - 16]
+	add rdx, r15
+	movzx esi, byte ptr [rsp - 25]
+	adc r12, rsi
+	imul rbx, qword ptr [r9 + 24]
+	imul rdi, rbp
+	add rdi, rbx
+	imul rcx, qword ptr [r10 + 24]
+	imul r8, r13
+	add rcx, r8
+	add rcx, rdi
+	add rcx, r12
+	mov rsi, qword ptr [rsp - 8]
+	mov qword ptr [rax], rsi
+	mov qword ptr [rax + 8], r11
+	mov qword ptr [rax + 16], rdx
+	mov qword ptr [rax + 24], rcx
+	pop rbx
+	.cfi_def_cfa_offset 48
+	pop r12
+	.cfi_def_cfa_offset 40
+	pop r13
+	.cfi_def_cfa_offset 32
+	pop r14
+	.cfi_def_cfa_offset 24
+	pop r15
+	.cfi_def_cfa_offset 16
+	pop rbp
+	.cfi_def_cfa_offset 8
+	ret

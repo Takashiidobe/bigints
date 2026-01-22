@@ -1,4 +1,5 @@
 use std::process::Command;
+use regex::Regex;
 
 fn cargo_asm(symbol: &str) -> String {
     let output = Command::new("cargo")
@@ -14,7 +15,23 @@ fn cargo_asm(symbol: &str) -> String {
         let stderr = String::from_utf8_lossy(&output.stderr);
         panic!("cargo asm failed for {symbol}: {stderr}");
     }
-    String::from_utf8_lossy(&output.stdout).into_owned()
+    let asm = String::from_utf8_lossy(&output.stdout).into_owned();
+    normalize_asm(&asm)
+}
+
+/// Normalize assembly output for stable snapshots.
+/// Replaces variable labels like .LBB68_5 with .LBB_5 (strips the function-specific prefix).
+fn normalize_asm(asm: &str) -> String {
+    // Normalize .LBB<N>_<M> labels - strip the N which varies by function order
+    // Keep the M suffix which is stable within a function
+    let lbb_re = Regex::new(r"\.LBB\d+_(\d+)").unwrap();
+    let result = lbb_re.replace_all(asm, ".LBB_$1");
+
+    // Normalize .Lanon.<hash>.<N> labels - strip the hash, keep the suffix
+    let anon_re = Regex::new(r"\.Lanon\.[a-f0-9]+\.(\d+)").unwrap();
+    let result = anon_re.replace_all(&result, ".Lanon.$1");
+
+    result.into_owned()
 }
 
 macro_rules! asm_snapshot {

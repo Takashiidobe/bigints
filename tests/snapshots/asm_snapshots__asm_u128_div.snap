@@ -12,12 +12,12 @@ expression: asm
 	.cfi_def_cfa_offset 16
 	mov rax, rdx
 	or rax, rcx
-	je .LBB65_2
+	je .LBB_2
 	call qword ptr [rip + __udivti3@GOTPCREL]
 	pop rcx
 	.cfi_def_cfa_offset 8
 	ret
-.LBB65_2:
+.LBB_2:
 	.cfi_def_cfa_offset 16
-	lea rdi, [rip + .Lanon.8a0de8f2d308581a9d48e9cda43cb528.13]
+	lea rdi, [rip + .Lanon.13]
 	call qword ptr [rip + core::panicking::panic_const::panic_const_div_by_zero@GOTPCREL]

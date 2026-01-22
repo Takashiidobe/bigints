@@ -18,7 +18,7 @@ expression: asm
 	.cfi_offset rbp, -16
 	vmovdqu ymm0, ymmword ptr [rdx]
 	vptest ymm0, ymm0
-	je .LBB69_8
+	je .LBB_8
 	mov rbx, rdi
 	mov rcx, qword ptr [rsi + 24]
 	test rcx, rcx
@@ -31,7 +31,7 @@ expression: asm
 	mov r8, qword ptr [rsi + 8]
 	mov rsi, qword ptr [rsi + 16]
 	test rcx, rcx
-	jns .LBB69_3
+	jns .LBB_3
 	xor r9d, r9d
 	neg rdi
 	mov r10d, 0
@@ -43,7 +43,7 @@ expression: asm
 	mov r8, r10
 	mov rsi, r11
 	mov rcx, r9
-.LBB69_3:
+.LBB_3:
 	mov qword ptr [rsp + 8], rdi
 	mov qword ptr [rsp + 16], r8
 	mov qword ptr [rsp + 24], rsi
@@ -53,7 +53,7 @@ expression: asm
 	vpextrq rsi, xmm0, 1
 	vmovq rdx, xmm1
 	test rax, rax
-	jns .LBB69_5
+	jns .LBB_5
 	xor edi, edi
 	neg rcx
 	mov r8d, 0
@@ -65,7 +65,7 @@ expression: asm
 	mov rsi, r8
 	mov rdx, r9
 	mov rax, rdi
-.LBB69_5:
+.LBB_5:
 	mov qword ptr [rsp + 40], rcx
 	mov qword ptr [rsp + 48], rsi
 	mov qword ptr [rsp + 56], rdx
@@ -80,7 +80,7 @@ expression: asm
 	mov rdx, qword ptr [rsp + 88]
 	mov rcx, qword ptr [rsp + 96]
 	test bpl, bpl
-	je .LBB69_7
+	je .LBB_7
 	xor edi, edi
 	neg rax
 	mov r8d, 0
@@ -92,7 +92,7 @@ expression: asm
 	mov rsi, r8
 	mov rdx, r9
 	mov rcx, rdi
-.LBB69_7:
+.LBB_7:
 	mov qword ptr [rbx], rax
 	mov qword ptr [rbx + 8], rsi
 	mov qword ptr [rbx + 16], rdx
@@ -105,10 +105,10 @@ expression: asm
 	pop rbp
 	.cfi_def_cfa_offset 8
 	ret
-.LBB69_8:
+.LBB_8:
 	.cfi_def_cfa_offset 128
-	lea rdi, [rip + .Lanon.8a0de8f2d308581a9d48e9cda43cb528.19]
-	lea rdx, [rip + .Lanon.8a0de8f2d308581a9d48e9cda43cb528.21]
+	lea rdi, [rip + .Lanon.19]
+	lea rdx, [rip + .Lanon.21]
 	mov esi, 51
 	vzeroupper
 	call qword ptr [rip + core::panicking::panic_fmt@GOTPCREL]

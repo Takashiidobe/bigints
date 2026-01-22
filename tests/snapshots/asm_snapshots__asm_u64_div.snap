@@ -11,26 +11,26 @@ expression: asm
 	shl rcx, 32
 	mov r8d, edx
 	or r8, rcx
-	je .LBB62_5
+	je .LBB_5
 	shl rsi, 32
 	mov eax, edi
 	or rax, rsi
 	or rsi, r8
 	shr rsi, 32
-	je .LBB62_4
+	je .LBB_4
 	xor edx, edx
 	div r8
 	mov rdx, rax
 	shr rdx, 32
 	ret
-.LBB62_4:
+.LBB_4:
 	xor edx, edx
 	div r8d
 	mov rdx, rax
 	shr rdx, 32
 	ret
-.LBB62_5:
+.LBB_5:
 	push rax
 	.cfi_def_cfa_offset 16
-	lea rdi, [rip + .Lanon.8a0de8f2d308581a9d48e9cda43cb528.11]
+	lea rdi, [rip + .Lanon.11]
 	call qword ptr [rip + core::panicking::panic_const::panic_const_div_by_zero@GOTPCREL]

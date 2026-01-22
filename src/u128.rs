@@ -76,6 +76,7 @@ impl Uint128 {
 impl std::ops::Add for Uint128 {
     type Output = Self;
 
+    #[inline(never)]
     fn add(self, rhs: Self) -> Self::Output {
         let (l, carry) = self.l.overflowing_add(rhs.l);
         let h = self.h.wrapping_add(rhs.h).wrapping_add(carry as u64);
@@ -87,6 +88,7 @@ impl std::ops::Add for Uint128 {
 impl std::ops::Sub for Uint128 {
     type Output = Self;
 
+    #[inline(never)]
     fn sub(self, rhs: Self) -> Self::Output {
         let (l, borrow) = self.l.overflowing_sub(rhs.l);
         let h = self.h.wrapping_sub(rhs.h).wrapping_sub(borrow as u64);
@@ -99,6 +101,7 @@ impl std::ops::Mul for Uint128 {
     type Output = Self;
 
     /// 128-bit multiplication, keeping only the low 128 bits of the 256-bit result.
+    #[inline(never)]
     ///
     /// # Algorithm
     ///

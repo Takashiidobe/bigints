@@ -74,6 +74,7 @@ impl std::ops::Add for Uint64 {
     /// LLVM generates:
     /// - x86-32: `add`/`adc`
     /// - ARM32: `adds`/`adc`
+    #[inline(never)]
     fn add(self, rhs: Self) -> Self::Output {
         let (l, carry) = self.l.overflowing_add(rhs.l);
         let h = self.h.wrapping_add(rhs.h).wrapping_add(carry as u32);
@@ -93,6 +94,7 @@ impl std::ops::Sub for Uint64 {
     /// LLVM generates:
     /// - x86-32: `sub`/`sbb`
     /// - ARM32: `subs`/`sbc`
+    #[inline(never)]
     fn sub(self, rhs: Self) -> Self::Output {
         let (l, borrow) = self.l.overflowing_sub(rhs.l);
         let h = self.h.wrapping_sub(rhs.h).wrapping_sub(borrow as u32);
@@ -125,6 +127,7 @@ impl std::ops::Mul for Uint64 {
     ///     result.h = p0_hi + t1 + t2
     ///     result.l = p0_lo
     /// ```
+    #[inline(never)]
     fn mul(self, rhs: Self) -> Self::Output {
         // This cast pattern tells LLVM we want 32×32→64
         // x86-32: emits `mul`

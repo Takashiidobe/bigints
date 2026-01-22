@@ -19,6 +19,7 @@ dependencies = [
  "insta",
  "quickcheck",
  "quickcheck_macros",
+ "regex",
 ]
 
 [[package]]

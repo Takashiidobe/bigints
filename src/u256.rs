@@ -46,6 +46,7 @@ impl std::ops::Add for Uint256 {
 
     /// 256-bit addition with carry chain.
     /// this is much better generated code than previously (uint) pre 1.79
+    #[inline(never)]
     fn add(self, rhs: Self) -> Self::Output {
         let (l0, c0) = self.l0.overflowing_add(rhs.l0);
 
@@ -60,6 +61,7 @@ impl std::ops::Sub for Uint256 {
     type Output = Self;
 
     /// 256-bit subtraction with borrow chain.
+    #[inline(never)]
     fn sub(self, rhs: Self) -> Self::Output {
         let (l0, b0) = self.l0.overflowing_sub(rhs.l0);
         let (l1, b1) = self.l1.borrowing_sub(rhs.l1, b0);
@@ -73,7 +75,7 @@ impl std::ops::Mul for Uint256 {
     type Output = Self;
 
     /// 256-bit multiplication (schoolbook), keeping only the low 256 bits.
-    #[inline]
+    #[inline(never)]
     fn mul(self, rhs: Self) -> Self::Output {
         #[cfg(target_arch = "x86_64")]
         {
