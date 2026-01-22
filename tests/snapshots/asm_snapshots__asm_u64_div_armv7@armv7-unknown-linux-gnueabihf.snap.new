@@ -1,0 +1,17 @@
+---
+source: tests/asm_snapshots.rs
+assertion_line: 342
+expression: asm
+---
+<bigints::u64::Uint64 as core::ops::arith::Div>::div:
+	push {r11, lr}
+	orrs r12, r2, r3
+	beq .LBB_2
+	bl __aeabi_uldivmod
+	pop {r11, pc}
+.LBB_2:
+	ldr r0, .LCPI67_0
+.LPC67_0:
+	add r0, pc, r0
+	bl core::panicking::panic_const::panic_const_div_by_zero
+.LCPI67_0:

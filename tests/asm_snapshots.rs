@@ -304,6 +304,48 @@ asm_snapshot!(
 );
 
 asm_snapshot!(
+    asm_i64_add_armv7,
+    "<bigints::i64::Int64 as core::ops::arith::Add>::add",
+    "armv7-unknown-linux-gnueabihf"
+);
+asm_snapshot!(
+    asm_i64_sub_armv7,
+    "<bigints::i64::Int64 as core::ops::arith::Sub>::sub",
+    "armv7-unknown-linux-gnueabihf"
+);
+asm_snapshot!(
+    asm_i64_mul_armv7,
+    "<bigints::i64::Int64 as core::ops::arith::Mul>::mul",
+    "armv7-unknown-linux-gnueabihf"
+);
+asm_snapshot!(
+    asm_i64_div_armv7,
+    "<bigints::i64::Int64 as core::ops::arith::Div>::div",
+    "armv7-unknown-linux-gnueabihf"
+);
+
+asm_snapshot!(
+    asm_u64_add_armv7,
+    "<bigints::u64::Uint64 as core::ops::arith::Add>::add",
+    "armv7-unknown-linux-gnueabihf"
+);
+asm_snapshot!(
+    asm_u64_sub_armv7,
+    "<bigints::u64::Uint64 as core::ops::arith::Sub>::sub",
+    "armv7-unknown-linux-gnueabihf"
+);
+asm_snapshot!(
+    asm_u64_mul_armv7,
+    "<bigints::u64::Uint64 as core::ops::arith::Mul>::mul",
+    "armv7-unknown-linux-gnueabihf"
+);
+asm_snapshot!(
+    asm_u64_div_armv7,
+    "<bigints::u64::Uint64 as core::ops::arith::Div>::div",
+    "armv7-unknown-linux-gnueabihf"
+);
+
+asm_snapshot!(
     asm_i128_add_riscv,
     "<bigints::i128::Int128 as core::ops::arith::Add>::add",
     "riscv64gc-unknown-linux-gnu"

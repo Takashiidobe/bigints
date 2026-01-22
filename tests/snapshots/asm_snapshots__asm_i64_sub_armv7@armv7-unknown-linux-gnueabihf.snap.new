@@ -1,0 +1,11 @@
+---
+source: tests/asm_snapshots.rs
+assertion_line: 311
+expression: asm
+---
+<bigints::i64::Int64 as core::ops::arith::Sub>::sub:
+	cmp r0, r2
+	sub r1, r1, r3
+	sublo r1, r1, #1
+	sub r0, r0, r2
+	bx lr
