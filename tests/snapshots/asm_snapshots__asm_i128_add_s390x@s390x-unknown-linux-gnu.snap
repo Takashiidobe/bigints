@@ -1,0 +1,9 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::i128::Int128 as core::ops::arith::Add>::add:
+	algr %r3, %r5
+	alcgr %r4, %r2
+	lgr %r2, %r4
+	br %r14

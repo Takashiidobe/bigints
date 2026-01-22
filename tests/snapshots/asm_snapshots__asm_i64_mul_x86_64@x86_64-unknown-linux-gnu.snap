@@ -1,0 +1,15 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::i64::Int64 as core::ops::arith::Mul>::mul:
+	mov r8d, edi
+	mov eax, edx
+	imul rax, r8
+	mov r8, rax
+	shr r8, 32
+	imul ecx, edi
+	imul edx, esi
+	add edx, ecx
+	add edx, r8d
+	ret

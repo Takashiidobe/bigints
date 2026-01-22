@@ -1,0 +1,42 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::i64::Int64 as core::ops::arith::Div>::div:
+	push rax
+	shl rcx, 32
+	mov r8d, edx
+	or r8, rcx
+	je .LBB_6
+	shl rsi, 32
+	mov eax, edi
+	or rax, rsi
+	mov rcx, r8
+	not rcx
+	movabs rdx, -9223372036854775808
+	xor rdx, rax
+	or rdx, rcx
+	je .LBB_7
+	mov rcx, rax
+	or rcx, r8
+	shr rcx, 32
+	je .LBB_5
+	cqo
+	idiv r8
+	mov rdx, rax
+	shr rdx, 32
+	pop rcx
+	ret
+.LBB_5:
+	xor edx, edx
+	div r8d
+	mov rdx, rax
+	shr rdx, 32
+	pop rcx
+	ret
+.LBB_6:
+	lea rdi, [rip + .Lanon.15]
+	call qword ptr [rip + core::panicking::panic_const::panic_const_div_by_zero@GOTPCREL]
+.LBB_7:
+	lea rdi, [rip + .Lanon.15]
+	call qword ptr [rip + core::panicking::panic_const::panic_const_div_overflow@GOTPCREL]

@@ -1,0 +1,18 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::u256::Uint256 as core::ops::arith::Add>::add:
+	lg %r0, 24(%r4)
+	alg %r0, 24(%r3)
+	lg %r1, 16(%r4)
+	alcg %r1, 16(%r3)
+	lg %r5, 8(%r4)
+	alcg %r5, 8(%r3)
+	lg %r4, 0(%r4)
+	alcg %r4, 0(%r3)
+	stg %r4, 0(%r2)
+	stg %r5, 8(%r2)
+	stg %r1, 16(%r2)
+	stg %r0, 24(%r2)
+	br %r14

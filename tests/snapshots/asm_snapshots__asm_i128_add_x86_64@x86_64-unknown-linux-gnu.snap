@@ -1,0 +1,10 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::i128::Int128 as core::ops::arith::Add>::add:
+	mov rax, rdi
+	add rax, rdx
+	adc rsi, rcx
+	mov rdx, rsi
+	ret

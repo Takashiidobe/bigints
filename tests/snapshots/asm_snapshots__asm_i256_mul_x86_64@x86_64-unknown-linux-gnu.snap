@@ -1,0 +1,24 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::i256::Int256 as core::ops::arith::Mul>::mul:
+	push rbx
+	sub rsp, 96
+	mov rbx, rdi
+	vmovups ymm0, ymmword ptr [rsi]
+	vmovups ymmword ptr [rsp + 32], ymm0
+	vmovups ymm0, ymmword ptr [rdx]
+	vmovups ymmword ptr [rsp + 64], ymm0
+	mov rdi, rsp
+	lea rsi, [rsp + 32]
+	lea rdx, [rsp + 64]
+	vzeroupper
+	call qword ptr [rip + <bigints::u256::Uint256 as core::ops::arith::Mul>::mul@GOTPCREL]
+	vmovups ymm0, ymmword ptr [rsp]
+	vmovups ymmword ptr [rbx], ymm0
+	mov rax, rbx
+	add rsp, 96
+	pop rbx
+	vzeroupper
+	ret

@@ -1,0 +1,30 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::u64::Uint64 as core::ops::arith::Div>::div:
+	shl rcx, 32
+	mov r8d, edx
+	or r8, rcx
+	je .LBB_5
+	shl rsi, 32
+	mov eax, edi
+	or rax, rsi
+	or rsi, r8
+	shr rsi, 32
+	je .LBB_4
+	xor edx, edx
+	div r8
+	mov rdx, rax
+	shr rdx, 32
+	ret
+.LBB_4:
+	xor edx, edx
+	div r8d
+	mov rdx, rax
+	shr rdx, 32
+	ret
+.LBB_5:
+	push rax
+	lea rdi, [rip + .Lanon.11]
+	call qword ptr [rip + core::panicking::panic_const::panic_const_div_by_zero@GOTPCREL]

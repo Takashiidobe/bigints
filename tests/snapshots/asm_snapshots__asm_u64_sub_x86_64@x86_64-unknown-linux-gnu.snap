@@ -1,0 +1,10 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::u64::Uint64 as core::ops::arith::Sub>::sub:
+	mov eax, edi
+	sub eax, edx
+	sbb esi, ecx
+	mov edx, esi
+	ret

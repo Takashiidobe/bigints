@@ -1,0 +1,100 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::i256::Int256 as core::ops::arith::Div>::div:
+	push rbp
+	push rbx
+	sub rsp, 104
+	vmovdqu ymm0, ymmword ptr [rdx]
+	vptest ymm0, ymm0
+	je .LBB_8
+	mov rbx, rdi
+	mov rcx, qword ptr [rsi + 24]
+	test rcx, rcx
+	sets bpl
+	vextracti128 xmm1, ymm0, 1
+	vpextrq rax, xmm1, 1
+	test rax, rax
+	sets dl
+	mov rdi, qword ptr [rsi]
+	mov r8, qword ptr [rsi + 8]
+	mov rsi, qword ptr [rsi + 16]
+	test rcx, rcx
+	jns .LBB_3
+	xor r9d, r9d
+	neg rdi
+	mov r10d, 0
+	sbb r10, r8
+	mov r11d, 0
+	sbb r11, rsi
+	sbb r9, r9
+	sub r9, rcx
+	mov r8, r10
+	mov rsi, r11
+	mov rcx, r9
+.LBB_3:
+	mov qword ptr [rsp + 8], rdi
+	mov qword ptr [rsp + 16], r8
+	mov qword ptr [rsp + 24], rsi
+	mov qword ptr [rsp + 32], rcx
+	xor bpl, dl
+	vmovq rcx, xmm0
+	vpextrq rsi, xmm0, 1
+	vmovq rdx, xmm1
+	test rax, rax
+	jns .LBB_5
+	xor edi, edi
+	neg rcx
+	mov r8d, 0
+	sbb r8, rsi
+	mov r9d, 0
+	sbb r9, rdx
+	sbb rdi, rdi
+	sub rdi, rax
+	mov rsi, r8
+	mov rdx, r9
+	mov rax, rdi
+.LBB_5:
+	mov qword ptr [rsp + 40], rcx
+	mov qword ptr [rsp + 48], rsi
+	mov qword ptr [rsp + 56], rdx
+	mov qword ptr [rsp + 64], rax
+	lea rdi, [rsp + 72]
+	lea rsi, [rsp + 8]
+	lea rdx, [rsp + 40]
+	vzeroupper
+	call qword ptr [rip + <bigints::u256::Uint256 as core::ops::arith::Div>::div@GOTPCREL]
+	mov rax, qword ptr [rsp + 72]
+	mov rsi, qword ptr [rsp + 80]
+	mov rdx, qword ptr [rsp + 88]
+	mov rcx, qword ptr [rsp + 96]
+	test bpl, bpl
+	je .LBB_7
+	xor edi, edi
+	neg rax
+	mov r8d, 0
+	sbb r8, rsi
+	mov r9d, 0
+	sbb r9, rdx
+	sbb rdi, rdi
+	sub rdi, rcx
+	mov rsi, r8
+	mov rdx, r9
+	mov rcx, rdi
+.LBB_7:
+	mov qword ptr [rbx], rax
+	mov qword ptr [rbx + 8], rsi
+	mov qword ptr [rbx + 16], rdx
+	mov qword ptr [rbx + 24], rcx
+	mov rax, rbx
+	add rsp, 104
+	pop rbx
+	pop rbp
+	ret
+.LBB_8:
+	lea rdi, [rip + .Lanon.19]
+	lea rdx, [rip + .Lanon.21]
+	mov esi, 51
+	vzeroupper
+	call qword ptr [rip + core::panicking::panic_fmt@GOTPCREL]

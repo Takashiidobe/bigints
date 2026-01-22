@@ -1,0 +1,25 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::u128::Uint128 as core::ops::arith::Div>::div:
+	stmg %r14, %r15, 112(%r15)
+	aghi %r15, -208
+	lgr %r0, %r5
+	ogr %r0, %r4
+	je .LBB_2
+	stg %r4, 160(%r15)
+	stg %r3, 184(%r15)
+	stg %r2, 176(%r15)
+	la %r2, 192(%r15)
+	la %r3, 176(%r15)
+	la %r4, 160(%r15)
+	stg %r5, 168(%r15)
+	brasl %r14, __udivti3@PLT
+	lg %r2, 192(%r15)
+	lg %r3, 200(%r15)
+	lmg %r14, %r15, 320(%r15)
+	br %r14
+.LBB_2:
+	larl %r2, .Lanon.14
+	brasl %r14, core::panicking::panic_const::panic_const_div_by_zero@PLT

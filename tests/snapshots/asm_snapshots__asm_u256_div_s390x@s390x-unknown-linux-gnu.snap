@@ -1,0 +1,1364 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::u256::Uint256 as core::ops::arith::Div>::div:
+	stmg %r6, %r15, 48(%r15)
+	aghi %r15, -968
+	lg %r5, 0(%r4)
+	lg %r10, 8(%r4)
+	lgr %r0, %r5
+	ogr %r0, %r10
+	je .LBB_12
+	stg %r2, 848(%r15)
+	lg %r0, 0(%r3)
+	clgr %r0, %r5
+	ipm %r1
+	cgrjlh %r0, %r5, .LBB_10
+	lg %r2, 8(%r3)
+	clgr %r2, %r10
+	ipm %r1
+	cgrjlh %r2, %r10, .LBB_10
+	lg %r12, 16(%r3)
+	lg %r2, 16(%r4)
+	clgr %r12, %r2
+	ipm %r1
+	cgrjlh %r12, %r2, .LBB_10
+	lg %r6, 24(%r3)
+	lg %r1, 24(%r4)
+	stg %r1, 360(%r15)
+	clgr %r6, %r1
+	lgr %r2, %r12
+	lgr %r1, %r10
+	jl .LBB_11
+	cgije %r5, 0, .LBB_17
+.LBB_6:
+	lgr %r11, %r12
+	lgr %r14, %r10
+	flogr %r12, %r5
+	cghi %r12, 0
+	lr %r10, %r12
+	lghi %r12, 0
+	je .LBB_8
+	lcr %r3, %r10
+	srlg %r12, %r0, 0(%r3)
+.LBB_8:
+	sllg %r8, %r2, 0(%r10)
+	stg %r6, 888(%r15)
+	srlg %r3, %r6, 1
+	lr %r4, %r10
+	xilf %r4, 4294967295
+	srlg %r13, %r3, 0(%r4)
+	sllg %r3, %r1, 0(%r10)
+	srlg %r2, %r2, 1
+	srlg %r2, %r2, 0(%r4)
+	stg %r2, 392(%r15)
+	sllg %r0, %r0, 0(%r10)
+	srlg %r1, %r1, 1
+	srlg %r6, %r1, 0(%r4)
+	ogr %r6, %r0
+	sllg %r0, %r5, 0(%r10)
+	srlg %r1, %r14, 1
+	srlg %r7, %r1, 0(%r4)
+	ogr %r7, %r0
+	sllg %r2, %r14, 0(%r10)
+	srlg %r0, %r11, 1
+	srlg %r14, %r0, 0(%r4)
+	sllg %r5, %r11, 0(%r10)
+	lg %r0, 360(%r15)
+	srlg %r0, %r0, 1
+	srlg %r11, %r0, 0(%r4)
+	clgrjhe %r12, %r7, .LBB_24
+	stg %r7, 336(%r15)
+	stg %r6, 816(%r15)
+	stg %r12, 808(%r15)
+	stg %r2, 920(%r15)
+	la %r2, 824(%r15)
+	stg %r13, 872(%r15)
+	stg %r8, 904(%r15)
+	lgr %r8, %r3
+	la %r3, 808(%r15)
+	la %r4, 328(%r15)
+	mvghi 328(%r15), 0
+	lgr %r9, %r5
+	lgr %r13, %r11
+	lgr %r11, %r14
+	brasl %r14, __udivti3@PLT
+	lgr %r14, %r11
+	lgr %r11, %r13
+	lgr %r5, %r9
+	lghi %r9, 0
+	lg %r2, 920(%r15)
+	lgr %r3, %r8
+	lg %r8, 904(%r15)
+	lg %r13, 872(%r15)
+	lg %r0, 832(%r15)
+	j .LBB_25
+.LBB_10:
+	risbg %r1, %r1, 63, 191, 36
+	cije %r1, 0, .LBB_16
+.LBB_11:
+	lg %r1, 848(%r15)
+	xc 0(32,%r1), 0(%r1)
+	lmg %r6, %r15, 1016(%r15)
+	br %r14
+.LBB_12:
+	ltg %r7, 16(%r4)
+	je .LBB_22
+	stg %r2, 848(%r15)
+	lg %r13, 24(%r4)
+	lg %r8, 16(%r3)
+	lg %r9, 24(%r3)
+	lg %r10, 8(%r3)
+	lg %r6, 0(%r3)
+	stg %r7, 728(%r15)
+	stg %r13, 736(%r15)
+	stg %r10, 752(%r15)
+	la %r2, 760(%r15)
+	la %r3, 744(%r15)
+	la %r4, 728(%r15)
+	stg %r6, 744(%r15)
+	brasl %r14, __udivti3@PLT
+	lg %r11, 768(%r15)
+	lg %r0, 760(%r15)
+	lgr %r1, %r11
+	msgr %r1, %r7
+	lgr %r3, %r11
+	mlgr %r2, %r13
+	agr %r1, %r2
+	msgr %r0, %r13
+	agr %r0, %r1
+	slgr %r10, %r3
+	slbgr %r6, %r0
+	lgr %r0, %r10
+	ogr %r0, %r6
+	je .LBB_30
+	stg %r11, 360(%r15)
+	cgije %r7, 0, .LBB_31
+	flogr %r0, %r7
+	lgr %r12, %r0
+	j .LBB_32
+.LBB_16:
+	lg %r1, 8(%r3)
+	lg %r2, 16(%r3)
+	lg %r6, 24(%r3)
+	lg %r12, 16(%r4)
+	mvc 360(8,%r15), 24(%r4)
+	cgijlh %r5, 0, .LBB_6
+.LBB_17:
+	flogr %r4, %r10
+	cgije %r4, 0, .LBB_104
+	lgr %r5, %r4
+	tmll %r5, 63
+	je .LBB_105
+	lr %r4, %r5
+	nilf %r4, 63
+	stg %r12, 920(%r15)
+	sllg %r7, %r12, 0(%r5)
+	lcr %r14, %r4
+	lg %r3, 360(%r15)
+	srlg %r8, %r3, 0(%r14)
+	ltgr %r12, %r10
+	lghi %r3, 0
+	lghi %r10, 8
+	lghi %r11, 16
+	lghi %r13, 24
+	jlh .LBB_107
+	lghi %r9, 8
+	lghi %r10, 16
+	lghi %r11, 24
+	lghi %r13, 32
+	ogr %r8, %r7
+	cghi %r12, 0
+	ipm %r7
+	je .LBB_108
+.LBB_21:
+	lg %r3, 920(%r15)
+	srlg %r3, %r3, 0(%r14)
+	sllg %r12, %r12, 0(%r5)
+	ogr %r12, %r3
+	lg %r3, 360(%r15)
+	sllg %r3, %r3, 0(%r5)
+	stg %r8, 360(%r15)
+	j .LBB_109
+.LBB_22:
+	ltg %r11, 24(%r4)
+	je .LBB_188
+	lgr %r6, %r2
+	lg %r13, 0(%r3)
+	llill %r12, 0
+	dlgr %r12, %r11
+	lg %r8, 8(%r3)
+	stg %r11, 256(%r15)
+	stg %r8, 480(%r15)
+	stg %r12, 472(%r15)
+	la %r2, 488(%r15)
+	lgr %r9, %r3
+	la %r3, 472(%r15)
+	la %r4, 248(%r15)
+	mvghi 248(%r15), 0
+	brasl %r14, __udivti3@PLT
+	lg %r10, 496(%r15)
+	lgr %r0, %r10
+	lg %r7, 16(%r9)
+	msgr %r0, %r11
+	sgr %r8, %r0
+	stg %r11, 240(%r15)
+	stg %r7, 448(%r15)
+	stg %r8, 440(%r15)
+	la %r2, 456(%r15)
+	la %r3, 440(%r15)
+	la %r4, 232(%r15)
+	mvghi 232(%r15), 0
+	brasl %r14, __udivti3@PLT
+	lg %r8, 464(%r15)
+	lgr %r0, %r8
+	lg %r1, 24(%r9)
+	msgr %r0, %r11
+	sgr %r7, %r0
+	stg %r11, 224(%r15)
+	stg %r1, 416(%r15)
+	stg %r7, 408(%r15)
+	la %r2, 424(%r15)
+	la %r3, 408(%r15)
+	la %r4, 216(%r15)
+	mvghi 216(%r15), 0
+	brasl %r14, __udivti3@PLT
+	lg %r0, 432(%r15)
+	stg %r13, 0(%r6)
+	stg %r10, 8(%r6)
+	stg %r8, 16(%r6)
+	stg %r0, 24(%r6)
+	lmg %r6, %r15, 1016(%r15)
+	br %r14
+.LBB_24:
+	lghi %r9, 0
+	lghi %r0, -1
+.LBB_25:
+	lg %r1, 888(%r15)
+	sllg %r1, %r1, 0(%r10)
+	stg %r1, 872(%r15)
+	lg %r1, 360(%r15)
+	sllg %r4, %r1, 0(%r10)
+	ogr %r8, %r13
+	stg %r8, 904(%r15)
+	og %r3, 392(%r15)
+	ogr %r2, %r14
+	ogr %r5, %r11
+	stg %r5, 392(%r15)
+	lgr %r1, %r9
+	msgr %r1, %r0
+	lgr %r11, %r7
+	mlgr %r10, %r0
+	agr %r1, %r10
+	lgr %r5, %r11
+	lgr %r13, %r3
+	lgr %r3, %r6
+	slgr %r6, %r11
+	lgr %r10, %r12
+	lgr %r11, %r2
+	slbgr %r12, %r1
+	lghi %r2, 0
+	stg %r13, 888(%r15)
+	stg %r11, 920(%r15)
+	jhe .LBB_27
+	lgr %r14, %r0
+	lgr %r7, %r10
+	lgr %r12, %r3
+	lg %r3, 872(%r15)
+	j .LBB_184
+.LBB_27:
+	stg %r4, 840(%r15)
+	lgr %r4, %r9
+	lgr %r9, %r0
+	mlgr %r8, %r11
+	clgr %r8, %r6
+	ipm %r11
+	clgr %r9, %r13
+	ipm %r13
+	cgrjlh %r8, %r6, .LBB_82
+	afi %r13, -536870912
+	srl %r13, 31
+	lgr %r12, %r3
+	cije %r13, 0, .LBB_83
+.LBB_29:
+	lgr %r14, %r0
+	lgr %r7, %r10
+	j .LBB_183
+.LBB_30:
+	stg %r7, 504(%r15)
+	stg %r8, 520(%r15)
+	stg %r13, 512(%r15)
+	la %r2, 536(%r15)
+	la %r3, 520(%r15)
+	la %r4, 504(%r15)
+	stg %r9, 528(%r15)
+	brasl %r14, __udivti3@PLT
+	lg %r14, 544(%r15)
+	lghi %r12, 0
+	j .LBB_39
+.LBB_31:
+	flogr %r2, %r13
+	la %r12, 64(%r2)
+.LBB_32:
+	stg %r7, 696(%r15)
+	la %r2, 712(%r15)
+	la %r3, 696(%r15)
+	stg %r13, 704(%r15)
+	lgr %r4, %r12
+	brasl %r14, __ashlti3@PLT
+	lg %r13, 720(%r15)
+	lg %r7, 712(%r15)
+	stg %r6, 664(%r15)
+	la %r2, 680(%r15)
+	la %r3, 664(%r15)
+	stg %r10, 672(%r15)
+	lgr %r4, %r12
+	brasl %r14, __ashlti3@PLT
+	lg %r6, 680(%r15)
+	lg %r10, 688(%r15)
+	lcr %r0, %r12
+	stg %r8, 632(%r15)
+	risbg %r4, %r0, 57, 191, 0
+	la %r2, 648(%r15)
+	la %r3, 632(%r15)
+	stg %r9, 640(%r15)
+	brasl %r14, __lshrti3@PLT
+	og %r10, 656(%r15)
+	og %r6, 648(%r15)
+	stg %r8, 616(%r15)
+	la %r2, 296(%r15)
+	la %r3, 616(%r15)
+	stg %r9, 624(%r15)
+	lgr %r4, %r12
+	brasl %r14, __ashlti3@PLT
+	mvc 344(8,%r15), 304(%r15)
+	lg %r11, 296(%r15)
+	lghi %r12, -1
+	clgrjhe %r6, %r7, .LBB_34
+	stg %r6, 584(%r15)
+	stg %r7, 288(%r15)
+	stg %r10, 592(%r15)
+	la %r2, 600(%r15)
+	la %r3, 584(%r15)
+	la %r4, 280(%r15)
+	mvghi 280(%r15), 0
+	brasl %r14, __udivti3@PLT
+	lg %r12, 608(%r15)
+.LBB_34:
+	lgr %r1, %r7
+	mlgr %r0, %r12
+	lgr %r14, %r10
+	slgr %r14, %r1
+	lgr %r2, %r6
+	slbgr %r2, %r0
+	lghi %r0, 0
+	jhe .LBB_40
+.LBB_35:
+	lgr %r1, %r12
+	msgr %r1, %r7
+	lgr %r3, %r12
+	mlgr %r2, %r13
+	agr %r1, %r2
+	msgr %r0, %r13
+	agr %r0, %r1
+	slgr %r11, %r3
+	slbgr %r10, %r0
+	lghi %r14, -1
+	clgrjhe %r10, %r7, .LBB_37
+	stg %r10, 552(%r15)
+	stg %r7, 272(%r15)
+	stg %r11, 560(%r15)
+	la %r2, 568(%r15)
+	la %r3, 552(%r15)
+	la %r4, 264(%r15)
+	mvghi 264(%r15), 0
+	brasl %r14, __udivti3@PLT
+	lg %r14, 576(%r15)
+.LBB_37:
+	lgr %r1, %r7
+	mlgr %r0, %r14
+	lgr %r8, %r11
+	slgr %r8, %r1
+	lgr %r2, %r10
+	slbgr %r2, %r0
+	jhe .LBB_61
+.LBB_38:
+	lg %r11, 360(%r15)
+.LBB_39:
+	lg %r1, 848(%r15)
+	mvghi 0(%r1), 0
+	stg %r11, 8(%r1)
+	stg %r12, 16(%r1)
+	stg %r14, 24(%r1)
+	lmg %r6, %r15, 1016(%r15)
+	br %r14
+.LBB_40:
+	lay %r1, -4(%r12)
+	lgr %r3, %r7
+	stg %r2, 920(%r15)
+	stg %r3, 928(%r15)
+	lgr %r3, %r13
+	stg %r2, 904(%r15)
+	stg %r3, 912(%r15)
+	lgr %r3, %r7
+	stg %r2, 888(%r15)
+	stg %r3, 896(%r15)
+	lgr %r3, %r13
+	stg %r2, 392(%r15)
+	stg %r3, 400(%r15)
+	lgr %r3, %r7
+	stg %r2, 872(%r15)
+	stg %r3, 880(%r15)
+	lgr %r3, %r13
+	stg %r2, 856(%r15)
+	stg %r3, 864(%r15)
+	lgr %r3, %r7
+	stg %r2, 376(%r15)
+	stg %r3, 384(%r15)
+.LBB_41:
+	lgr %r2, %r0
+	msgr %r2, %r13
+	lgr %r9, %r12
+	mlgr %r8, %r13
+	agr %r2, %r8
+	clgr %r2, %r14
+	ipm %r4
+	clgr %r9, %r11
+	ipm %r5
+	cgrjlh %r2, %r14, .LBB_43
+	risbg %r4, %r5, 63, 191, 35
+	j .LBB_44
+.LBB_43:
+	risbg %r4, %r4, 63, 191, 35
+.LBB_44:
+	cije %r4, 0, .LBB_35
+	la %r12, 3(%r1)
+	lg %r4, 920(%r15)
+	lg %r5, 928(%r15)
+	mlgr %r4, %r12
+	lgr %r14, %r10
+	slgr %r14, %r5
+	lgr %r0, %r6
+	slbgr %r0, %r4
+	lghi %r0, 0
+	jnhe .LBB_35
+	lg %r2, 904(%r15)
+	lg %r3, 912(%r15)
+	mlgr %r2, %r12
+	clgr %r2, %r14
+	ipm %r4
+	clgr %r3, %r11
+	ipm %r8
+	cgrjlh %r2, %r14, .LBB_48
+	afi %r8, -536870912
+	srl %r8, 31
+	j .LBB_49
+.LBB_48:
+	afi %r4, -536870912
+	srl %r4, 31
+	lr %r8, %r4
+.LBB_49:
+	cijlh %r8, 0, .LBB_35
+	la %r12, 2(%r1)
+	lg %r2, 888(%r15)
+	lg %r3, 896(%r15)
+	mlgr %r2, %r12
+	lgr %r14, %r10
+	slgr %r14, %r3
+	lgr %r4, %r6
+	slbgr %r4, %r2
+	jnhe .LBB_35
+	lg %r2, 392(%r15)
+	lg %r3, 400(%r15)
+	mlgr %r2, %r12
+	clgr %r2, %r14
+	ipm %r4
+	clgr %r3, %r11
+	ipm %r8
+	cgrjlh %r2, %r14, .LBB_53
+	afi %r8, -536870912
+	srl %r8, 31
+	j .LBB_54
+.LBB_53:
+	afi %r4, -536870912
+	srl %r4, 31
+	lr %r8, %r4
+.LBB_54:
+	cijlh %r8, 0, .LBB_35
+	la %r12, 1(%r1)
+	lg %r2, 872(%r15)
+	lg %r3, 880(%r15)
+	mlgr %r2, %r12
+	lgr %r14, %r10
+	slgr %r14, %r3
+	lgr %r4, %r6
+	slbgr %r4, %r2
+	jnhe .LBB_35
+	lg %r2, 856(%r15)
+	lg %r3, 864(%r15)
+	mlgr %r2, %r12
+	clgr %r2, %r14
+	ipm %r4
+	clgr %r3, %r11
+	ipm %r8
+	cgrjlh %r2, %r14, .LBB_58
+	afi %r8, -536870912
+	srl %r8, 31
+	j .LBB_59
+.LBB_58:
+	afi %r4, -536870912
+	srl %r4, 31
+	lr %r8, %r4
+.LBB_59:
+	cijlh %r8, 0, .LBB_35
+	lgr %r12, %r1
+	lg %r2, 376(%r15)
+	lg %r3, 384(%r15)
+	mlgr %r2, %r1
+	lgr %r14, %r10
+	slgr %r14, %r3
+	lgr %r4, %r6
+	slbgr %r4, %r2
+	lay %r1, -4(%r1)
+	jhe .LBB_41
+	j .LBB_35
+.LBB_61:
+	lghi %r4, 0
+	lgr %r1, %r7
+	lgr %r3, %r13
+	stg %r2, 920(%r15)
+	stg %r3, 928(%r15)
+	lgr %r3, %r7
+	stg %r2, 904(%r15)
+	stg %r3, 912(%r15)
+	lgr %r3, %r13
+	stg %r2, 888(%r15)
+	stg %r3, 896(%r15)
+	lgr %r3, %r7
+	stg %r2, 392(%r15)
+	stg %r3, 400(%r15)
+	lgr %r3, %r13
+	stg %r2, 872(%r15)
+	stg %r3, 880(%r15)
+	lgr %r6, %r14
+	lgr %r3, %r7
+	stg %r2, 856(%r15)
+	stg %r3, 864(%r15)
+	lg %r7, 344(%r15)
+.LBB_62:
+	msgr %r4, %r13
+	lgr %r3, %r6
+	mlgr %r2, %r13
+	agr %r4, %r2
+	clgr %r4, %r8
+	ipm %r5
+	clgr %r3, %r7
+	ipm %r14
+	cgrjlh %r4, %r8, .LBB_64
+	risbg %r4, %r14, 63, 191, 35
+	j .LBB_65
+.LBB_64:
+	risbg %r4, %r5, 63, 191, 35
+.LBB_65:
+	cije %r4, 0, .LBB_176
+	lgr %r14, %r6
+	aghi %r14, -1
+	lgr %r8, %r0
+	lgr %r9, %r1
+	mlgr %r8, %r14
+	lgr %r4, %r11
+	slgr %r4, %r9
+	lgr %r5, %r10
+	slbgr %r5, %r8
+	jnhe .LBB_38
+	lg %r2, 920(%r15)
+	lg %r3, 928(%r15)
+	mlgr %r2, %r14
+	clgr %r2, %r4
+	ipm %r8
+	clgr %r3, %r7
+	ipm %r5
+	cgrjlh %r2, %r4, .LBB_69
+	afi %r5, -536870912
+	srl %r5, 31
+	j .LBB_70
+.LBB_69:
+	afi %r8, -536870912
+	srl %r8, 31
+	lr %r5, %r8
+.LBB_70:
+	cijlh %r5, 0, .LBB_38
+	lgr %r14, %r6
+	aghi %r14, -2
+	lg %r2, 904(%r15)
+	lg %r3, 912(%r15)
+	mlgr %r2, %r14
+	lgr %r4, %r11
+	slgr %r4, %r3
+	lgr %r5, %r10
+	slbgr %r5, %r2
+	jnhe .LBB_38
+	lg %r2, 888(%r15)
+	lg %r3, 896(%r15)
+	mlgr %r2, %r14
+	clgr %r2, %r4
+	ipm %r8
+	clgr %r3, %r7
+	ipm %r5
+	cgrjlh %r2, %r4, .LBB_74
+	afi %r5, -536870912
+	srl %r5, 31
+	j .LBB_75
+.LBB_74:
+	afi %r8, -536870912
+	srl %r8, 31
+	lr %r5, %r8
+.LBB_75:
+	cijlh %r5, 0, .LBB_38
+	lgr %r14, %r6
+	aghi %r14, -3
+	lg %r2, 392(%r15)
+	lg %r3, 400(%r15)
+	mlgr %r2, %r14
+	lgr %r4, %r11
+	slgr %r4, %r3
+	lgr %r5, %r10
+	slbgr %r5, %r2
+	jnhe .LBB_38
+	lg %r2, 872(%r15)
+	lg %r3, 880(%r15)
+	mlgr %r2, %r14
+	clgr %r2, %r4
+	ipm %r8
+	clgr %r3, %r7
+	ipm %r5
+	cgrjlh %r2, %r4, .LBB_79
+	afi %r5, -536870912
+	srl %r5, 31
+	j .LBB_80
+.LBB_79:
+	afi %r8, -536870912
+	srl %r8, 31
+	lr %r5, %r8
+.LBB_80:
+	cijlh %r5, 0, .LBB_38
+	aghi %r6, -4
+	lg %r2, 856(%r15)
+	lg %r3, 864(%r15)
+	mlgr %r2, %r6
+	lgr %r8, %r11
+	slgr %r8, %r3
+	lgr %r4, %r10
+	slbgr %r4, %r2
+	lghi %r4, 0
+	lgr %r14, %r6
+	jhe .LBB_62
+	j .LBB_38
+.LBB_82:
+	afi %r11, -536870912
+	srl %r11, 31
+	ltr %r13, %r11
+	lgr %r12, %r3
+	jlh .LBB_29
+.LBB_83:
+	lgr %r13, %r4
+	lgr %r14, %r0
+	aghi %r14, -4
+	lgr %r9, %r7
+	stg %r8, 856(%r15)
+	stg %r9, 864(%r15)
+	stg %r8, 376(%r15)
+	stg %r9, 384(%r15)
+	stg %r8, 360(%r15)
+	stg %r9, 368(%r15)
+	stg %r8, 344(%r15)
+	stg %r9, 352(%r15)
+	lgr %r7, %r10
+	lg %r3, 888(%r15)
+	j .LBB_86
+.LBB_84:
+	afi %r11, -536870912
+	srl %r11, 31
+	lr %r13, %r11
+.LBB_85:
+	aghi %r0, -4
+	chi %r13, 0
+	lay %r14, -4(%r6)
+	lgr %r13, %r4
+	jlh .LBB_182
+.LBB_86:
+	lgr %r6, %r14
+	la %r14, 3(%r14)
+	lgr %r1, %r13
+	msgr %r1, %r14
+	lg %r10, 856(%r15)
+	lg %r11, 864(%r15)
+	mlgr %r10, %r14
+	agr %r1, %r10
+	lgr %r5, %r11
+	lgr %r13, %r12
+	slgr %r13, %r11
+	lgr %r11, %r7
+	slbgr %r11, %r1
+	jnhe .LBB_175
+	lgr %r9, %r14
+	mlg %r8, 920(%r15)
+	clgr %r8, %r13
+	ipm %r10
+	clgr %r9, %r3
+	ipm %r11
+	cgrjlh %r8, %r13, .LBB_89
+	afi %r11, -536870912
+	srl %r11, 31
+	j .LBB_90
+.LBB_89:
+	afi %r10, -536870912
+	srl %r10, 31
+	lr %r11, %r10
+.LBB_90:
+	cijlh %r11, 0, .LBB_177
+	la %r14, 2(%r6)
+	lgr %r1, %r4
+	msgr %r1, %r14
+	lg %r10, 376(%r15)
+	lg %r11, 384(%r15)
+	mlgr %r10, %r14
+	agr %r1, %r10
+	lgr %r5, %r11
+	lgr %r13, %r12
+	slgr %r13, %r11
+	lgr %r11, %r7
+	slbgr %r11, %r1
+	jnhe .LBB_175
+	lgr %r9, %r14
+	mlg %r8, 920(%r15)
+	clgr %r8, %r13
+	ipm %r10
+	clgr %r9, %r3
+	ipm %r11
+	cgrjlh %r8, %r13, .LBB_94
+	afi %r11, -536870912
+	srl %r11, 31
+	j .LBB_95
+.LBB_94:
+	afi %r10, -536870912
+	srl %r10, 31
+	lr %r11, %r10
+.LBB_95:
+	cijlh %r11, 0, .LBB_178
+	la %r14, 1(%r6)
+	lgr %r1, %r4
+	msgr %r1, %r14
+	lg %r10, 360(%r15)
+	lg %r11, 368(%r15)
+	mlgr %r10, %r14
+	agr %r1, %r10
+	lgr %r5, %r11
+	lgr %r13, %r12
+	slgr %r13, %r11
+	lgr %r11, %r7
+	slbgr %r11, %r1
+	jnhe .LBB_179
+	lgr %r9, %r14
+	mlg %r8, 920(%r15)
+	clgr %r8, %r13
+	ipm %r10
+	clgr %r9, %r3
+	ipm %r11
+	cgrjlh %r8, %r13, .LBB_99
+	afi %r11, -536870912
+	srl %r11, 31
+	j .LBB_100
+.LBB_99:
+	afi %r10, -536870912
+	srl %r10, 31
+	lr %r11, %r10
+.LBB_100:
+	cijlh %r11, 0, .LBB_180
+	lgr %r1, %r4
+	msgr %r1, %r6
+	lg %r10, 344(%r15)
+	lg %r11, 352(%r15)
+	mlgr %r10, %r6
+	agr %r1, %r10
+	lgr %r5, %r11
+	lgr %r14, %r12
+	slgr %r14, %r11
+	lgr %r13, %r7
+	slbgr %r13, %r1
+	jnhe .LBB_181
+	lgr %r9, %r6
+	mlg %r8, 920(%r15)
+	clgr %r8, %r14
+	ipm %r11
+	clgr %r9, %r3
+	ipm %r13
+	cgrjlh %r8, %r14, .LBB_84
+	afi %r13, -536870912
+	srl %r13, 31
+	j .LBB_85
+.LBB_104:
+	stg %r6, 160(%r15)
+	stg %r2, 168(%r15)
+	stg %r1, 176(%r15)
+	stg %r0, 184(%r15)
+	xc 192(24,%r15), 192(%r15)
+	j .LBB_119
+.LBB_105:
+	xc 160(56,%r15), 160(%r15)
+	cghi %r10, 0
+	lghi %r4, 0
+	jlh .LBB_112
+	lghi %r3, 0
+	lgr %r10, %r12
+	lghi %r4, 8
+	j .LBB_113
+.LBB_107:
+	lghi %r9, 0
+	ogr %r8, %r7
+	cghi %r12, 0
+	ipm %r7
+	jlh .LBB_21
+.LBB_108:
+	lgr %r12, %r8
+.LBB_109:
+	afi %r7, -268435456
+	risbg %r8, %r7, 63, 191, 33
+	xc 160(56,%r15), 160(%r15)
+	stg %r6, 936(%r15)
+	stg %r2, 944(%r15)
+	stg %r1, 952(%r15)
+	stg %r0, 960(%r15)
+	sllg %r7, %r6, 0(%r5)
+	stg %r7, 160(%r9,%r15)
+	sllg %r9, %r2, 0(%r5)
+	srlg %r7, %r6, 0(%r14)
+	ogr %r7, %r9
+	stg %r7, 160(%r10,%r15)
+	sllg %r10, %r1, 0(%r5)
+	srlg %r2, %r2, 0(%r14)
+	ogr %r2, %r10
+	stg %r2, 160(%r11,%r15)
+	sllg %r0, %r0, 0(%r5)
+	srlg %r1, %r1, 0(%r14)
+	ogr %r1, %r0
+	lcgr %r2, %r8
+	aghi %r2, -1
+	la %r0, 4(%r2,%r8)
+	stg %r1, 160(%r13,%r15)
+	cgijhe %r0, 4, .LBB_111
+	lhi %r1, 64
+	sllg %r2, %r0, 3
+	lg %r0, 936(%r2,%r15)
+	sr %r1, %r4
+	llgfr %r1, %r1
+	la %r2, 4(%r8)
+	srlg %r0, %r0, 0(%r1)
+	sllg %r1, %r2, 3
+	og %r0, 160(%r1,%r15)
+	stg %r0, 160(%r1,%r15)
+.LBB_111:
+	lgr %r10, %r12
+	j .LBB_118
+.LBB_112:
+	lg %r3, 360(%r15)
+	stg %r12, 360(%r15)
+.LBB_113:
+	stg %r6, 160(%r4,%r15)
+	lghi %r4, 16
+	jlh .LBB_173
+	stg %r2, 160(%r4,%r15)
+	lghi %r2, 24
+	jlh .LBB_174
+.LBB_115:
+	stg %r1, 160(%r2,%r15)
+	lghi %r1, 32
+	je .LBB_117
+.LBB_116:
+	lghi %r1, 24
+.LBB_117:
+	stg %r0, 160(%r1,%r15)
+.LBB_118:
+	lg %r12, 360(%r15)
+	stg %r3, 360(%r15)
+.LBB_119:
+	lghi %r3, 1
+	lghi %r0, 0
+	stg %r10, 904(%r15)
+	stg %r12, 920(%r15)
+	j .LBB_122
+.LBB_120:
+	lg %r0, 376(%r15)
+.LBB_121:
+	lgr %r3, %r4
+	cgije %r6, 0, .LBB_172
+.LBB_122:
+	stg %r0, 376(%r15)
+	stg %r3, 888(%r15)
+	cgije %r3, 0, .LBB_126
+	la %r0, 3(%r3)
+	clgijh %r0, 6, .LBB_186
+	la %r2, 2(%r3)
+	clgijhe %r2, 7, .LBB_185
+	sllg %r1, %r0, 3
+	lg %r7, 160(%r1,%r15)
+	lay %r0, -1(%r3)
+	stg %r0, 392(%r15)
+	la %r1, 160(%r1,%r15)
+	j .LBB_127
+.LBB_126:
+	lg %r7, 184(%r15)
+	mvghi 392(%r15), 0
+	lghi %r2, 2
+	la %r1, 184(%r15)
+.LBB_127:
+	stg %r1, 872(%r15)
+	sllg %r13, %r2, 3
+	lg %r9, 160(%r13,%r15)
+	lghi %r6, -1
+	clgrjhe %r7, %r10, .LBB_129
+	stg %r10, 320(%r15)
+	stg %r7, 776(%r15)
+	stg %r9, 784(%r15)
+	la %r2, 792(%r15)
+	la %r3, 776(%r15)
+	la %r4, 312(%r15)
+	mvghi 312(%r15), 0
+	brasl %r14, __udivti3@PLT
+	lg %r6, 800(%r15)
+.LBB_129:
+	lgr %r3, %r6
+	mlgr %r2, %r10
+	la %r1, 160(%r13,%r15)
+	stg %r1, 856(%r15)
+	lgr %r0, %r3
+	lgr %r4, %r2
+	lgr %r1, %r9
+	slgr %r1, %r3
+	lgr %r2, %r7
+	slbgr %r2, %r4
+	jhe .LBB_133
+	lgr %r1, %r6
+	lghi %r13, 0
+	lgr %r3, %r6
+.LBB_131:
+	lg %r6, 888(%r15)
+	lghi %r5, 0
+	clgijh %r6, 6, .LBB_154
+	la %r2, 1(%r6)
+	sllg %r5, %r2, 3
+	lg %r14, 160(%r5,%r15)
+	lgr %r11, %r13
+	msgr %r11, %r12
+	lgr %r9, %r3
+	mlgr %r8, %r12
+	agr %r11, %r8
+	lgr %r10, %r9
+	j .LBB_157
+.LBB_133:
+	lg %r2, 888(%r15)
+	clgfi %r2, 5
+	la %r2, 1(%r2)
+	jh .LBB_187
+	sllg %r3, %r2, 3
+	lg %r14, 160(%r3,%r15)
+	lgr %r13, %r6
+	mlg %r12, 920(%r15)
+	lgr %r11, %r12
+	lgr %r10, %r13
+	clgr %r12, %r1
+	ipm %r13
+	clgr %r10, %r14
+	ipm %r3
+	cgrjlh %r12, %r1, .LBB_155
+	afi %r3, -536870912
+	srl %r3, 31
+	cijlh %r3, 0, .LBB_156
+.LBB_136:
+	lgr %r2, %r6
+	aghi %r2, -4
+	lg %r10, 904(%r15)
+	j .LBB_139
+.LBB_137:
+	risbg %r2, %r3, 63, 191, 35
+.LBB_138:
+	aghi %r6, -4
+	chi %r2, 0
+	lay %r2, -4(%r1)
+	lgr %r9, %r5
+	je .LBB_171
+.LBB_139:
+	lgr %r1, %r2
+	la %r3, 3(%r2)
+	lgr %r13, %r3
+	mlgr %r12, %r10
+	lgr %r0, %r13
+	lgr %r4, %r12
+	lgr %r2, %r9
+	slgr %r2, %r13
+	lgr %r13, %r7
+	slbgr %r13, %r12
+	jnhe .LBB_163
+	lgr %r5, %r9
+	lgr %r9, %r3
+	lg %r12, 920(%r15)
+	mlgr %r8, %r12
+	clgr %r8, %r2
+	ipm %r11
+	clgr %r9, %r14
+	ipm %r13
+	cgrjlh %r8, %r2, .LBB_142
+	afi %r13, -536870912
+	srl %r13, 31
+	chi %r13, 0
+	lghi %r13, 0
+	lgr %r9, %r5
+	je .LBB_143
+	j .LBB_164
+.LBB_142:
+	afi %r11, -536870912
+	srl %r11, 31
+	ltr %r13, %r11
+	lghi %r13, 0
+	lgr %r9, %r5
+	jlh .LBB_164
+.LBB_143:
+	la %r3, 2(%r1)
+	lgr %r0, %r10
+	lgr %r11, %r3
+	mlgr %r10, %r0
+	lgr %r0, %r11
+	lgr %r4, %r10
+	lgr %r2, %r9
+	slgr %r2, %r11
+	lgr %r12, %r7
+	slbgr %r12, %r10
+	jnhe .LBB_165
+	lgr %r9, %r3
+	lg %r12, 920(%r15)
+	mlgr %r8, %r12
+	clgr %r8, %r2
+	ipm %r10
+	clgr %r9, %r14
+	ipm %r11
+	cgrjlh %r8, %r2, .LBB_146
+	afi %r11, -536870912
+	srl %r11, 31
+	lgr %r9, %r5
+	cije %r11, 0, .LBB_147
+	j .LBB_166
+.LBB_146:
+	afi %r10, -536870912
+	srl %r10, 31
+	ltr %r11, %r10
+	lgr %r9, %r5
+	jlh .LBB_166
+.LBB_147:
+	la %r3, 1(%r1)
+	lgr %r11, %r3
+	mlg %r10, 904(%r15)
+	lgr %r0, %r11
+	lgr %r4, %r10
+	lgr %r2, %r9
+	slgr %r2, %r11
+	lgr %r12, %r7
+	slbgr %r12, %r10
+	jnhe .LBB_167
+	lgr %r9, %r3
+	lg %r12, 920(%r15)
+	mlgr %r8, %r12
+	clgr %r8, %r2
+	ipm %r10
+	clgr %r9, %r14
+	ipm %r11
+	cgrjlh %r8, %r2, .LBB_150
+	afi %r11, -536870912
+	srl %r11, 31
+	lg %r10, 904(%r15)
+	lgr %r9, %r5
+	cije %r11, 0, .LBB_151
+	j .LBB_169
+.LBB_150:
+	afi %r10, -536870912
+	srl %r10, 31
+	ltr %r11, %r10
+	lg %r10, 904(%r15)
+	lgr %r9, %r5
+	jlh .LBB_169
+.LBB_151:
+	lgr %r3, %r1
+	mlgr %r2, %r10
+	lgr %r0, %r3
+	lgr %r4, %r2
+	lgr %r2, %r9
+	slgr %r2, %r3
+	lgr %r3, %r7
+	slbgr %r3, %r4
+	jnhe .LBB_170
+	lgr %r9, %r1
+	mlgr %r8, %r12
+	clgr %r8, %r2
+	ipm %r3
+	clgr %r9, %r14
+	ipm %r11
+	cgrjlh %r8, %r2, .LBB_137
+	risbg %r2, %r11, 63, 191, 35
+	j .LBB_138
+.LBB_154:
+	lghi %r2, -1
+	lhi %r3, 0
+	lghi %r14, 0
+	lg %r13, 872(%r15)
+	lg %r11, 856(%r15)
+	j .LBB_158
+.LBB_155:
+	afi %r13, -536870912
+	srl %r13, 31
+	ltr %r3, %r13
+	je .LBB_136
+.LBB_156:
+	lghi %r13, 0
+	lgr %r3, %r6
+	lgr %r1, %r6
+	lg %r6, 888(%r15)
+.LBB_157:
+	sllg %r5, %r6, 3
+	lg %r12, 160(%r5,%r15)
+	lg %r7, 360(%r15)
+	msgr %r13, %r7
+	lgr %r9, %r3
+	mlgr %r8, %r7
+	agr %r13, %r8
+	slgr %r12, %r9
+	ipm %r3
+	afi %r3, -536870912
+	risbg %r3, %r3, 63, 191, 33
+	stg %r12, 160(%r5,%r15)
+	algr %r13, %r10
+	lghi %r5, 0
+	alcgr %r11, %r5
+	la %r5, 0(%r3,%r13)
+	cghi %r5, 0
+	ipm %r13
+	afi %r13, -268435456
+	srl %r13, 31
+	nr %r13, %r3
+	algfr %r11, %r13
+	sllg %r3, %r2, 3
+	slgr %r14, %r5
+	ipm %r5
+	afi %r5, -536870912
+	risbg %r13, %r5, 63, 191, 33
+	stg %r14, 160(%r3,%r15)
+	lgr %r5, %r13
+	agr %r5, %r11
+	cghi %r5, 0
+	ipm %r3
+	afi %r3, -268435456
+	srl %r3, 31
+	lg %r11, 856(%r15)
+	lg %r9, 0(%r11)
+	nr %r3, %r13
+	llgfr %r14, %r3
+	lhi %r3, 1
+	lg %r10, 904(%r15)
+	lg %r12, 920(%r15)
+	lg %r13, 872(%r15)
+.LBB_158:
+	algr %r0, %r5
+	alcgr %r14, %r4
+	slgr %r9, %r0
+	ipm %r0
+	stg %r9, 0(%r11)
+	lg %r4, 0(%r13)
+	afi %r0, -536870912
+	risbg %r0, %r0, 63, 191, 33
+	agr %r0, %r14
+	slgr %r4, %r0
+	stg %r4, 0(%r13)
+	jnle .LBB_162
+	lghi %r0, 0
+	lg %r4, 392(%r15)
+	cije %r3, 0, .LBB_161
+	sllg %r3, %r6, 3
+	lg %r0, 160(%r3,%r15)
+	alg %r0, 360(%r15)
+	stg %r0, 160(%r3,%r15)
+	sllg %r2, %r2, 3
+	lg %r0, 160(%r2,%r15)
+	alcgr %r0, %r12
+	stg %r0, 160(%r2,%r15)
+	ipm %r0
+	risbg %r0, %r0, 63, 191, 35
+.LBB_161:
+	lg %r2, 0(%r11)
+	aghi %r1, -1
+	algr %r2, %r10
+	ipm %r3
+	algr %r2, %r0
+	ipm %r0
+	risbg %r0, %r0, 63, 191, 35
+	stg %r2, 0(%r11)
+	rosbg %r0, %r3, 63, 63, 35
+	risbg %r0, %r0, 63, 191, 0
+	ag %r0, 0(%r13)
+	stg %r0, 0(%r13)
+	lgr %r0, %r1
+	cgije %r6, 1, .LBB_121
+	j .LBB_120
+.LBB_162:
+	lg %r4, 392(%r15)
+	lgr %r0, %r1
+	cgije %r6, 1, .LBB_121
+	j .LBB_120
+.LBB_163:
+	lghi %r13, 0
+	lgr %r1, %r3
+	lg %r12, 920(%r15)
+	j .LBB_131
+.LBB_164:
+	aghi %r6, -1
+	lgr %r1, %r6
+	j .LBB_131
+.LBB_165:
+	lgr %r1, %r3
+	j .LBB_168
+.LBB_166:
+	aghi %r6, -2
+	lgr %r1, %r6
+	lg %r10, 904(%r15)
+	j .LBB_131
+.LBB_167:
+	aghi %r6, -3
+	lgr %r1, %r6
+.LBB_168:
+	lg %r10, 904(%r15)
+	lg %r12, 920(%r15)
+	j .LBB_131
+.LBB_169:
+	la %r1, 1(%r1)
+	j .LBB_131
+.LBB_170:
+	lgr %r3, %r1
+	j .LBB_131
+.LBB_171:
+	lgr %r3, %r1
+	lgr %r1, %r6
+	lg %r12, 920(%r15)
+	j .LBB_131
+.LBB_172:
+	lg %r2, 848(%r15)
+	mvghi 8(%r2), 0
+	mvghi 0(%r2), 0
+	mvc 16(8,%r2), 376(%r15)
+	stg %r1, 24(%r2)
+	lmg %r6, %r15, 1016(%r15)
+	br %r14
+.LBB_173:
+	lghi %r4, 8
+	stg %r2, 160(%r4,%r15)
+	lghi %r2, 24
+	je .LBB_115
+.LBB_174:
+	lghi %r2, 16
+	stg %r1, 160(%r2,%r15)
+	lghi %r1, 32
+	jlh .LBB_116
+	j .LBB_117
+.LBB_175:
+	lgr %r0, %r14
+	j .LBB_183
+.LBB_176:
+	lgr %r14, %r6
+	j .LBB_38
+.LBB_177:
+	aghi %r0, -1
+	j .LBB_183
+.LBB_178:
+	aghi %r0, -2
+	j .LBB_183
+.LBB_179:
+	aghi %r0, -3
+	j .LBB_183
+.LBB_180:
+	la %r0, 1(%r6)
+	j .LBB_183
+.LBB_181:
+	lgr %r0, %r6
+.LBB_182:
+	lgr %r14, %r6
+.LBB_183:
+	lg %r3, 872(%r15)
+	lg %r4, 840(%r15)
+.LBB_184:
+	lgr %r13, %r2
+	msgr %r13, %r4
+	lgr %r11, %r14
+	lgr %r8, %r10
+	lgr %r9, %r11
+	mlgr %r8, %r4
+	agr %r13, %r8
+	clgr %r3, %r9
+	lgr %r3, %r2
+	lg %r4, 392(%r15)
+	msgr %r3, %r4
+	lgr %r8, %r10
+	lgr %r9, %r11
+	mlgr %r8, %r4
+	ipm %r4
+	risbg %r4, %r4, 63, 191, 36
+	algr %r9, %r13
+	alcgr %r8, %r3
+	algr %r9, %r4
+	alcgr %r8, %r2
+	lg %r3, 904(%r15)
+	clgr %r3, %r9
+	ipm %r3
+	risbg %r3, %r3, 63, 191, 36
+	lg %r14, 920(%r15)
+	mlgr %r10, %r14
+	algr %r11, %r8
+	lgr %r4, %r2
+	msgr %r4, %r14
+	alcgr %r10, %r4
+	algr %r11, %r3
+	alcgr %r10, %r2
+	lg %r3, 888(%r15)
+	clgr %r3, %r11
+	ipm %r3
+	risbg %r3, %r3, 63, 191, 36
+	algr %r10, %r5
+	alcgr %r1, %r2
+	lgr %r2, %r10
+	algr %r2, %r3
+	clgr %r12, %r2
+	ipm %r2
+	risbg %r2, %r2, 63, 191, 36
+	algr %r10, %r3
+	alcgr %r2, %r1
+	clgr %r7, %r2
+	ipm %r1
+	lg %r2, 848(%r15)
+	xc 0(24,%r2), 0(%r2)
+	risbg %r1, %r1, 63, 191, 36
+	sgr %r0, %r1
+	stg %r0, 24(%r2)
+	lmg %r6, %r15, 1016(%r15)
+	br %r14
+.LBB_185:
+	lghi %r3, 7
+	larl %r4, .Lanon.9
+	brasl %r14, core::panicking::panic_bounds_check@PLT
+.LBB_186:
+	lghi %r3, 7
+	larl %r4, .Lanon.8
+	lgr %r2, %r0
+	brasl %r14, core::panicking::panic_bounds_check@PLT
+.LBB_187:
+	lghi %r3, 7
+	larl %r4, .Lanon.10
+	brasl %r14, core::panicking::panic_bounds_check@PLT
+.LBB_188:
+	larl %r2, .Lanon.11
+	brasl %r14, core::panicking::panic_const::panic_const_div_by_zero@PLT

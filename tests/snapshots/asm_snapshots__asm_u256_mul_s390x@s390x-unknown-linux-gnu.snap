@@ -1,0 +1,80 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::u256::Uint256 as core::ops::arith::Mul>::mul:
+	stmg %r6, %r15, 48(%r15)
+	aghi %r15, -216
+	stg %r4, 208(%r15)
+	lg %r1, 24(%r3)
+	lg %r0, 24(%r4)
+	lg %r13, 16(%r4)
+	lg %r14, 16(%r3)
+	lgr %r7, %r0
+	lgr %r4, %r6
+	lgr %r5, %r7
+	mlgr %r4, %r1
+	stg %r13, 184(%r15)
+	lgr %r9, %r13
+	lgr %r10, %r8
+	lgr %r11, %r9
+	stg %r1, 192(%r15)
+	mlgr %r10, %r1
+	lgr %r12, %r6
+	lgr %r13, %r7
+	stg %r14, 176(%r15)
+	mlgr %r12, %r14
+	algr %r11, %r4
+	lghi %r1, 0
+	alcgr %r10, %r1
+	lgr %r14, %r13
+	algr %r14, %r11
+	lgr %r1, %r10
+	alcgr %r1, %r12
+	stg %r14, 160(%r15)
+	clgr %r14, %r11
+	ipm %r14
+	stg %r14, 168(%r15)
+	clgr %r1, %r10
+	stg %r3, 200(%r15)
+	lg %r12, 8(%r3)
+	lg %r3, 208(%r15)
+	lg %r14, 8(%r3)
+	ipm %r13
+	cgrjlh %r1, %r10, .LBB_2
+	lg %r3, 168(%r15)
+	risbg %r13, %r3, 63, 191, 36
+	j .LBB_3
+.LBB_2:
+	risbg %r13, %r13, 63, 191, 36
+.LBB_3:
+	lgr %r11, %r14
+	lg %r3, 192(%r15)
+	mlgr %r10, %r3
+	lg %r4, 176(%r15)
+	mlgr %r8, %r4
+	mlgr %r6, %r12
+	algr %r7, %r9
+	alcgr %r8, %r6
+	algr %r7, %r11
+	alcgr %r8, %r10
+	algr %r7, %r1
+	llgfr %r1, %r13
+	alcgr %r8, %r1
+	lg %r1, 200(%r15)
+	msg %r0, 0(%r1)
+	lg %r1, 208(%r15)
+	msg %r3, 0(%r1)
+	msgr %r14, %r4
+	lg %r1, 184(%r15)
+	msgr %r1, %r12
+	agr %r0, %r1
+	agr %r0, %r14
+	agr %r0, %r3
+	agr %r0, %r8
+	stg %r7, 8(%r2)
+	stg %r0, 0(%r2)
+	mvc 16(8,%r2), 160(%r15)
+	stg %r5, 24(%r2)
+	lmg %r6, %r15, 264(%r15)
+	br %r14

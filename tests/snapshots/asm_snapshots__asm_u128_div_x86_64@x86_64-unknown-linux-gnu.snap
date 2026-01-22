@@ -1,0 +1,15 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::u128::Uint128 as core::ops::arith::Div>::div:
+	push rax
+	mov rax, rdx
+	or rax, rcx
+	je .LBB_2
+	call qword ptr [rip + __udivti3@GOTPCREL]
+	pop rcx
+	ret
+.LBB_2:
+	lea rdi, [rip + .Lanon.13]
+	call qword ptr [rip + core::panicking::panic_const::panic_const_div_by_zero@GOTPCREL]

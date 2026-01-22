@@ -1,0 +1,10 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::u128::Uint128 as core::ops::arith::Sub>::sub:
+	mov rax, rdi
+	sub rax, rdx
+	sbb rsi, rcx
+	mov rdx, rsi
+	ret

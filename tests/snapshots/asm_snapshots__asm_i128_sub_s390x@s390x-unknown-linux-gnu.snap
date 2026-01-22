@@ -1,0 +1,12 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::i128::Int128 as core::ops::arith::Sub>::sub:
+	slgr %r3, %r5
+	ipm %r0
+	afi %r0, -536870912
+	risbg %r0, %r0, 63, 191, 33
+	sgr %r2, %r4
+	sgr %r2, %r0
+	br %r14

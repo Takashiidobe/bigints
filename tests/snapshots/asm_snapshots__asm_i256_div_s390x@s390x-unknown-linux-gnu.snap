@@ -1,0 +1,101 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::i256::Int256 as core::ops::arith::Div>::div:
+	stmg %r9, %r15, 72(%r15)
+	aghi %r15, -256
+	ltg %r1, 24(%r4)
+	lg %r14, 16(%r4)
+	lg %r5, 8(%r4)
+	lg %r0, 0(%r4)
+	lgr %r13, %r2
+	jlh .LBB_4
+	cgijlh %r14, 0, .LBB_4
+	cgijlh %r5, 0, .LBB_4
+	cgije %r0, 0, .LBB_12
+.LBB_4:
+	ltg %r2, 0(%r3)
+	ipm %r4
+	cghi %r0, 0
+	ipm %r12
+	risbg %r12, %r12, 63, 191, 36
+	lg %r10, 16(%r3)
+	rxsbg %r12, %r4, 63, 63, 36
+	cgijl %r2, 0, .LBB_6
+	lg %r4, 24(%r3)
+	lg %r11, 8(%r3)
+	j .LBB_7
+.LBB_6:
+	lghi %r4, 0
+	slg %r4, 24(%r3)
+	lghi %r11, 0
+	lghi %r9, 0
+	slbgr %r9, %r10
+	slbg %r11, 8(%r3)
+	ipm %r3
+	afi %r3, -536870912
+	risbg %r3, %r3, 63, 191, 33
+	agr %r3, %r2
+	lcgr %r2, %r3
+	lgr %r10, %r9
+.LBB_7:
+	stg %r2, 160(%r15)
+	stg %r11, 168(%r15)
+	stg %r10, 176(%r15)
+	stg %r4, 184(%r15)
+	cgijhe %r0, 0, .LBB_9
+	lghi %r2, 0
+	lghi %r3, 0
+	slgr %r3, %r1
+	lghi %r1, 0
+	slbgr %r1, %r14
+	slbgr %r2, %r5
+	ipm %r4
+	afi %r4, -536870912
+	risbg %r4, %r4, 63, 191, 33
+	agr %r4, %r0
+	lcgr %r0, %r4
+	lgr %r5, %r2
+	lgr %r14, %r1
+	lgr %r1, %r3
+.LBB_9:
+	stg %r0, 192(%r15)
+	stg %r5, 200(%r15)
+	stg %r14, 208(%r15)
+	la %r2, 224(%r15)
+	la %r3, 160(%r15)
+	la %r4, 192(%r15)
+	stg %r1, 216(%r15)
+	brasl %r14, <bigints::u256::Uint256 as core::ops::arith::Div>::div@PLT
+	lg %r3, 248(%r15)
+	lg %r2, 240(%r15)
+	lg %r1, 232(%r15)
+	lg %r0, 224(%r15)
+	cije %r12, 0, .LBB_11
+	lghi %r4, 0
+	lghi %r5, 0
+	slgr %r5, %r3
+	lghi %r3, 0
+	slbgr %r3, %r2
+	slbgr %r4, %r1
+	ipm %r1
+	afi %r1, -536870912
+	risbg %r1, %r1, 63, 191, 33
+	agr %r1, %r0
+	lcgr %r0, %r1
+	lgr %r1, %r4
+	lgr %r2, %r3
+	lgr %r3, %r5
+.LBB_11:
+	stg %r0, 0(%r13)
+	stg %r1, 8(%r13)
+	stg %r2, 16(%r13)
+	stg %r3, 24(%r13)
+	lmg %r9, %r15, 328(%r15)
+	br %r14
+.LBB_12:
+	larl %r2, .Lanon.20
+	lghi %r3, 51
+	larl %r4, .Lanon.22
+	brasl %r14, core::panicking::panic_fmt@PLT

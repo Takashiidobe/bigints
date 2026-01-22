@@ -1,0 +1,30 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::i128::Int128 as core::ops::arith::Div>::div:
+	push rax
+	mov rax, rdx
+	or rax, rcx
+	je .LBB_3
+	vmovq xmm0, rdx
+	vmovq xmm1, rcx
+	vpunpcklqdq xmm0, xmm0, xmm1
+	vmovq xmm1, rdi
+	vmovq xmm2, rsi
+	vpunpcklqdq xmm1, xmm1, xmm2
+	vpcmpeqd xmm2, xmm2, xmm2
+	vpxor xmm0, xmm0, xmm2
+	vpxor xmm1, xmm1, xmmword ptr [rip + .LCPI74_0]
+	vpor xmm0, xmm1, xmm0
+	vptest xmm0, xmm0
+	je .LBB_2
+	call qword ptr [rip + __divti3@GOTPCREL]
+	pop rcx
+	ret
+.LBB_3:
+	lea rdi, [rip + .Lanon.18]
+	call qword ptr [rip + core::panicking::panic_const::panic_const_div_by_zero@GOTPCREL]
+.LBB_2:
+	lea rdi, [rip + .Lanon.18]
+	call qword ptr [rip + core::panicking::panic_const::panic_const_div_overflow@GOTPCREL]

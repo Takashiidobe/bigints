@@ -178,6 +178,132 @@ asm_snapshot!(
 );
 
 asm_snapshot!(
+    asm_i64_add_x86_64,
+    "<bigints::i64::Int64 as core::ops::arith::Add>::add",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i64_sub_x86_64,
+    "<bigints::i64::Int64 as core::ops::arith::Sub>::sub",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i64_mul_x86_64,
+    "<bigints::i64::Int64 as core::ops::arith::Mul>::mul",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i64_div_x86_64,
+    "<bigints::i64::Int64 as core::ops::arith::Div>::div",
+    "x86_64-unknown-linux-gnu"
+);
+
+asm_snapshot!(
+    asm_i128_add_x86_64,
+    "<bigints::i128::Int128 as core::ops::arith::Add>::add",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i128_sub_x86_64,
+    "<bigints::i128::Int128 as core::ops::arith::Sub>::sub",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i128_mul_x86_64,
+    "<bigints::i128::Int128 as core::ops::arith::Mul>::mul",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i128_div_x86_64,
+    "<bigints::i128::Int128 as core::ops::arith::Div>::div",
+    "x86_64-unknown-linux-gnu"
+);
+
+asm_snapshot!(
+    asm_i256_add_x86_64,
+    "<bigints::i256::Int256 as core::ops::arith::Add>::add",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i256_sub_x86_64,
+    "<bigints::i256::Int256 as core::ops::arith::Sub>::sub",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i256_mul_x86_64,
+    "<bigints::i256::Int256 as core::ops::arith::Mul>::mul",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i256_div_x86_64,
+    "<bigints::i256::Int256 as core::ops::arith::Div>::div",
+    "x86_64-unknown-linux-gnu"
+);
+
+asm_snapshot!(
+    asm_u64_add_x86_64,
+    "<bigints::u64::Uint64 as core::ops::arith::Add>::add",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u64_sub_x86_64,
+    "<bigints::u64::Uint64 as core::ops::arith::Sub>::sub",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u64_mul_x86_64,
+    "<bigints::u64::Uint64 as core::ops::arith::Mul>::mul",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u64_div_x86_64,
+    "<bigints::u64::Uint64 as core::ops::arith::Div>::div",
+    "x86_64-unknown-linux-gnu"
+);
+
+asm_snapshot!(
+    asm_u128_add_x86_64,
+    "<bigints::u128::Uint128 as core::ops::arith::Add>::add",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u128_sub_x86_64,
+    "<bigints::u128::Uint128 as core::ops::arith::Sub>::sub",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u128_mul_x86_64,
+    "<bigints::u128::Uint128 as core::ops::arith::Mul>::mul",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u128_div_x86_64,
+    "<bigints::u128::Uint128 as core::ops::arith::Div>::div",
+    "x86_64-unknown-linux-gnu"
+);
+
+asm_snapshot!(
+    asm_u256_add_x86_64,
+    "<bigints::u256::Uint256 as core::ops::arith::Add>::add",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u256_sub_x86_64,
+    "<bigints::u256::Uint256 as core::ops::arith::Sub>::sub",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u256_mul_x86_64,
+    "<bigints::u256::Uint256 as core::ops::arith::Mul>::mul",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u256_div_x86_64,
+    "<bigints::u256::Uint256 as core::ops::arith::Div>::div",
+    "x86_64-unknown-linux-gnu"
+);
+
+asm_snapshot!(
     asm_i128_add_riscv,
     "<bigints::i128::Int128 as core::ops::arith::Add>::add",
     "riscv64gc-unknown-linux-gnu"
@@ -259,4 +385,88 @@ asm_snapshot!(
     asm_u256_div_riscv,
     "<bigints::u256::Uint256 as core::ops::arith::Div>::div",
     "riscv64gc-unknown-linux-gnu"
+);
+
+asm_snapshot!(
+    asm_i128_add_s390x,
+    "<bigints::i128::Int128 as core::ops::arith::Add>::add",
+    "s390x-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i128_sub_s390x,
+    "<bigints::i128::Int128 as core::ops::arith::Sub>::sub",
+    "s390x-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i128_mul_s390x,
+    "<bigints::i128::Int128 as core::ops::arith::Mul>::mul",
+    "s390x-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i128_div_s390x,
+    "<bigints::i128::Int128 as core::ops::arith::Div>::div",
+    "s390x-unknown-linux-gnu"
+);
+
+asm_snapshot!(
+    asm_i256_add_s390x,
+    "<bigints::i256::Int256 as core::ops::arith::Add>::add",
+    "s390x-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i256_sub_s390x,
+    "<bigints::i256::Int256 as core::ops::arith::Sub>::sub",
+    "s390x-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i256_mul_s390x,
+    "<bigints::i256::Int256 as core::ops::arith::Mul>::mul",
+    "s390x-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_i256_div_s390x,
+    "<bigints::i256::Int256 as core::ops::arith::Div>::div",
+    "s390x-unknown-linux-gnu"
+);
+
+asm_snapshot!(
+    asm_u128_add_s390x,
+    "<bigints::u128::Uint128 as core::ops::arith::Add>::add",
+    "s390x-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u128_sub_s390x,
+    "<bigints::u128::Uint128 as core::ops::arith::Sub>::sub",
+    "s390x-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u128_mul_s390x,
+    "<bigints::u128::Uint128 as core::ops::arith::Mul>::mul",
+    "s390x-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u128_div_s390x,
+    "<bigints::u128::Uint128 as core::ops::arith::Div>::div",
+    "s390x-unknown-linux-gnu"
+);
+
+asm_snapshot!(
+    asm_u256_add_s390x,
+    "<bigints::u256::Uint256 as core::ops::arith::Add>::add",
+    "s390x-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u256_sub_s390x,
+    "<bigints::u256::Uint256 as core::ops::arith::Sub>::sub",
+    "s390x-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u256_mul_s390x,
+    "<bigints::u256::Uint256 as core::ops::arith::Mul>::mul",
+    "s390x-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_u256_div_s390x,
+    "<bigints::u256::Uint256 as core::ops::arith::Div>::div",
+    "s390x-unknown-linux-gnu"
 );

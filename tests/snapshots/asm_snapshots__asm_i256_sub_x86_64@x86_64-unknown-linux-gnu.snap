@@ -1,0 +1,19 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::i256::Int256 as core::ops::arith::Sub>::sub:
+	mov rcx, qword ptr [rsi]
+	sub rcx, qword ptr [rdx]
+	mov r8, qword ptr [rsi + 8]
+	sbb r8, qword ptr [rdx + 8]
+	mov r9, qword ptr [rsi + 16]
+	sbb r9, qword ptr [rdx + 16]
+	mov rax, rdi
+	mov rsi, qword ptr [rsi + 24]
+	sbb rsi, qword ptr [rdx + 24]
+	mov qword ptr [rdi], rcx
+	mov qword ptr [rdi + 8], r8
+	mov qword ptr [rdi + 16], r9
+	mov qword ptr [rdi + 24], rsi
+	ret

@@ -1,0 +1,11 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+<bigints::i128::Int128 as core::ops::arith::Mul>::mul:
+	mulx r8, rax, rdi
+	imul rcx, rdi
+	imul rdx, rsi
+	add rdx, rcx
+	add rdx, r8
+	ret
