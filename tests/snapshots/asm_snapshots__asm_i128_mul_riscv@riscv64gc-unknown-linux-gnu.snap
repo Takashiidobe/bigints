@@ -1,0 +1,35 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::i128::Int128 as core::ops::arith::Mul>::mul,"ax",@progbits
+	.globl	<bigints::i128::Int128 as core::ops::arith::Mul>::mul
+	.p2align	1
+.type	<bigints::i128::Int128 as core::ops::arith::Mul>::mul,@function
+<bigints::i128::Int128 as core::ops::arith::Mul>::mul:
+	.cfi_startproc
+	slli a7, a0, 32
+	srli a6, a0, 32
+	slli a5, a2, 32
+	srli a4, a2, 32
+	mul a0, a3, a0
+	mul a1, a2, a1
+	srli a2, a7, 32
+	srli a3, a5, 32
+	mulhu a7, a5, a7
+	mul a5, a4, a6
+	add a0, a0, a1
+	mul a1, a4, a2
+	mul a2, a3, a6
+	add a5, a5, a0
+	add a2, a2, a1
+	sltu a1, a2, a1
+	slli a3, a2, 32
+	srli a2, a2, 32
+	add a0, a3, a7
+	slli a1, a1, 32
+	add a2, a2, a5
+	sltu a3, a0, a3
+	add a1, a1, a2
+	add a1, a1, a3
+	ret

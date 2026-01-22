@@ -1,0 +1,83 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::i64::Int64 as core::ops::arith::Div>::div,"ax",@progbits
+	.globl	<bigints::i64::Int64 as core::ops::arith::Div>::div
+	.p2align	4
+.type	<bigints::i64::Int64 as core::ops::arith::Div>::div,@function
+<bigints::i64::Int64 as core::ops::arith::Div>::div:
+	.cfi_startproc
+	push ebp
+	.cfi_def_cfa_offset 8
+	push ebx
+	.cfi_def_cfa_offset 12
+	push edi
+	.cfi_def_cfa_offset 16
+	push esi
+	.cfi_def_cfa_offset 20
+	sub esp, 12
+	.cfi_def_cfa_offset 32
+	.cfi_offset esi, -20
+	.cfi_offset edi, -16
+	.cfi_offset ebx, -12
+	.cfi_offset ebp, -8
+	mov eax, dword ptr [esp + 40]
+	mov edx, dword ptr [esp + 44]
+	call .L71$pb
+	.cfi_adjust_cfa_offset 4
+.L71$pb:
+	pop ebx
+	.cfi_adjust_cfa_offset -4
+.Ltmp1224:
+	add ebx, offset _GLOBAL_OFFSET_TABLE_+(.Ltmp1224-.L71$pb)
+	mov ecx, eax
+	or ecx, edx
+	je .LBB_3
+	mov esi, dword ptr [esp + 36]
+	mov edi, edx
+	mov ebp, eax
+	not edi
+	not ebp
+	lea ecx, [esi - 2147483648]
+	or ecx, edi
+	mov edi, dword ptr [esp + 32]
+	or ebp, edi
+	or ebp, ecx
+	je .LBB_2
+	push edx
+	.cfi_adjust_cfa_offset 4
+	push eax
+	.cfi_adjust_cfa_offset 4
+	push esi
+	.cfi_adjust_cfa_offset 4
+	push edi
+	.cfi_adjust_cfa_offset 4
+	call __divdi3@PLT
+	add esp, 28
+	.cfi_adjust_cfa_offset -28
+	pop esi
+	.cfi_def_cfa_offset 16
+	pop edi
+	.cfi_def_cfa_offset 12
+	pop ebx
+	.cfi_def_cfa_offset 8
+	pop ebp
+	.cfi_def_cfa_offset 4
+	ret
+.LBB_3:
+	.cfi_def_cfa_offset 32
+	sub esp, 12
+	.cfi_adjust_cfa_offset 12
+	lea eax, [ebx + .Lanon.16@GOTOFF]
+	push eax
+	.cfi_adjust_cfa_offset 4
+	call core::panicking::panic_const::panic_const_div_by_zero@PLT
+.LBB_2:
+	.cfi_def_cfa_offset 32
+	sub esp, 12
+	.cfi_adjust_cfa_offset 12
+	lea eax, [ebx + .Lanon.16@GOTOFF]
+	push eax
+	.cfi_adjust_cfa_offset 4
+	call core::panicking::panic_const::panic_const_div_overflow@PLT

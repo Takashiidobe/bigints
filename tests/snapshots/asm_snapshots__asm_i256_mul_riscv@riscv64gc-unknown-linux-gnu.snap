@@ -1,0 +1,52 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::i256::Int256 as core::ops::arith::Mul>::mul,"ax",@progbits
+	.globl	<bigints::i256::Int256 as core::ops::arith::Mul>::mul
+	.p2align	1
+.type	<bigints::i256::Int256 as core::ops::arith::Mul>::mul,@function
+<bigints::i256::Int256 as core::ops::arith::Mul>::mul:
+	.cfi_startproc
+	addi sp, sp, -112
+	.cfi_def_cfa_offset 112
+	sd ra, 104(sp)
+	sd s0, 96(sp)
+	.cfi_offset ra, -8
+	.cfi_offset s0, -16
+	mv s0, a0
+	ld a6, 0(a1)
+	ld a3, 8(a1)
+	ld a4, 16(a1)
+	ld a7, 24(a1)
+	ld a5, 0(a2)
+	ld a0, 8(a2)
+	ld a1, 16(a2)
+	ld a2, 24(a2)
+	sd a6, 32(sp)
+	sd a3, 40(sp)
+	sd a4, 48(sp)
+	sd a7, 56(sp)
+	sd a5, 64(sp)
+	sd a0, 72(sp)
+	sd a1, 80(sp)
+	sd a2, 88(sp)
+	mv a0, sp
+	addi a1, sp, 32
+	addi a2, sp, 64
+	call <bigints::u256::Uint256 as core::ops::arith::Mul>::mul
+	ld a0, 0(sp)
+	ld a1, 8(sp)
+	ld a2, 16(sp)
+	ld a3, 24(sp)
+	sd a0, 0(s0)
+	sd a1, 8(s0)
+	sd a2, 16(s0)
+	sd a3, 24(s0)
+	ld ra, 104(sp)
+	ld s0, 96(sp)
+	.cfi_restore ra
+	.cfi_restore s0
+	addi sp, sp, 112
+	.cfi_def_cfa_offset 0
+	ret

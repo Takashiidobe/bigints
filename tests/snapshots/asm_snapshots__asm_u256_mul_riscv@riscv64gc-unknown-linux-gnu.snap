@@ -1,0 +1,89 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::u256::Uint256 as core::ops::arith::Mul>::mul,"ax",@progbits
+	.globl	<bigints::u256::Uint256 as core::ops::arith::Mul>::mul
+	.p2align	1
+.type	<bigints::u256::Uint256 as core::ops::arith::Mul>::mul,@function
+<bigints::u256::Uint256 as core::ops::arith::Mul>::mul:
+	.cfi_startproc
+	ld a3, 0(a1)
+	ld t6, 8(a1)
+	ld t0, 16(a1)
+	ld a6, 24(a1)
+	ld a1, 0(a2)
+	ld a5, 8(a2)
+	ld t2, 16(a2)
+	ld t3, 24(a2)
+	mulhu a4, a1, a3
+	mulhu a7, a5, a3
+	mul t1, a5, a3
+	mulhu t5, a1, t6
+	mul t4, a1, t6
+	add a2, a4, t1
+	sltu a4, a2, a4
+	add t1, a2, t4
+	add a4, a4, a7
+	sltu t4, t1, a2
+	add t5, t5, a4
+	add t5, t5, t4
+	mul a7, a1, a3
+	beq t5, a4, .LBB_2
+	sltu t4, t5, a4
+.LBB_2:
+	addi sp, sp, -48
+	.cfi_def_cfa_offset 48
+	sd s0, 40(sp)
+	sd s1, 32(sp)
+	sd s2, 24(sp)
+	sd s3, 16(sp)
+	sd s4, 8(sp)
+	.cfi_offset s0, -8
+	.cfi_offset s1, -16
+	.cfi_offset s2, -24
+	.cfi_offset s3, -32
+	.cfi_offset s4, -40
+	mulhu s2, t2, a3
+	mul s3, t2, a3
+	mul s0, a5, t6
+	mulhu s1, a5, t6
+	mul s4, a1, t0
+	mulhu a4, a1, t0
+	mul a3, t3, a3
+	mul a2, t2, t6
+	mul a5, a5, t0
+	mul a1, a1, a6
+	add a4, a4, s1
+	add s4, s4, s0
+	add a1, a1, a5
+	add a2, a2, a3
+	sltu a3, s4, s0
+	add s3, s3, s4
+	add a4, a4, s2
+	add a1, a1, a2
+	sltu a2, s3, s4
+	add a3, a3, a4
+	add t5, t5, s3
+	add a2, a2, a3
+	sltu a3, t5, s3
+	add a2, a2, t4
+	add a2, a2, a3
+	add a1, a1, a2
+	sd a7, 0(a0)
+	sd t1, 8(a0)
+	sd t5, 16(a0)
+	sd a1, 24(a0)
+	ld s0, 40(sp)
+	ld s1, 32(sp)
+	ld s2, 24(sp)
+	ld s3, 16(sp)
+	ld s4, 8(sp)
+	.cfi_restore s0
+	.cfi_restore s1
+	.cfi_restore s2
+	.cfi_restore s3
+	.cfi_restore s4
+	addi sp, sp, 48
+	.cfi_def_cfa_offset 0
+	ret

@@ -1,0 +1,37 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::i256::Int256 as core::ops::arith::Sub>::sub,"ax",@progbits
+	.globl	<bigints::i256::Int256 as core::ops::arith::Sub>::sub
+	.p2align	1
+.type	<bigints::i256::Int256 as core::ops::arith::Sub>::sub,@function
+<bigints::i256::Int256 as core::ops::arith::Sub>::sub:
+	.cfi_startproc
+	ld a7, 0(a1)
+	ld t0, 8(a1)
+	ld t3, 16(a1)
+	ld a6, 24(a1)
+	ld a1, 0(a2)
+	ld a3, 8(a2)
+	ld a4, 16(a2)
+	ld t2, 24(a2)
+	sub t1, a7, a1
+	sltu a1, a7, a1
+	sub a2, t0, a3
+	sltu a3, t0, a3
+	sub a5, t3, a4
+	sltu a4, t3, a4
+	sub a6, a6, t2
+	sub a7, a2, a1
+	sltu a1, a2, a1
+	or a1, a1, a3
+	sub a2, a5, a1
+	sltu a1, a5, a1
+	or a1, a1, a4
+	sub a1, a6, a1
+	sd t1, 0(a0)
+	sd a7, 8(a0)
+	sd a2, 16(a0)
+	sd a1, 24(a0)
+	ret

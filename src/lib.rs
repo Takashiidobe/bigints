@@ -15,7 +15,9 @@ pub use i128::Int128;
 pub use i256::Int256;
 pub use u64::Uint64;
 pub use u128::Uint128;
-pub use u256::{Uint256, optimal_u256_mul};
+pub use u256::Uint256;
+#[cfg(target_arch = "x86_64")]
+pub use u256::optimal_u256_mul;
 
 // ============================================================================
 // Test functions for codegen comparison

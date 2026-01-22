@@ -1,0 +1,139 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::i256::Int256 as core::ops::arith::Div>::div,"ax",@progbits
+	.globl	<bigints::i256::Int256 as core::ops::arith::Div>::div
+	.p2align	1
+.type	<bigints::i256::Int256 as core::ops::arith::Div>::div,@function
+<bigints::i256::Int256 as core::ops::arith::Div>::div:
+	.cfi_startproc
+	addi sp, sp, -144
+	.cfi_def_cfa_offset 144
+	sd ra, 136(sp)
+	sd s0, 128(sp)
+	sd s1, 120(sp)
+	sd s2, 112(sp)
+	sd s3, 104(sp)
+	.cfi_offset ra, -8
+	.cfi_offset s0, -16
+	.cfi_offset s1, -24
+	.cfi_offset s2, -32
+	.cfi_offset s3, -40
+	.cfi_remember_state
+	ld a5, 0(a2)
+	ld t0, 8(a2)
+	ld a6, 16(a2)
+	ld a2, 24(a2)
+	mv s3, a0
+	bnez a5, .LBB_4
+	bnez t0, .LBB_4
+	bnez a6, .LBB_4
+	beqz a2, .LBB_11
+.LBB_4:
+	ld a0, 24(a1)
+	ld s0, 0(a1)
+	ld s1, 8(a1)
+	ld a1, 16(a1)
+	slti a7, a0, 0
+	slti t1, a2, 0
+	bltz a0, .LBB_9
+	xor s2, a7, t1
+	sd s0, 8(sp)
+	sd s1, 16(sp)
+	sd a1, 24(sp)
+	sd a0, 32(sp)
+	bltz a2, .LBB_10
+.LBB_6:
+	sd a5, 40(sp)
+	sd t0, 48(sp)
+	sd a6, 56(sp)
+	sd a2, 64(sp)
+	addi a0, sp, 72
+	addi a1, sp, 8
+	addi a2, sp, 40
+	call <bigints::u256::Uint256 as core::ops::arith::Div>::div
+	ld a3, 72(sp)
+	ld a0, 80(sp)
+	ld a2, 88(sp)
+	ld a1, 96(sp)
+	beqz s2, .LBB_8
+	snez a4, a3
+	neg a3, a3
+	neg a5, a0
+	snez s1, a0
+	sub a0, a5, a4
+	sltu a4, a5, a4
+	neg a5, a2
+	snez s0, a2
+	or a4, a4, s1
+	sub a2, a5, a4
+	sltu a4, a5, a4
+	or a4, a4, s0
+	neg a1, a1
+	sub a1, a1, a4
+.LBB_8:
+	sd a3, 0(s3)
+	sd a0, 8(s3)
+	sd a2, 16(s3)
+	sd a1, 24(s3)
+	ld ra, 136(sp)
+	ld s0, 128(sp)
+	ld s1, 120(sp)
+	ld s2, 112(sp)
+	ld s3, 104(sp)
+	.cfi_restore ra
+	.cfi_restore s0
+	.cfi_restore s1
+	.cfi_restore s2
+	.cfi_restore s3
+	addi sp, sp, 144
+	.cfi_def_cfa_offset 0
+	ret
+.LBB_9:
+	.cfi_restore_state
+	snez a3, s0
+	neg s0, s0
+	neg a4, s1
+	snez t2, s1
+	sub s1, a4, a3
+	sltu a3, a4, a3
+	neg a4, a1
+	snez t3, a1
+	or a3, t2, a3
+	sub a1, a4, a3
+	sltu a3, a4, a3
+	or a3, t3, a3
+	neg a0, a0
+	sub a0, a0, a3
+	xor s2, a7, t1
+	sd s0, 8(sp)
+	sd s1, 16(sp)
+	sd a1, 24(sp)
+	sd a0, 32(sp)
+	bgez a2, .LBB_6
+.LBB_10:
+	snez a0, a5
+	neg a5, a5
+	neg a1, t0
+	snez a3, t0
+	sub t0, a1, a0
+	sltu a0, a1, a0
+	neg a1, a6
+	snez a4, a6
+	or a0, a0, a3
+	sub a6, a1, a0
+	sltu a0, a1, a0
+	or a0, a0, a4
+	neg a2, a2
+	sub a2, a2, a0
+	j .LBB_6
+.LBB_11:
+.Lpcrel_hi14:
+	auipc a0, %pcrel_hi(.Lanon.20)
+.Lpcrel_hi15:
+	auipc a1, %pcrel_hi(.Lanon.22)
+	addi a0, a0, %pcrel_lo(.Lpcrel_hi14)
+	addi a2, a1, %pcrel_lo(.Lpcrel_hi15)
+	li a1, 51
+	call core::panicking::panic_fmt

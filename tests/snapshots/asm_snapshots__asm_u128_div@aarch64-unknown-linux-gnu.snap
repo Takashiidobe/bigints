@@ -1,0 +1,31 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::u128::Uint128 as core::ops::arith::Div>::div,"ax",@progbits
+	.globl	<bigints::u128::Uint128 as core::ops::arith::Div>::div
+	.p2align	2
+.type	<bigints::u128::Uint128 as core::ops::arith::Div>::div,@function
+<bigints::u128::Uint128 as core::ops::arith::Div>::div:
+	.cfi_startproc
+	stp x29, x30, [sp, #-16]!
+	.cfi_def_cfa_offset 16
+	mov x29, sp
+	.cfi_def_cfa w29, 16
+	.cfi_offset w30, -8
+	.cfi_offset w29, -16
+	.cfi_remember_state
+	orr x8, x2, x3
+	cbz x8, .LBB_2
+	bl __udivti3
+	.cfi_def_cfa wsp, 16
+	ldp x29, x30, [sp], #16
+	.cfi_def_cfa_offset 0
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB_2:
+	.cfi_restore_state
+	adrp x0, .Lanon.14
+	add x0, x0, :lo12:.Lanon.14
+	bl core::panicking::panic_const::panic_const_div_by_zero

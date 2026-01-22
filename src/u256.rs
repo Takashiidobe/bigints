@@ -287,34 +287,77 @@ impl Uint256 {
             return Self::ZERO;
         }
 
-        // Normalize: shift so divisor's MSB is set
-        let shift = d.leading_zeros();
+        if d.l3 != 0 {
+            // Quotient fits in 64 bits - single iteration
+            self.div_large_divisor_64bit_quotient(d)
+        } else {
+            // d.l2 != 0, quotient fits in 128 bits - two iterations max
+            self.div_large_divisor_128bit_quotient(d)
+        }
+    }
+
+    /// 256÷256 where divisor uses l3; quotient fits in 64 bits.
+    #[inline]
+    fn div_large_divisor_64bit_quotient(self, d: Self) -> Self {
+        debug_assert!(d.l3 != 0);
+
+        let shift = d.l3.leading_zeros();
         let d_norm = d.shl_u32(shift);
-        let n_norm = self.shl_wide(shift); // Returns 320 bits (5 limbs)
+        let mut rem = self.shl_wide(shift);
 
-        // Count actual number of significant limbs (must check actual content, not estimate)
-        let n_limbs = if n_norm[6] != 0 { 7 }
-            else if n_norm[5] != 0 { 6 }
-            else if n_norm[4] != 0 { 5 }
-            else if n_norm[3] != 0 { 4 }
-            else if n_norm[2] != 0 { 3 }
-            else if n_norm[1] != 0 { 2 }
-            else { 1 };
+        let r_hi = rem[4];
+        let r_lo = rem[3];
+        let d_hi = d_norm.l3;
 
-        let d_limbs = if d_norm.l3 != 0 { 4 }
-            else if d_norm.l2 != 0 { 3 }
-            else if d_norm.l1 != 0 { 2 }
-            else { 1 };
+        let mut qhat = if r_hi >= d_hi {
+            u64::MAX
+        } else {
+            let numer = (r_hi as u128) << 64 | r_lo as u128;
+            (numer / d_hi as u128) as u64
+        };
 
-        let mut q = [0u64; 4];
-        let mut rem = n_norm;
+        loop {
+            let rhat = ((r_hi as u128) << 64 | r_lo as u128)
+                .wrapping_sub((qhat as u128) * (d_hi as u128));
 
-        // Process from most significant quotient limb down
-        for j in (0..=(n_limbs - d_limbs)).rev() {
-            // Estimate quotient digit: q̂ = (r[j+d_limbs] : r[j+d_limbs-1]) / d[d_limbs-1]
-            let r_hi = rem[j + d_limbs];
-            let r_lo = rem[j + d_limbs - 1];
-            let d_hi = d_norm.l3;
+            if rhat > u64::MAX as u128 {
+                break;
+            }
+
+            let left = (qhat as u128) * (d_norm.l2 as u128);
+            let right = (rhat << 64) | rem[2] as u128;
+
+            if left <= right {
+                break;
+            }
+            qhat -= 1;
+        }
+
+        let borrow = sub_mul_limbs(&mut rem, 0, &d_norm, qhat);
+        if borrow {
+            qhat -= 1;
+            add_back_limbs(&mut rem, 0, &d_norm);
+        }
+
+        Self { l0: qhat, l1: 0, l2: 0, l3: 0 }
+    }
+
+    /// 256÷192 where divisor uses l2; quotient fits in 128 bits.
+    #[inline]
+    fn div_large_divisor_128bit_quotient(self, d: Self) -> Self {
+        debug_assert!(d.l2 != 0 && d.l3 == 0);
+
+        let shift = d.l2.leading_zeros();
+        let d_norm = d.shl_u32(shift);
+        let mut rem = self.shl_wide(shift);
+
+        let d_hi = d_norm.l2;
+        let mut q_hi = 0u64;
+        let mut q_lo = 0u64;
+
+        for j in (0..=1).rev() {
+            let r_hi = rem[j + 3];
+            let r_lo = rem[j + 2];
 
             let mut qhat = if r_hi >= d_hi {
                 u64::MAX
@@ -323,18 +366,16 @@ impl Uint256 {
                 (numer / d_hi as u128) as u64
             };
 
-            // Refinement: while qhat * d[d_limbs-2] > (rhat : r[j+d_limbs-2])
-            // Note: at most 2 iterations needed
             loop {
                 let rhat = ((r_hi as u128) << 64 | r_lo as u128)
                     .wrapping_sub((qhat as u128) * (d_hi as u128));
 
                 if rhat > u64::MAX as u128 {
-                    break; // rhat overflowed, qhat is correct
+                    break;
                 }
 
-                let left = (qhat as u128) * (d_norm.l2 as u128);
-                let right = (rhat << 64) | rem[j + d_limbs - 2] as u128;
+                let left = (qhat as u128) * (d_norm.l1 as u128);
+                let right = (rhat << 64) | rem[j + 1] as u128;
 
                 if left <= right {
                     break;
@@ -342,21 +383,20 @@ impl Uint256 {
                 qhat -= 1;
             }
 
-            // Multiply and subtract: rem[j..j+d_limbs+1] -= qhat * d_norm
-            let borrow = sub_mul_limbs(&mut rem, j, &d_norm, qhat);
-
+            let borrow = sub_mul_limbs_3(&mut rem, j, &d_norm, qhat);
             if borrow {
-                // Rare case: qhat was 1 too large, add back
                 qhat -= 1;
-                add_back_limbs(&mut rem, j, &d_norm);
+                add_back_limbs_3(&mut rem, j, &d_norm);
             }
 
-            if j < 4 {
-                q[j] = qhat;
+            if j == 1 {
+                q_hi = qhat;
+            } else {
+                q_lo = qhat;
             }
         }
 
-        Self { l0: q[0], l1: q[1], l2: q[2], l3: q[3] }
+        Self { l0: q_lo, l1: q_hi, l2: 0, l3: 0 }
     }
 
     /// Count leading zeros
@@ -578,6 +618,30 @@ fn sub_mul_limbs(rem: &mut [u64; 7], j: usize, d: &Uint256, qhat: u64) -> bool {
     borrow != 0
 }
 
+/// Subtract qhat * d (3 limbs) from rem[j..j+4], returning true if borrow occurred.
+#[inline]
+fn sub_mul_limbs_3(rem: &mut [u64; 7], j: usize, d: &Uint256, qhat: u64) -> bool {
+    let d_limbs = [d.l0, d.l1, d.l2];
+    let mut borrow: u128 = 0;
+
+    for i in 0..3 {
+        if j + i < 7 {
+            let prod = (qhat as u128) * (d_limbs[i] as u128) + borrow;
+            let (diff, b) = rem[j + i].overflowing_sub(prod as u64);
+            rem[j + i] = diff;
+            borrow = (prod >> 64) + b as u128;
+        }
+    }
+
+    if j + 3 < 7 {
+        let (diff, b) = rem[j + 3].overflowing_sub(borrow as u64);
+        rem[j + 3] = diff;
+        return b;
+    }
+
+    borrow != 0
+}
+
 /// Add d back to rem[j..j+5] after over-subtraction.
 #[inline]
 fn add_back_limbs(rem: &mut [u64; 7], j: usize, d: &Uint256) {
@@ -595,6 +659,26 @@ fn add_back_limbs(rem: &mut [u64; 7], j: usize, d: &Uint256) {
 
     if j + 4 < 7 {
         rem[j + 4] = rem[j + 4].wrapping_add(carry as u64);
+    }
+}
+
+/// Add d (3 limbs) back to rem[j..j+4] after over-subtraction.
+#[inline]
+fn add_back_limbs_3(rem: &mut [u64; 7], j: usize, d: &Uint256) {
+    let d_limbs = [d.l0, d.l1, d.l2];
+    let mut carry = false;
+
+    for i in 0..3 {
+        if j + i < 7 {
+            let (sum, c1) = rem[j + i].overflowing_add(d_limbs[i]);
+            let (sum, c2) = sum.overflowing_add(carry as u64);
+            rem[j + i] = sum;
+            carry = c1 || c2;
+        }
+    }
+
+    if j + 3 < 7 {
+        rem[j + 3] = rem[j + 3].wrapping_add(carry as u64);
     }
 }
 

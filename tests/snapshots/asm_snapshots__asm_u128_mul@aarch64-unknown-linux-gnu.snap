@@ -1,0 +1,27 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::u128::Uint128 as core::ops::arith::Mul>::mul,"ax",@progbits
+	.globl	<bigints::u128::Uint128 as core::ops::arith::Mul>::mul
+	.p2align	2
+.type	<bigints::u128::Uint128 as core::ops::arith::Mul>::mul,@function
+<bigints::u128::Uint128 as core::ops::arith::Mul>::mul:
+	.cfi_startproc
+	mul x8, x2, x1
+	lsr x9, x0, #32
+	lsr x10, x2, #32
+	mov w11, w0
+	mov w12, w2
+	umaddl x8, w10, w9, x8
+	madd x8, x3, x0, x8
+	umull x10, w10, w11
+	umull x9, w12, w9
+	umull x11, w2, w0
+	adds x9, x10, x9
+	mov x10, #4294967296
+	add x8, x8, x9, lsr #32
+	csel x10, x10, xzr, hs
+	adds x0, x11, x9, lsl #32
+	adc x1, x8, x10
+	ret

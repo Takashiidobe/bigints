@@ -1,0 +1,127 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::i256::Int256 as core::ops::arith::Div>::div,"ax",@progbits
+	.globl	<bigints::i256::Int256 as core::ops::arith::Div>::div
+	.p2align	2
+.type	<bigints::i256::Int256 as core::ops::arith::Div>::div,@function
+<bigints::i256::Int256 as core::ops::arith::Div>::div:
+	.cfi_startproc
+	sub sp, sp, #128
+	.cfi_def_cfa_offset 128
+	stp x29, x30, [sp, #96]
+	stp x20, x19, [sp, #112]
+	add x29, sp, #96
+	.cfi_def_cfa w29, 32
+	.cfi_offset w19, -8
+	.cfi_offset w20, -16
+	.cfi_offset w30, -24
+	.cfi_offset w29, -32
+	.cfi_remember_state
+	ldp x10, x12, [x1]
+	mov x19, x8
+	ldp x11, x9, [x1, #16]
+	cbnz x10, .LBB_4
+	cbnz x12, .LBB_4
+	cbnz x11, .LBB_4
+	cbz x9, .LBB_11
+.LBB_4:
+	ldp x16, x8, [x0, #16]
+	ldp x15, x17, [x0]
+	cmp x8, #0
+	cset w13, lt
+	cmp x9, #0
+	cset w14, lt
+	tbnz x8, #63, .LBB_9
+	eor w20, w13, w14
+	stp x15, x17, [sp]
+	stp x16, x8, [sp, #16]
+	tbnz x9, #63, .LBB_10
+.LBB_6:
+	sub x8, x29, #32
+	mov x0, sp
+	add x1, sp, #32
+	stp x10, x12, [sp, #32]
+	stp x11, x9, [sp, #48]
+	bl <bigints::u256::Uint256 as core::ops::arith::Div>::div
+	ldp x9, x11, [x29, #-32]
+	ldp x10, x8, [x29, #-16]
+	cbz w20, .LBB_8
+	cmp x9, #0
+	neg x12, x11
+	neg x9, x9
+	cset w13, ne
+	cmp x11, #0
+	neg x11, x10
+	ccmp x12, x13, #0, eq
+	sub x12, x12, x13
+	cset w14, lo
+	cmp x10, #0
+	ccmp x11, x14, #0, eq
+	sub x13, x11, x14
+	mov x11, x12
+	cset w10, lo
+	sbfx x10, x10, #0, #1
+	sub x8, x10, x8
+	mov x10, x13
+.LBB_8:
+	stp x9, x11, [x19]
+	stp x10, x8, [x19, #16]
+	.cfi_def_cfa wsp, 128
+	ldp x20, x19, [sp, #112]
+	ldp x29, x30, [sp, #96]
+	add sp, sp, #128
+	.cfi_def_cfa_offset 0
+	.cfi_restore w19
+	.cfi_restore w20
+	.cfi_restore w30
+	.cfi_restore w29
+	ret
+.LBB_9:
+	.cfi_restore_state
+	cmp x15, #0
+	neg x18, x17
+	neg x15, x15
+	cset w0, ne
+	cmp x17, #0
+	neg x17, x16
+	ccmp x18, x0, #0, eq
+	sub x18, x18, x0
+	cset w1, lo
+	cmp x16, #0
+	ccmp x17, x1, #0, eq
+	sub x0, x17, x1
+	cset w16, lo
+	sbfx x16, x16, #0, #1
+	sub x8, x16, x8
+	eor w20, w13, w14
+	stp x15, x18, [sp]
+	stp x0, x8, [sp, #16]
+	tbz x9, #63, .LBB_6
+.LBB_10:
+	cmp x10, #0
+	neg x8, x12
+	neg x10, x10
+	cset w13, ne
+	cmp x12, #0
+	neg x12, x11
+	ccmp x8, x13, #0, eq
+	sub x8, x8, x13
+	cset w14, lo
+	cmp x11, #0
+	ccmp x12, x14, #0, eq
+	sub x13, x12, x14
+	mov x12, x8
+	cset w11, lo
+	sbfx x11, x11, #0, #1
+	sub x9, x11, x9
+	mov x11, x13
+	b .LBB_6
+.LBB_11:
+	adrp x0, .Lanon.20
+	add x0, x0, :lo12:.Lanon.20
+	adrp x2, .Lanon.22
+	add x2, x2, :lo12:.Lanon.22
+	mov w1, #51
+	bl core::panicking::panic_fmt
