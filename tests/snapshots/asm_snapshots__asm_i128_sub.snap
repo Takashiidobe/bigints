@@ -1,0 +1,15 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::i128::Int128 as core::ops::arith::Sub>::sub,"ax",@progbits
+	.globl	<bigints::i128::Int128 as core::ops::arith::Sub>::sub
+	.p2align	4
+.type	<bigints::i128::Int128 as core::ops::arith::Sub>::sub,@function
+<bigints::i128::Int128 as core::ops::arith::Sub>::sub:
+	.cfi_startproc
+	mov rax, rdi
+	sub rax, rdx
+	sbb rsi, rcx
+	mov rdx, rsi
+	ret

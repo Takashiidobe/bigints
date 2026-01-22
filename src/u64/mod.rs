@@ -29,14 +29,15 @@ pub struct Uint64 {
 
 impl Uint64 {
     pub const ZERO: Self = Self { l: 0, h: 0 };
-    pub const MAX: Self = Self { l: u32::MAX, h: u32::MAX };
+    pub const MAX: Self = Self {
+        l: u32::MAX,
+        h: u32::MAX,
+    };
 
-    #[inline]
     pub const fn new(l: u32, h: u32) -> Self {
         Self { l, h }
     }
 
-    #[inline]
     pub const fn from_u64(v: u64) -> Self {
         Self {
             l: v as u32,
@@ -44,17 +45,14 @@ impl Uint64 {
         }
     }
 
-    #[inline]
     pub const fn to_u64(self) -> u64 {
         (self.h as u64) << 32 | self.l as u64
     }
 
-    #[inline]
     pub fn is_zero(&self) -> bool {
         self.l == 0 && self.h == 0
     }
 
-    #[inline]
     pub fn leading_zeros(&self) -> u32 {
         if self.h != 0 {
             self.h.leading_zeros()
@@ -76,7 +74,6 @@ impl std::ops::Add for Uint64 {
     /// LLVM generates:
     /// - x86-32: `add`/`adc`
     /// - ARM32: `adds`/`adc`
-    #[inline]
     fn add(self, rhs: Self) -> Self::Output {
         let (l, carry) = self.l.overflowing_add(rhs.l);
         let h = self.h.wrapping_add(rhs.h).wrapping_add(carry as u32);
@@ -96,7 +93,6 @@ impl std::ops::Sub for Uint64 {
     /// LLVM generates:
     /// - x86-32: `sub`/`sbb`
     /// - ARM32: `subs`/`sbc`
-    #[inline]
     fn sub(self, rhs: Self) -> Self::Output {
         let (l, borrow) = self.l.overflowing_sub(rhs.l);
         let h = self.h.wrapping_sub(rhs.h).wrapping_sub(borrow as u32);
@@ -129,7 +125,6 @@ impl std::ops::Mul for Uint64 {
     ///     result.h = p0_hi + t1 + t2
     ///     result.l = p0_lo
     /// ```
-    #[inline]
     fn mul(self, rhs: Self) -> Self::Output {
         // This cast pattern tells LLVM we want 32×32→64
         // x86-32: emits `mul`
@@ -165,7 +160,6 @@ impl std::ops::Div for Uint64 {
     ///
     /// ARM32 has no hardware divide on most cores, so LLVM calls
     /// `__aeabi_uldivmod` (software division).
-    #[inline]
     fn div(self, rhs: Self) -> Self::Output {
         // LLVM handles the optimal instruction selection
         Self::from_u64(self.to_u64() / rhs.to_u64())
@@ -175,7 +169,6 @@ impl std::ops::Div for Uint64 {
 impl std::ops::Rem for Uint64 {
     type Output = Self;
 
-    #[inline]
     fn rem(self, rhs: Self) -> Self::Output {
         Self::from_u64(self.to_u64() % rhs.to_u64())
     }
@@ -190,13 +183,11 @@ impl Uint64 {
     ///
     /// On x86-32, LLVM generates two `div` instructions.
     /// On ARM32, calls software division.
-    #[inline]
     pub fn div_by_u32(self, d: u32) -> Self {
         Self::from_u64(self.to_u64() / d as u64)
     }
 
     /// Division by u32 with remainder.
-    #[inline]
     pub fn divrem_by_u32(self, d: u32) -> (Self, u32) {
         let n = self.to_u64();
         let q = n / d as u64;
@@ -212,7 +203,6 @@ impl Uint64 {
     ///
     /// The `umlal` instruction does: Rd_hi:Rd_lo += Rm × Rs
     /// This is perfect for accumulating partial products.
-    #[inline]
     pub fn widening_mul(self, rhs: Self) -> (Self, Self) {
         let a0 = self.l as u64;
         let a1 = self.h as u64;

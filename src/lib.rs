@@ -33,23 +33,18 @@ pub fn custom256_mul(a: Uint256, b: Uint256) -> Uint256 {
     a * b
 }
 
-/// Test: 256÷64 division (fast path)
-#[inline(never)]
 pub fn custom256_div_u64(a: Uint256, d: u64) -> Uint256 {
     a.div_by_u64(d)
 }
 
-#[inline(never)]
 pub fn custom256_div(a: Uint256, b: Uint256) -> Uint256 {
     a / b
 }
 
-#[inline(never)]
 pub fn ethnum_mul(a: ethnum::U256, b: ethnum::U256) -> ethnum::U256 {
     a * b
 }
 
-#[inline(never)]
 pub fn ethnum_div(a: ethnum::U256, b: ethnum::U256) -> ethnum::U256 {
     a / b
 }

@@ -1,0 +1,766 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::u256::Uint256 as core::ops::arith::Div>::div,"ax",@progbits
+	.globl	<bigints::u256::Uint256 as core::ops::arith::Div>::div
+	.p2align	4
+.type	<bigints::u256::Uint256 as core::ops::arith::Div>::div,@function
+<bigints::u256::Uint256 as core::ops::arith::Div>::div:
+	.cfi_startproc
+	push rbp
+	.cfi_def_cfa_offset 16
+	push r15
+	.cfi_def_cfa_offset 24
+	push r14
+	.cfi_def_cfa_offset 32
+	push r13
+	.cfi_def_cfa_offset 40
+	push r12
+	.cfi_def_cfa_offset 48
+	push rbx
+	.cfi_def_cfa_offset 56
+	sub rsp, 216
+	.cfi_def_cfa_offset 272
+	.cfi_offset rbx, -56
+	.cfi_offset r12, -48
+	.cfi_offset r13, -40
+	.cfi_offset r14, -32
+	.cfi_offset r15, -24
+	.cfi_offset rbp, -16
+	mov rbp, qword ptr [rdx + 16]
+	mov r14, qword ptr [rdx + 24]
+	mov rax, r14
+	or rax, rbp
+	jne .LBB85_7
+	mov r15, qword ptr [rdx + 8]
+	test r15, r15
+	je .LBB85_16
+	mov qword ptr [rsp + 104], rdi
+	mov rbx, qword ptr [rdx]
+	mov r12, qword ptr [rsi]
+	mov rax, qword ptr [rsi + 8]
+	mov qword ptr [rsp + 16], rax
+	mov rbp, qword ptr [rsi + 24]
+	mov r14, qword ptr [rsi + 16]
+	mov rdi, r14
+	mov rsi, rbp
+	mov rdx, rbx
+	mov rcx, r15
+	call qword ptr [rip + __udivti3@GOTPCREL]
+	mov r13, rax
+	mov rax, rdx
+	mov rcx, r13
+	imul rcx, r15
+	mov rdx, r13
+	mulx rsi, rdx, rbx
+	add rsi, rcx
+	imul rax, rbx
+	add rax, rsi
+	sub r14, rdx
+	sbb rbp, rax
+	mov rax, r14
+	or rax, rbp
+	je .LBB85_17
+	mov qword ptr [rsp + 24], r13
+	lzcnt rax, rbx
+	add al, 64
+	lzcnt rdx, r15
+	movzx ecx, al
+	cmovae ecx, edx
+	shlx rsi, r12, rcx
+	xor eax, eax
+	test cl, 64
+	mov rdx, rsi
+	cmovne rdx, rax
+	mov qword ptr [rsp + 8], rdx
+	mov r8, qword ptr [rsp + 16]
+	mov r13, r8
+	shld r13, r12, cl
+	test cl, 64
+	shlx rdi, r14, rcx
+	mov rdx, rdi
+	cmovne rdx, rax
+	cmovne r13, rsi
+	shld rbp, r14, cl
+	test cl, 64
+	shlx rsi, rbx, rcx
+	mov r14, rsi
+	cmovne r14, rax
+	cmovne rbp, rdi
+	shld r15, rbx, cl
+	test cl, 64
+	cmovne r15, rsi
+	neg cl
+	shrx rbx, r8, rcx
+	shrd r12, r8, cl
+	test cl, 64
+	cmovne r12, rbx
+	cmovne rbx, rax
+	or r12, rdx
+	or rbx, rbp
+	mov rbp, -1
+	cmp rbx, r15
+	jae .LBB85_5
+	mov rdi, r12
+	mov rsi, rbx
+	mov rdx, r15
+	xor ecx, ecx
+	call qword ptr [rip + __udivti3@GOTPCREL]
+	mov rbp, rax
+.LBB85_5:
+	mov rdx, r15
+	mulx rax, rcx, rbp
+	mov rsi, r12
+	sub rsi, rcx
+	mov rcx, rbx
+	sbb rcx, rax
+	je .LBB85_18
+	xor eax, eax
+	jmp .LBB85_21
+.LBB85_7:
+	mov rax, qword ptr [rsi + 24]
+	cmp rax, r14
+	setb cl
+	jne .LBB85_14
+	cmp qword ptr [rsi + 16], rbp
+	setb cl
+	jne .LBB85_14
+	mov rcx, qword ptr [rsi + 8]
+	cmp rcx, qword ptr [rdx + 8]
+	setb cl
+	jne .LBB85_14
+	mov rcx, qword ptr [rsi]
+	cmp rcx, qword ptr [rdx]
+	jb .LBB85_15
+.LBB85_11:
+	test r14, r14
+	mov qword ptr [rsp + 104], rdi
+	je .LBB85_29
+	lzcnt rcx, r14
+	jne .LBB85_35
+	mov rcx, qword ptr [rdx]
+	mov rdi, qword ptr [rsi + 16]
+	vmovdqu xmm0, xmmword ptr [rsi]
+	vmovdqa xmmword ptr [rsp + 112], xmm0
+	mov qword ptr [rsp + 128], rdi
+	mov qword ptr [rsp + 136], rax
+	mov rax, qword ptr [rdx + 8]
+	mov qword ptr [rsp + 8], rax
+	vpxor xmm0, xmm0, xmm0
+	vmovdqa xmmword ptr [rsp + 144], xmm0
+	mov qword ptr [rsp + 160], 0
+	mov qword ptr [rsp + 96], rcx
+	jmp .LBB85_54
+.LBB85_14:
+	test cl, cl
+	je .LBB85_11
+.LBB85_15:
+	vxorps xmm0, xmm0, xmm0
+	jmp .LBB85_98
+.LBB85_16:
+	mov r9, qword ptr [rdx]
+	mov rax, qword ptr [rsi + 24]
+	xor edx, edx
+	#APP
+
+	div r9
+
+	#NO_APP
+	mov rcx, rax
+	mov rax, qword ptr [rsi + 16]
+	#APP
+
+	div r9
+
+	#NO_APP
+	mov r10, rax
+	mov rax, qword ptr [rsi + 8]
+	#APP
+
+	div r9
+
+	#NO_APP
+	mov r8, rax
+	mov rax, qword ptr [rsi]
+	#APP
+
+	div r9
+
+	#NO_APP
+	mov qword ptr [rdi], rax
+	mov qword ptr [rdi + 8], r8
+	mov qword ptr [rdi + 16], r10
+	mov qword ptr [rdi + 24], rcx
+	jmp .LBB85_99
+.LBB85_17:
+	mov rdi, r12
+	mov rsi, qword ptr [rsp + 16]
+	mov rdx, rbx
+	mov rcx, r15
+	call qword ptr [rip + __udivti3@GOTPCREL]
+	xor ebp, ebp
+	jmp .LBB85_28
+.LBB85_18:
+	xor eax, eax
+	mov rcx, rbp
+	dec rcx
+	.p2align	4
+.LBB85_19:
+	mov rdx, rbp
+	mulx rdx, rdi, r14
+	mov r8, rax
+	imul r8, r14
+	add r8, rdx
+	cmp r13, rdi
+	sbb rsi, r8
+	jae .LBB85_21
+	mov rbp, rcx
+	mov rdx, r15
+	mulx rax, rdx, rcx
+	mov rsi, r12
+	sub rsi, rdx
+	mov rdx, rbx
+	sbb rdx, rax
+	dec rcx
+	mov eax, 0
+	test rdx, rdx
+	je .LBB85_19
+.LBB85_21:
+	mov rdx, rbp
+	mulx rcx, rdx, r14
+	mov rsi, rbp
+	imul rsi, r15
+	add rsi, rcx
+	imul rax, r14
+	add rax, rsi
+	sub r13, rdx
+	sbb r12, rax
+	mov rax, -1
+	cmp r12, r15
+	jae .LBB85_23
+	mov rdi, r13
+	mov rsi, r12
+	mov rdx, r15
+	xor ecx, ecx
+	call qword ptr [rip + __udivti3@GOTPCREL]
+.LBB85_23:
+	mov rdx, r15
+	mulx rdx, rsi, rax
+	mov rcx, r13
+	sub rcx, rsi
+	mov rsi, r12
+	sbb rsi, rdx
+	jne .LBB85_27
+	xor esi, esi
+	mov r8, qword ptr [rsp + 8]
+	.p2align	4
+.LBB85_25:
+	mov rdx, rax
+	mulx rdx, rdi, r14
+	imul rsi, r14
+	add rsi, rdx
+	cmp r8, rdi
+	sbb rcx, rsi
+	jae .LBB85_27
+	dec rax
+	mov rdx, r15
+	mulx rdx, rsi, rax
+	mov rcx, r13
+	sub rcx, rsi
+	mov rsi, r12
+	sbb rsi, rdx
+	mov esi, 0
+	je .LBB85_25
+.LBB85_27:
+	mov r13, qword ptr [rsp + 24]
+.LBB85_28:
+	mov rdi, qword ptr [rsp + 104]
+	mov qword ptr [rdi], rax
+	mov qword ptr [rdi + 8], rbp
+	mov qword ptr [rdi + 16], r13
+	mov qword ptr [rdi + 24], 0
+	jmp .LBB85_99
+.LBB85_29:
+	test rbp, rbp
+	je .LBB85_31
+	lzcnt rcx, rbp
+	or ecx, 64
+	jmp .LBB85_35
+.LBB85_31:
+	mov rcx, qword ptr [rdx + 8]
+	test rcx, rcx
+	je .LBB85_33
+	lzcnt rcx, rcx
+	or ecx, 128
+	xor ebp, ebp
+	jmp .LBB85_35
+.LBB85_33:
+	mov rcx, qword ptr [rdx]
+	xor ebp, ebp
+	test rcx, rcx
+	je .LBB85_107
+	lzcnt rcx, rcx
+	add ecx, 192
+.LBB85_35:
+	mov ebx, ecx
+	shr ebx, 6
+	mov r11d, ecx
+	vpxor xmm0, xmm0, xmm0
+	vmovdqu ymmword ptr [rsp + 32], ymm0
+	mov r10, qword ptr [rdx]
+	mov rdx, qword ptr [rdx + 8]
+	and r11d, 63
+	je .LBB85_40
+	shlx r8, r10, r11
+	mov qword ptr [rsp + 8*rbx + 32], r8
+	cmp rbx, 3
+	je .LBB85_44
+	mov r8d, r11d
+	mov r9d, 64
+	sub r9d, r11d
+	shlx r11, rdx, r8
+	shrx r10, r10, r9
+	or r10, r11
+	mov qword ptr [rsp + 8*rbx + 40], r10
+	cmp rbx, 2
+	je .LBB85_44
+	shlx r10, rbp, r8
+	shrx rdx, rdx, r9
+	or rdx, r10
+	mov qword ptr [rsp + 8*rbx + 48], rdx
+	cmp rbx, 1
+	je .LBB85_44
+	shlx rdx, r14, r8
+	shrx r8, rbp, r9
+	or r8, rdx
+	mov qword ptr [rsp + 8*rbx + 56], r8
+	jmp .LBB85_44
+.LBB85_40:
+	mov qword ptr [rsp + 8*rbx + 32], r10
+	cmp rbx, 3
+	je .LBB85_44
+	mov qword ptr [rsp + 8*rbx + 40], rdx
+	cmp rbx, 2
+	je .LBB85_44
+	mov qword ptr [rsp + 8*rbx + 48], rbp
+	cmp rbx, 1
+	je .LBB85_44
+	mov qword ptr [rsp + 8*rbx + 56], r14
+.LBB85_44:
+	mov rdx, qword ptr [rsp + 32]
+	mov qword ptr [rsp + 96], rdx
+	mov rdx, qword ptr [rsp + 40]
+	mov qword ptr [rsp + 8], rdx
+	mov rbp, qword ptr [rsp + 48]
+	mov r14, qword ptr [rsp + 56]
+.LBB85_45:
+	vpxor xmm0, xmm0, xmm0
+	vmovdqu ymmword ptr [rsp + 136], ymm0
+	vmovdqu ymmword ptr [rsp + 112], ymm0
+	mov r9, qword ptr [rsi]
+	mov r8, qword ptr [rsi + 8]
+	mov rdi, qword ptr [rsi + 16]
+	mov qword ptr [rsp + 32], r9
+	mov qword ptr [rsp + 40], r8
+	mov qword ptr [rsp + 48], rdi
+	mov qword ptr [rsp + 56], rax
+	mov edx, ecx
+	shr edx, 6
+	and ecx, 63
+	je .LBB85_50
+	shlx rsi, r9, rcx
+	mov qword ptr [rsp + 8*rdx + 112], rsi
+	mov rsi, r8
+	shld rsi, r9, cl
+	mov qword ptr [rsp + 8*rdx + 120], rsi
+	mov rsi, rdi
+	shld rsi, r8, cl
+	mov qword ptr [rsp + 8*rdx + 128], rsi
+	cmp rdx, 4
+	je .LBB85_52
+	mov r8d, ecx
+	mov esi, 64
+	sub esi, ecx
+	lea r9, [rdx + 4]
+	shlx rax, rax, r8
+	shrx rcx, rdi, rsi
+	or rcx, rax
+	mov qword ptr [rsp + 8*rdx + 136], rcx
+	cmp r9, 7
+	je .LBB85_52
+	mov rax, rdx
+	not rax
+	mov edi, 3
+	sub rdi, rdx
+	cmp rdi, 4
+	jae .LBB85_100
+	mov rcx, r9
+	jmp .LBB85_103
+.LBB85_50:
+	mov qword ptr [rsp + 8*rdx + 112], r9
+	mov qword ptr [rsp + 8*rdx + 120], r8
+	mov qword ptr [rsp + 8*rdx + 128], rdi
+	cmp rdx, 4
+	je .LBB85_52
+	mov qword ptr [rsp + 8*rdx + 136], rax
+.LBB85_52:
+	mov r15d, 7
+	cmp qword ptr [rsp + 160], 0
+	jne .LBB85_58
+	mov r15d, 6
+	cmp qword ptr [rsp + 152], 0
+	jne .LBB85_58
+.LBB85_54:
+	mov r15d, 5
+	cmp qword ptr [rsp + 144], 0
+	jne .LBB85_58
+	mov r15d, 4
+	cmp qword ptr [rsp + 136], 0
+	jne .LBB85_58
+	mov r15d, 3
+	cmp qword ptr [rsp + 128], 0
+	jne .LBB85_58
+	cmp qword ptr [rsp + 120], 1
+	mov r15d, 2
+	sbb r15, 0
+.LBB85_58:
+	mov edi, 4
+	test r14, r14
+	jne .LBB85_61
+	mov edi, 3
+	test rbp, rbp
+	jne .LBB85_61
+	cmp qword ptr [rsp + 8], 1
+	mov edi, 2
+	sbb rdi, 0
+.LBB85_61:
+	vpxor xmm0, xmm0, xmm0
+	vmovdqu ymmword ptr [rsp + 176], ymm0
+	vmovups ymm0, ymmword ptr [rsp + 136]
+	vmovups ymmword ptr [rsp + 56], ymm0
+	vmovups ymm0, ymmword ptr [rsp + 112]
+	vmovups ymmword ptr [rsp + 32], ymm0
+	sub r15, rdi
+	mov qword ptr [rsp + 16], 0
+	mov qword ptr [rsp + 24], rdi
+	jmp .LBB85_63
+	.p2align	4
+.LBB85_62:
+	test r15, r15
+	mov r15, rax
+	je .LBB85_97
+.LBB85_63:
+	lea r13, [r15 + rdi]
+	cmp r13, 7
+	jae .LBB85_109
+	lea rax, [r13 - 1]
+	cmp rax, 7
+	jae .LBB85_108
+	mov rbx, qword ptr [rsp + 8*r13 + 24]
+	mov r12, qword ptr [rsp + 8*r13 + 32]
+	mov rdx, -1
+	cmp r12, r14
+	jae .LBB85_67
+	mov rdi, rbx
+	mov rsi, r12
+	mov rdx, r14
+	mov rcx, qword ptr [rsp + 16]
+	vzeroupper
+	call qword ptr [rip + __udivti3@GOTPCREL]
+	mov rdx, rax
+.LBB85_67:
+	mulx rcx, rsi, r14
+	mov r8, rbx
+	sub r8, rsi
+	mov rax, r12
+	sbb rax, rcx
+	jne .LBB85_73
+	lea rdi, [r13 - 2]
+	cmp rdi, 6
+	ja .LBB85_110
+	mov rax, qword ptr [rsp + 8*r13 + 16]
+	mulx rdi, r9, rbp
+	cmp rax, r9
+	sbb r8, rdi
+	jae .LBB85_73
+	dec rdx
+	mov r8, rdx
+	.p2align	4
+.LBB85_71:
+	mov rdx, r8
+	mulx rcx, rsi, r14
+	mov rdi, rbx
+	sub rdi, rsi
+	mov r8, r12
+	sbb r8, rcx
+	jne .LBB85_73
+	mulx r9, r10, rbp
+	lea r8, [rdx - 1]
+	cmp rax, r10
+	sbb rdi, r9
+	jb .LBB85_71
+	.p2align	4
+.LBB85_73:
+	mov r11d, 0
+	mov r9d, 0
+	cmp r15, 7
+	jae .LBB85_74
+	mov r8, qword ptr [rsp + 96]
+	mulx rax, rdi, r8
+	mov r11, qword ptr [rsp + 16]
+	imul r11, r8
+	add r11, rax
+	sub qword ptr [rsp + 8*r15 + 32], rdi
+	adc r11, 0
+	setb al
+	movzx r9d, al
+	lea rax, [r15 - 1]
+	lea rdi, [r15 + 1]
+	cmp rdi, 6
+	jbe .LBB85_81
+.LBB85_75:
+	lea r8, [r15 + 2]
+	cmp r8, 6
+	ja .LBB85_76
+.LBB85_82:
+	mulx r10, rbx, rbp
+	mov r12, qword ptr [rsp + 16]
+	imul r12, rbp
+	add r12, r10
+	add r11, rbx
+	adc r9, r12
+	sub qword ptr [rsp + 8*rax + 56], r11
+	adc r9, 0
+	setb r10b
+	mov r11, r9
+	movzx r9d, r10b
+	lea r10, [r15 + 3]
+	cmp r10, 6
+	jbe .LBB85_83
+.LBB85_77:
+	lea rcx, [r15 + 4]
+	cmp rcx, 7
+	jae .LBB85_84
+.LBB85_78:
+	sub qword ptr [rsp + 8*rax + 72], r11
+	jb .LBB85_85
+.LBB85_79:
+	mov rdi, qword ptr [rsp + 24]
+	cmp r15, 4
+	jae .LBB85_62
+	jmp .LBB85_96
+	.p2align	4
+.LBB85_74:
+	lea rax, [r15 - 1]
+	lea rdi, [r15 + 1]
+	cmp rdi, 6
+	ja .LBB85_75
+.LBB85_81:
+	mov r12, qword ptr [rsp + 8]
+	mulx r8, r10, r12
+	mov rbx, qword ptr [rsp + 16]
+	imul rbx, r12
+	add rbx, r8
+	add r11, r10
+	adc r9, rbx
+	sub qword ptr [rsp + 8*rax + 48], r11
+	adc r9, 0
+	setb r8b
+	mov r11, r9
+	movzx r9d, r8b
+	lea r8, [r15 + 2]
+	cmp r8, 6
+	jbe .LBB85_82
+.LBB85_76:
+	lea r10, [r15 + 3]
+	cmp r10, 6
+	ja .LBB85_77
+.LBB85_83:
+	add r11, rsi
+	adc r9, rcx
+	sub qword ptr [rsp + 8*rax + 64], r11
+	adc r9, 0
+	setb cl
+	mov r11, r9
+	movzx r9d, cl
+	lea rcx, [r15 + 4]
+	cmp rcx, 7
+	jb .LBB85_78
+.LBB85_84:
+	or r11, r9
+	je .LBB85_79
+.LBB85_85:
+	cmp r15, 7
+	jae .LBB85_87
+	mov rsi, qword ptr [rsp + 96]
+	add qword ptr [rsp + 8*r15 + 32], rsi
+	setb sil
+	cmp rdi, 6
+	jbe .LBB85_88
+	jmp .LBB85_89
+	.p2align	4
+.LBB85_87:
+	xor esi, esi
+	cmp rdi, 6
+	ja .LBB85_89
+.LBB85_88:
+	mov rdi, qword ptr [rsp + 8*rax + 48]
+	add rdi, qword ptr [rsp + 8]
+	setb r9b
+	movzx r11d, sil
+	add r11, rdi
+	setb sil
+	mov qword ptr [rsp + 8*rax + 48], r11
+	or sil, r9b
+	and sil, 1
+.LBB85_89:
+	cmp r8, 6
+	ja .LBB85_90
+	mov rdi, qword ptr [rsp + 8*rax + 56]
+	add rdi, rbp
+	setb r8b
+	movzx r9d, sil
+	add r9, rdi
+	setb sil
+	mov qword ptr [rsp + 8*rax + 56], r9
+	or sil, r8b
+	and sil, 1
+	cmp r10, 6
+	jbe .LBB85_94
+.LBB85_91:
+	mov rdi, qword ptr [rsp + 24]
+	dec rdx
+	cmp rcx, 7
+	jae .LBB85_92
+.LBB85_95:
+	movzx ecx, sil
+	add qword ptr [rsp + 8*rax + 72], rcx
+	cmp r15, 4
+	jae .LBB85_62
+	jmp .LBB85_96
+	.p2align	4
+.LBB85_90:
+	cmp r10, 6
+	ja .LBB85_91
+.LBB85_94:
+	mov rdi, qword ptr [rsp + 8*rax + 64]
+	add rdi, r14
+	setb r8b
+	movzx r9d, sil
+	add r9, rdi
+	setb sil
+	mov qword ptr [rsp + 8*rax + 64], r9
+	or sil, r8b
+	and sil, 1
+	mov rdi, qword ptr [rsp + 24]
+	dec rdx
+	cmp rcx, 7
+	jb .LBB85_95
+	.p2align	4
+.LBB85_92:
+	cmp r15, 4
+	jae .LBB85_62
+.LBB85_96:
+	mov qword ptr [rsp + 8*r15 + 176], rdx
+	jmp .LBB85_62
+.LBB85_97:
+	vmovups ymm0, ymmword ptr [rsp + 176]
+	mov rdi, qword ptr [rsp + 104]
+.LBB85_98:
+	vmovups ymmword ptr [rdi], ymm0
+.LBB85_99:
+	mov rax, rdi
+	add rsp, 216
+	.cfi_def_cfa_offset 56
+	pop rbx
+	.cfi_def_cfa_offset 48
+	pop r12
+	.cfi_def_cfa_offset 40
+	pop r13
+	.cfi_def_cfa_offset 32
+	pop r14
+	.cfi_def_cfa_offset 24
+	pop r15
+	.cfi_def_cfa_offset 16
+	pop rbp
+	.cfi_def_cfa_offset 8
+	vzeroupper
+	ret
+.LBB85_100:
+	.cfi_def_cfa_offset 272
+	mov r8, rdi
+	and r8, -4
+	lea rcx, [r9 + r8]
+	vmovq xmm0, rax
+	vpbroadcastq ymm0, xmm0
+	vmovq xmm2, rsi
+	vmovq xmm1, r9
+	vpbroadcastq ymm1, xmm1
+	vpaddq ymm1, ymm1, ymmword ptr [rip + .LCPI85_0]
+	vpbroadcastq ymm2, xmm2
+	lea r9, [rsp + 8*r9]
+	add r9, 112
+	xor r10d, r10d
+	vpbroadcastq ymm3, qword ptr [rip + .LCPI85_1]
+	vpbroadcastq ymm4, qword ptr [rip + .LCPI85_2]
+	vpbroadcastq ymm5, qword ptr [rip + .LCPI85_3]
+	.p2align	4
+.LBB85_101:
+	vpaddq ymm6, ymm1, ymm0
+	vpxor ymm7, ymm6, ymm3
+	vpcmpgtq ymm7, ymm4, ymm7
+	vmovq r11, xmm6
+	vpmaskmovq ymm6, ymm7, ymmword ptr [rsp + 8*r11 + 32]
+	vpsrlvq ymm6, ymm6, ymm2
+	vpmaskmovq ymm8, ymm7, ymmword ptr [r9 + 8*r10]
+	vpor ymm6, ymm8, ymm6
+	vpmaskmovq ymmword ptr [r9 + 8*r10], ymm7, ymm6
+	add r10, 4
+	vpaddq ymm1, ymm1, ymm5
+	cmp r8, r10
+	jne .LBB85_101
+	cmp rdi, r8
+	je .LBB85_52
+.LBB85_103:
+	shl edx, 3
+	lea rdi, [rsp + 32]
+	sub rdi, rdx
+	add rdi, -8
+	jmp .LBB85_105
+	.p2align	4
+.LBB85_104:
+	inc rcx
+	cmp rcx, 7
+	je .LBB85_52
+.LBB85_105:
+	lea rdx, [rax + rcx]
+	cmp rdx, 3
+	ja .LBB85_104
+	shrx rdx, qword ptr [rdi + 8*rcx], rsi
+	or qword ptr [rsp + 8*rcx + 112], rdx
+	jmp .LBB85_104
+.LBB85_107:
+	mov qword ptr [rsp + 96], 0
+	mov ecx, 256
+	mov qword ptr [rsp + 8], 0
+	xor ebp, ebp
+	xor r14d, r14d
+	jmp .LBB85_45
+.LBB85_108:
+	lea rdx, [rip + .Lanon.8a0de8f2d308581a9d48e9cda43cb528.9]
+	mov esi, 7
+	mov rdi, -1
+	vzeroupper
+	call qword ptr [rip + core::panicking::panic_bounds_check@GOTPCREL]
+.LBB85_109:
+	lea rdx, [rip + .Lanon.8a0de8f2d308581a9d48e9cda43cb528.8]
+	mov esi, 7
+	mov rdi, r13
+	vzeroupper
+	call qword ptr [rip + core::panicking::panic_bounds_check@GOTPCREL]
+.LBB85_110:
+	lea rdx, [rip + .Lanon.8a0de8f2d308581a9d48e9cda43cb528.10]
+	mov esi, 7
+	vzeroupper
+	call qword ptr [rip + core::panicking::panic_bounds_check@GOTPCREL]

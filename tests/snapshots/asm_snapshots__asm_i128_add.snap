@@ -1,0 +1,15 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::i128::Int128 as core::ops::arith::Add>::add,"ax",@progbits
+	.globl	<bigints::i128::Int128 as core::ops::arith::Add>::add
+	.p2align	4
+.type	<bigints::i128::Int128 as core::ops::arith::Add>::add,@function
+<bigints::i128::Int128 as core::ops::arith::Add>::add:
+	.cfi_startproc
+	mov rax, rdi
+	add rax, rdx
+	adc rsi, rcx
+	mov rdx, rsi
+	ret

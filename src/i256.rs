@@ -3,8 +3,8 @@
 //! Uses two's complement representation. Addition, subtraction, and wrapping
 //! multiplication are bitwise identical to unsigned operations.
 
-use std::cmp::Ordering;
 use crate::u256::Uint256;
+use std::cmp::Ordering;
 
 /// 256-bit signed integer stored as four 64-bit limbs.
 ///
@@ -31,8 +31,18 @@ pub struct Int256 {
 }
 
 impl Int256 {
-    pub const ZERO: Self = Self { l0: 0, l1: 0, l2: 0, l3: 0 };
-    pub const ONE: Self = Self { l0: 1, l1: 0, l2: 0, l3: 0 };
+    pub const ZERO: Self = Self {
+        l0: 0,
+        l1: 0,
+        l2: 0,
+        l3: 0,
+    };
+    pub const ONE: Self = Self {
+        l0: 1,
+        l1: 0,
+        l2: 0,
+        l3: 0,
+    };
     pub const NEG_ONE: Self = Self {
         l0: u64::MAX,
         l1: u64::MAX,
@@ -52,13 +62,11 @@ impl Int256 {
         l3: 0x7FFF_FFFF_FFFF_FFFF,
     };
 
-    #[inline]
     pub const fn new(l0: u64, l1: u64, l2: u64, l3: u64) -> Self {
         Self { l0, l1, l2, l3 }
     }
 
     /// Create from i128, sign-extending to 256 bits.
-    #[inline]
     pub const fn from_i128(v: i128) -> Self {
         let sign_ext = if v < 0 { u64::MAX } else { 0 };
         Self {
@@ -70,27 +78,22 @@ impl Int256 {
     }
 
     /// Convert to i128, truncating high bits.
-    #[inline]
     pub const fn to_i128(self) -> i128 {
         (self.l1 as i128) << 64 | self.l0 as i128
     }
 
-    #[inline]
     pub fn is_zero(&self) -> bool {
         self.l0 == 0 && self.l1 == 0 && self.l2 == 0 && self.l3 == 0
     }
 
-    #[inline]
     pub fn is_negative(&self) -> bool {
         (self.l3 as i64) < 0
     }
 
-    #[inline]
     pub fn is_positive(&self) -> bool {
         !self.is_negative() && !self.is_zero()
     }
 
-    #[inline]
     pub fn signum(&self) -> Self {
         if self.is_zero() {
             Self::ZERO
@@ -102,7 +105,6 @@ impl Int256 {
     }
 
     /// Absolute value. Note: MIN.abs() overflows (returns MIN).
-    #[inline]
     pub fn abs(&self) -> Self {
         if self.is_negative() {
             Self::ZERO - *self
@@ -112,13 +114,11 @@ impl Int256 {
     }
 
     /// Wrapping absolute value.
-    #[inline]
     pub fn wrapping_abs(&self) -> Self {
         self.abs()
     }
 
     /// Checked absolute value. Returns None for MIN.
-    #[inline]
     pub fn checked_abs(&self) -> Option<Self> {
         if *self == Self::MIN {
             None
@@ -128,7 +128,6 @@ impl Int256 {
     }
 
     /// Convert to unsigned, interpreting bits directly.
-    #[inline]
     pub fn to_uint256(&self) -> Uint256 {
         Uint256 {
             l0: self.l0,
@@ -139,7 +138,6 @@ impl Int256 {
     }
 
     /// Create from unsigned, interpreting bits directly.
-    #[inline]
     pub fn from_uint256(u: Uint256) -> Self {
         Self {
             l0: u.l0,
@@ -150,7 +148,6 @@ impl Int256 {
     }
 
     /// Count leading zeros (not counting sign, just the bits).
-    #[inline]
     pub fn leading_zeros(&self) -> u32 {
         if self.l3 != 0 {
             self.l3.leading_zeros()
@@ -171,7 +168,6 @@ impl Int256 {
 impl std::ops::Add for Int256 {
     type Output = Self;
 
-    #[inline]
     fn add(self, rhs: Self) -> Self::Output {
         let (l0, c0) = self.l0.overflowing_add(rhs.l0);
         let (l1, c1) = self.l1.carrying_add(rhs.l1, c0);
@@ -188,7 +184,6 @@ impl std::ops::Add for Int256 {
 impl std::ops::Sub for Int256 {
     type Output = Self;
 
-    #[inline]
     fn sub(self, rhs: Self) -> Self::Output {
         let (l0, b0) = self.l0.overflowing_sub(rhs.l0);
         let (l1, b1) = self.l1.borrowing_sub(rhs.l1, b0);
@@ -206,7 +201,6 @@ impl std::ops::Mul for Int256 {
     type Output = Self;
 
     /// Wrapping multiplication. Low 256 bits are identical for signed/unsigned.
-    #[inline]
     fn mul(self, rhs: Self) -> Self::Output {
         // Delegate to unsigned multiplication - low bits are identical
         let result = self.to_uint256() * rhs.to_uint256();
@@ -221,7 +215,6 @@ impl std::ops::Mul for Int256 {
 impl std::ops::Neg for Int256 {
     type Output = Self;
 
-    #[inline]
     fn neg(self) -> Self::Output {
         Self::ZERO - self
     }
@@ -238,7 +231,6 @@ impl std::ops::Div for Int256 {
     ///
     /// Strategy: Convert to unsigned magnitudes, divide, fix sign.
     /// This avoids implementing a separate signed division algorithm.
-    #[inline]
     fn div(self, rhs: Self) -> Self::Output {
         if rhs.is_zero() {
             panic!("attempt to divide by zero");
@@ -281,7 +273,6 @@ impl std::ops::Rem for Int256 {
     /// Signed remainder. Result has same sign as dividend.
     ///
     /// Uses the identity: a % b = a - (a / b) * b
-    #[inline]
     fn rem(self, rhs: Self) -> Self::Output {
         if rhs.is_zero() {
             panic!("attempt to calculate remainder with a divisor of zero");
@@ -365,7 +356,6 @@ impl Ord for Int256 {
 impl std::ops::Not for Int256 {
     type Output = Self;
 
-    #[inline]
     fn not(self) -> Self::Output {
         Self {
             l0: !self.l0,
@@ -379,7 +369,6 @@ impl std::ops::Not for Int256 {
 impl std::ops::BitAnd for Int256 {
     type Output = Self;
 
-    #[inline]
     fn bitand(self, rhs: Self) -> Self::Output {
         Self {
             l0: self.l0 & rhs.l0,
@@ -393,7 +382,6 @@ impl std::ops::BitAnd for Int256 {
 impl std::ops::BitOr for Int256 {
     type Output = Self;
 
-    #[inline]
     fn bitor(self, rhs: Self) -> Self::Output {
         Self {
             l0: self.l0 | rhs.l0,
@@ -407,7 +395,6 @@ impl std::ops::BitOr for Int256 {
 impl std::ops::BitXor for Int256 {
     type Output = Self;
 
-    #[inline]
     fn bitxor(self, rhs: Self) -> Self::Output {
         Self {
             l0: self.l0 ^ rhs.l0,
@@ -425,7 +412,6 @@ impl std::ops::BitXor for Int256 {
 impl std::ops::Shl<u32> for Int256 {
     type Output = Self;
 
-    #[inline]
     fn shl(self, n: u32) -> Self::Output {
         if n >= 256 {
             return Self::ZERO;
@@ -466,10 +452,13 @@ impl std::ops::Shr<u32> for Int256 {
     type Output = Self;
 
     /// Arithmetic right shift: fills with sign bit.
-    #[inline]
     fn shr(self, n: u32) -> Self::Output {
         if n >= 256 {
-            return if self.is_negative() { Self::NEG_ONE } else { Self::ZERO };
+            return if self.is_negative() {
+                Self::NEG_ONE
+            } else {
+                Self::ZERO
+            };
         }
         if n == 0 {
             return self;

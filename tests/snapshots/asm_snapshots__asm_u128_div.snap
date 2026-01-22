@@ -1,0 +1,23 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+.section .text.<bigints::u128::Uint128 as core::ops::arith::Div>::div,"ax",@progbits
+	.globl	<bigints::u128::Uint128 as core::ops::arith::Div>::div
+	.p2align	4
+.type	<bigints::u128::Uint128 as core::ops::arith::Div>::div,@function
+<bigints::u128::Uint128 as core::ops::arith::Div>::div:
+	.cfi_startproc
+	push rax
+	.cfi_def_cfa_offset 16
+	mov rax, rdx
+	or rax, rcx
+	je .LBB65_2
+	call qword ptr [rip + __udivti3@GOTPCREL]
+	pop rcx
+	.cfi_def_cfa_offset 8
+	ret
+.LBB65_2:
+	.cfi_def_cfa_offset 16
+	lea rdi, [rip + .Lanon.8a0de8f2d308581a9d48e9cda43cb528.13]
+	call qword ptr [rip + core::panicking::panic_const::panic_const_div_by_zero@GOTPCREL]
