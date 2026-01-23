@@ -1,6 +1,5 @@
 ---
 source: tests/asm_snapshots.rs
-assertion_line: 342
 expression: asm
 ---
 <bigints::u64::Uint64 as core::ops::arith::Div>::div:
@@ -13,6 +12,5 @@ expression: asm
 	ldr r0, .LCPI67_0
 .LPC67_0:
 	add r0, pc, r0
-	mov lr, pc
-	b core::panicking::panic_const::panic_const_div_by_zero
+	bl core::panicking::panic_const::panic_const_div_by_zero
 .LCPI67_0:

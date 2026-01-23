@@ -1,32 +1,27 @@
 ---
 source: tests/asm_snapshots.rs
-assertion_line: 321
 expression: asm
 ---
 <bigints::i64::Int64 as core::ops::arith::Div>::div:
 	push {r11, lr}
 	orrs r12, r2, r3
-	beq .LBB_4
+	beq .LBB_3
 	eor r12, r1, #-2147483648
 	orrs r12, r0, r12
-	bne .LBB_3
-	and r12, r2, r3
-	cmn r12, #1
-	beq .LBB_5
-.LBB_3:
+	andeq r12, r2, r3
+	cmneq r12, #1
+	beq .LBB_4
 	bl __aeabi_ldivmod
 	pop {r11, pc}
-.LBB_4:
+.LBB_3:
 	ldr r0, .LCPI71_1
 .LPC71_1:
 	add r0, pc, r0
-	mov lr, pc
-	b core::panicking::panic_const::panic_const_div_by_zero
-.LBB_5:
+	bl core::panicking::panic_const::panic_const_div_by_zero
+.LBB_4:
 	ldr r0, .LCPI71_0
 .LPC71_0:
 	add r0, pc, r0
-	mov lr, pc
-	b core::panicking::panic_const::panic_const_div_overflow
+	bl core::panicking::panic_const::panic_const_div_overflow
 .LCPI71_0:
 .LCPI71_1:

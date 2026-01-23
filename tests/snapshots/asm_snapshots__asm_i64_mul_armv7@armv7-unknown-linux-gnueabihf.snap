@@ -1,6 +1,5 @@
 ---
 source: tests/asm_snapshots.rs
-assertion_line: 316
 expression: asm
 ---
 <bigints::i64::Int64 as core::ops::arith::Mul>::mul:

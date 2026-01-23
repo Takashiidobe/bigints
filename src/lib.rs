@@ -90,3 +90,7 @@ pub fn native_gt(a: u128, b: u128) -> bool {
 pub fn native_ge(a: u128, b: u128) -> bool {
     a >= b
 }
+
+pub fn native_u64_sub(a: u64, b: u64) -> u64 {
+    a.wrapping_sub(b)
+}

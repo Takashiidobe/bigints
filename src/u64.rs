@@ -71,9 +71,14 @@ impl std::ops::Add for Uint64 {
 
     /// 64-bit addition with carry propagation.
     ///
-    /// LLVM generates:
-    /// - x86-32: `add`/`adc`
-    /// - ARM32: `adds`/`adc`
+    /// LLVM generates optimal code on all targets:
+    /// - x86-32: `add`/`adc` (2 instructions)
+    /// - ARM32: `adds`/`adc` (2 instructions)
+    ///
+    /// Note: Uses `overflowing_add` + `wrapping_add(carry as u32)` pattern.
+    /// Interestingly, LLVM recognizes this for addition but fails to recognize
+    /// the equivalent `borrowing_sub` pattern for subtraction on ARM32.
+    /// See the `Sub` impl for details on that codegen issue.
     #[inline(never)]
     fn add(self, rhs: Self) -> Self::Output {
         let (l, carry) = self.l.overflowing_add(rhs.l);
@@ -92,12 +97,36 @@ impl std::ops::Sub for Uint64 {
     /// 64-bit subtraction with borrow propagation.
     ///
     /// LLVM generates:
-    /// - x86-32: `sub`/`sbb`
-    /// - ARM32: `subs`/`sbc`
+    /// - x86-32: `sub`/`sbb` (optimal)
+    /// - ARM32: `cmp`/`sub`/`sublo`/`sub` (suboptimal - see note below)
+    ///
+    /// # ARM32 Codegen Issue
+    ///
+    /// Despite using `borrowing_sub` (which should chain borrows directly),
+    /// LLVM fails to recognize the `subs`/`sbc` pattern on ARM32. Instead of:
+    /// ```asm
+    /// subs r0, r0, r2    ; subtract low, set carry
+    /// sbc  r1, r1, r3    ; subtract high with borrow
+    /// ```
+    ///
+    /// LLVM generates:
+    /// ```asm
+    /// cmp   r0, r2       ; compare low halves
+    /// sub   r1, r1, r3   ; subtract high
+    /// sublo r1, r1, #1   ; conditionally subtract borrow
+    /// sub   r0, r0, r2   ; subtract low
+    /// ```
+    ///
+    /// This is 4 instructions vs the optimal 2. Native `u64` subtraction
+    /// produces optimal code, confirming this is an LLVM pattern-matching
+    /// issue with `borrowing_sub` on ARM, not a fundamental limitation.
+    ///
+    /// Workaround: use `Self::from_u64(self.to_u64().wrapping_sub(rhs.to_u64()))`
+    /// to delegate to LLVM's well-optimized native `u64` handling.
     #[inline(never)]
     fn sub(self, rhs: Self) -> Self::Output {
-        let (l, borrow) = self.l.overflowing_sub(rhs.l);
-        let h = self.h.wrapping_sub(rhs.h).wrapping_sub(borrow as u32);
+        let (l, borrow) = self.l.borrowing_sub(rhs.l, false);
+        let (h, _) = self.h.borrowing_sub(rhs.h, borrow);
         Self { l, h }
     }
 }

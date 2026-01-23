@@ -1,9 +1,8 @@
 ---
 source: tests/asm_snapshots.rs
-assertion_line: 306
 expression: asm
 ---
-<bigints::i64::Int64 as core::ops::arith::Add>::add:
+<bigints::u64::Uint64 as core::ops::arith::Add>::add:
 	adds r0, r2, r0
 	adc r1, r3, r1
 	bx lr
