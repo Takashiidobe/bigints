@@ -7,11 +7,11 @@ expression: asm
 	sub esp, 8
 	mov eax, dword ptr [esp + 24]
 	mov ecx, dword ptr [esp + 28]
-	call .L67$pb
-.L67$pb:
+	call .L68$pb
+.L68$pb:
 	pop ebx
 .Ltmp:
-	add ebx, offset _GLOBAL_OFFSET_TABLE_+(.Ltmp-.L67$pb)
+	add ebx, offset _GLOBAL_OFFSET_TABLE_+(.Ltmp-.L68$pb)
 	mov edx, eax
 	or edx, ecx
 	je .LBB_2

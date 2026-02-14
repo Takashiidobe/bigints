@@ -10,11 +10,11 @@ expression: asm
 	sub esp, 12
 	mov eax, dword ptr [esp + 40]
 	mov edx, dword ptr [esp + 44]
-	call .L71$pb
-.L71$pb:
+	call .L72$pb
+.L72$pb:
 	pop ebx
 .Ltmp:
-	add ebx, offset _GLOBAL_OFFSET_TABLE_+(.Ltmp-.L71$pb)
+	add ebx, offset _GLOBAL_OFFSET_TABLE_+(.Ltmp-.L72$pb)
 	mov ecx, eax
 	or ecx, edx
 	je .LBB_3

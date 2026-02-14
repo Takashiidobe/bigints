@@ -51,6 +51,37 @@ macro_rules! asm_snapshot {
     };
 }
 
+/// Strip the first line (function name) from asm output, returning just the instruction body.
+fn asm_body(asm: &str) -> &str {
+    asm.find('\n').map(|i| &asm[i + 1..]).unwrap_or(asm)
+}
+
+/// Normalize asm body for comparison: strip function name and normalize .Lanon.N
+/// references (anonymous data indices differ per function position).
+fn asm_body_normalized(asm: &str) -> String {
+    let body = asm_body(asm);
+    let anon_re = Regex::new(r"\.Lanon\.\d+").unwrap();
+    anon_re.replace_all(body, ".Lanon").into_owned()
+}
+
+/// Assert that a custom bigint operation produces identical asm to the native u128 equivalent.
+macro_rules! asm_matches_native {
+    ($name:ident, $custom_symbol:literal, $native_symbol:literal, $target:literal) => {
+        #[test]
+        fn $name() {
+            let custom = cargo_asm($custom_symbol, $target);
+            let native = cargo_asm($native_symbol, $target);
+            let custom_norm = asm_body_normalized(&custom);
+            let native_norm = asm_body_normalized(&native);
+            assert_eq!(
+                custom_norm,
+                native_norm,
+                "\n=== custom ===\n{custom}\n=== native ===\n{native}"
+            );
+        }
+    };
+}
+
 asm_snapshot!(
     asm_i64_add,
     "<bigints::i64::Int64 as core::ops::arith::Add>::add",
@@ -511,4 +542,50 @@ asm_snapshot!(
     asm_u256_div_s390x,
     "<bigints::u256::Uint256 as core::ops::arith::Div>::div",
     "s390x-unknown-linux-gnu"
+);
+
+// ============================================================================
+// Verify custom u128 operations produce identical asm to native u128
+// ============================================================================
+
+// x86_64
+asm_matches_native!(
+    asm_u128_add_matches_native_x86_64,
+    "<bigints::u128::Uint128 as core::ops::arith::Add>::add",
+    "bigints::native_add",
+    "x86_64-unknown-linux-gnu"
+);
+// sub: matches native (same LLVM usub.with.overflow fusion bug doesn't affect x86_64,
+//   but codegen is identical)
+asm_matches_native!(
+    asm_u128_sub_matches_native_x86_64,
+    "<bigints::u128::Uint128 as core::ops::arith::Sub>::sub",
+    "bigints::native_sub",
+    "x86_64-unknown-linux-gnu"
+);
+// mul: excluded — _mulx_u64 intrinsic pre-commits instruction selection before regalloc,
+//   causing different (but equivalent) register choices vs native mul i128 decomposition.
+//   Same instruction count and mix (1 mulx + 2 imul + 2 add).
+asm_matches_native!(
+    asm_u128_div_matches_native_x86_64,
+    "<bigints::u128::Uint128 as core::ops::arith::Div>::div",
+    "bigints::native_div",
+    "x86_64-unknown-linux-gnu"
+);
+
+// aarch64
+asm_matches_native!(
+    asm_u128_add_matches_native_aarch64,
+    "<bigints::u128::Uint128 as core::ops::arith::Add>::add",
+    "bigints::native_add",
+    "aarch64-unknown-linux-gnu"
+);
+// sub: excluded — LLVM aarch64 bug (does not fuse chained usub.with.overflow into subs/sbc)
+// mul: excluded — aarch64 has umulh for 64×64→128 but we only use _mulx_u64 on x86_64,
+//   falling back to 32-bit schoolbook on aarch64. TODO: add aarch64 umulh path.
+asm_matches_native!(
+    asm_u128_div_matches_native_aarch64,
+    "<bigints::u128::Uint128 as core::ops::arith::Div>::div",
+    "bigints::native_div",
+    "aarch64-unknown-linux-gnu"
 );

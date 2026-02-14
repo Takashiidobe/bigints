@@ -81,13 +81,18 @@ impl std::ops::Add for Uint128 {
         let (l, carry) = self.l.overflowing_add(rhs.l);
         let h = self.h.wrapping_add(rhs.h).wrapping_add(carry as u64);
 
-        Self { h, l }
+        Self { l, h }
     }
 }
 
 impl std::ops::Sub for Uint128 {
     type Output = Self;
 
+    /// Note: on aarch64 this generates `subs` + `cset` + two `sub` instead of optimal
+    /// `subs` + `sbc`. This is an LLVM backend bug: the aarch64 ISel fuses chained
+    /// `uadd.with.overflow` into `adds`/`adc` but does NOT fuse chained
+    /// `usub.with.overflow` into `subs`/`sbc`. Native u128 subtraction works because
+    /// LLVM sees a single `sub i128` and lowers it directly.
     #[inline(never)]
     fn sub(self, rhs: Self) -> Self::Output {
         let (l, borrow) = self.l.overflowing_sub(rhs.l);

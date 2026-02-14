@@ -15,7 +15,7 @@ expression: asm
 	vpunpcklqdq xmm1, xmm1, xmm2
 	vpcmpeqd xmm2, xmm2, xmm2
 	vpxor xmm0, xmm0, xmm2
-	vpxor xmm1, xmm1, xmmword ptr [rip + .LCPI74_0]
+	vpxor xmm1, xmm1, xmmword ptr [rip + .LCPI75_0]
 	vpor xmm0, xmm1, xmm0
 	vptest xmm0, xmm0
 	je .LBB_2
