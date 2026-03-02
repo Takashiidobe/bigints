@@ -48,7 +48,7 @@ pub struct Uint128 {
 }
 
 impl Uint128 {
-    #[cfg(not(target_arch = "x86_64"))]
+    #[cfg(all(not(target_arch = "x86_64"), target_pointer_width = "32"))]
     fn mul_u64_full(a: u64, b: u64) -> (u64, u64) {
         let a0 = a as u32 as u64;
         let a1 = (a >> 32) as u32 as u64;
@@ -160,7 +160,13 @@ impl std::ops::Mul for Uint128 {
             (hi, lo)
         };
 
-        #[cfg(not(target_arch = "x86_64"))]
+        #[cfg(all(not(target_arch = "x86_64"), target_pointer_width = "64"))]
+        let (p0_hi, p0_lo) = {
+            let full = self.l as u128 * rhs.l as u128;
+            ((full >> 64) as u64, full as u64)
+        };
+
+        #[cfg(all(not(target_arch = "x86_64"), target_pointer_width = "32"))]
         let (p0_hi, p0_lo) = Self::mul_u64_full(self.l, rhs.l);
 
         let t1_lo = self.l.wrapping_mul(rhs.h);
