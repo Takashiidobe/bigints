@@ -1,0 +1,19 @@
+---
+source: tests/asm_snapshots.rs
+assertion_line: 457
+expression: asm
+---
+bigints::native_div:
+	addi sp, sp, -16
+	sd ra, 8(sp)
+	or a4, a2, a3
+	beqz a4, .LBB_2
+	call __udivti3
+	ld ra, 8(sp)
+	addi sp, sp, 16
+	ret
+.LBB_2:
+.Lpcrel_hi2:
+	auipc a0, %pcrel_hi(.Lanon.1)
+	addi a0, a0, %pcrel_lo(.Lpcrel_hi2)
+	call core::panicking::panic_const::panic_const_div_by_zero

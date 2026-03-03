@@ -440,6 +440,27 @@ asm_snapshot!(
 );
 
 asm_snapshot!(
+    asm_native_add_riscv,
+    "bigints::native_add",
+    "riscv64gc-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_native_sub_riscv,
+    "bigints::native_sub",
+    "riscv64gc-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_native_mul_riscv,
+    "bigints::native_mul",
+    "riscv64gc-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_native_div_riscv,
+    "bigints::native_div",
+    "riscv64gc-unknown-linux-gnu"
+);
+
+asm_snapshot!(
     asm_u256_add_riscv,
     "<bigints::u256::Uint256 as core::ops::arith::Add>::add",
     "riscv64gc-unknown-linux-gnu"
@@ -549,6 +570,26 @@ asm_snapshot!(
 // ============================================================================
 
 // x86_64
+asm_snapshot!(
+    asm_native_add_x86_64,
+    "bigints::native_add",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_native_sub_x86_64,
+    "bigints::native_sub",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_native_mul_x86_64,
+    "bigints::native_mul",
+    "x86_64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_native_div_x86_64,
+    "bigints::native_div",
+    "x86_64-unknown-linux-gnu"
+);
 asm_matches_native!(
     asm_u128_add_matches_native_x86_64,
     "<bigints::u128::Uint128 as core::ops::arith::Add>::add",
@@ -574,6 +615,26 @@ asm_matches_native!(
 );
 
 // aarch64
+asm_snapshot!(
+    asm_native_add_aarch64,
+    "bigints::native_add",
+    "aarch64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_native_sub_aarch64,
+    "bigints::native_sub",
+    "aarch64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_native_mul_aarch64,
+    "bigints::native_mul",
+    "aarch64-unknown-linux-gnu"
+);
+asm_snapshot!(
+    asm_native_div_aarch64,
+    "bigints::native_div",
+    "aarch64-unknown-linux-gnu"
+);
 asm_matches_native!(
     asm_u128_add_matches_native_aarch64,
     "<bigints::u128::Uint128 as core::ops::arith::Add>::add",

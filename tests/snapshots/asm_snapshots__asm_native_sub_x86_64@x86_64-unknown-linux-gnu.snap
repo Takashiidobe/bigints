@@ -1,0 +1,10 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+bigints::native_sub:
+	mov rax, rdi
+	sub rax, rdx
+	sbb rsi, rcx
+	mov rdx, rsi
+	ret

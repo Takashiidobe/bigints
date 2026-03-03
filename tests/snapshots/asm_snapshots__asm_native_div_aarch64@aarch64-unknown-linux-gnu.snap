@@ -1,0 +1,16 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+bigints::native_div:
+	stp x29, x30, [sp, #-16]!
+	mov x29, sp
+	orr x8, x2, x3
+	cbz x8, .LBB_2
+	bl __udivti3
+	ldp x29, x30, [sp], #16
+	ret
+.LBB_2:
+	adrp x0, .Lanon.1
+	add x0, x0, :lo12:.Lanon.1
+	bl core::panicking::panic_const::panic_const_div_by_zero

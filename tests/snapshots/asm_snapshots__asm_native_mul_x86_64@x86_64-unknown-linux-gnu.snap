@@ -1,0 +1,11 @@
+---
+source: tests/asm_snapshots.rs
+expression: asm
+---
+bigints::native_mul:
+	imul rsi, rdx
+	mulx rdx, rax, rdi
+	add rdx, rsi
+	imul rcx, rdi
+	add rdx, rcx
+	ret

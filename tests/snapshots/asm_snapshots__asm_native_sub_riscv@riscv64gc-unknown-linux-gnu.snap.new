@@ -1,0 +1,11 @@
+---
+source: tests/asm_snapshots.rs
+assertion_line: 442
+expression: asm
+---
+bigints::native_sub:
+	sltu a4, a0, a2
+	sub a1, a1, a3
+	sub a1, a1, a4
+	sub a0, a0, a2
+	ret
