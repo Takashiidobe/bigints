@@ -95,7 +95,7 @@ expression: asm
 	lmg %r9, %r15, 328(%r15)
 	br %r14
 .LBB_12:
-	larl %r2, .Lanon.20
+	larl %r2, .Lanon.21
 	lghi %r3, 51
-	larl %r4, .Lanon.22
+	larl %r4, .Lanon.23
 	brasl %r14, core::panicking::panic_fmt@PLT

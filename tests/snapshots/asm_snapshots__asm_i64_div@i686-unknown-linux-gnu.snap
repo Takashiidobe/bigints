@@ -10,11 +10,11 @@ expression: asm
 	sub esp, 12
 	mov eax, dword ptr [esp + 40]
 	mov edx, dword ptr [esp + 44]
-	call .L72$pb
-.L72$pb:
+	call .L73$pb
+.L73$pb:
 	pop ebx
 .Ltmp:
-	add ebx, offset _GLOBAL_OFFSET_TABLE_+(.Ltmp-.L72$pb)
+	add ebx, offset _GLOBAL_OFFSET_TABLE_+(.Ltmp-.L73$pb)
 	mov ecx, eax
 	or ecx, edx
 	je .LBB_3
@@ -42,11 +42,11 @@ expression: asm
 	ret
 .LBB_3:
 	sub esp, 12
-	lea eax, [ebx + .Lanon.16@GOTOFF]
+	lea eax, [ebx + .Lanon.17@GOTOFF]
 	push eax
 	call core::panicking::panic_const::panic_const_div_by_zero@PLT
 .LBB_2:
 	sub esp, 12
-	lea eax, [ebx + .Lanon.16@GOTOFF]
+	lea eax, [ebx + .Lanon.17@GOTOFF]
 	push eax
 	call core::panicking::panic_const::panic_const_div_overflow@PLT

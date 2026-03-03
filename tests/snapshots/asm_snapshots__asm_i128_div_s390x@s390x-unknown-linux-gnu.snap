@@ -30,8 +30,8 @@ expression: asm
 	lmg %r14, %r15, 320(%r15)
 	br %r14
 .LBB_4:
-	larl %r2, .Lanon.19
+	larl %r2, .Lanon.20
 	brasl %r14, core::panicking::panic_const::panic_const_div_by_zero@PLT
 .LBB_5:
-	larl %r2, .Lanon.19
+	larl %r2, .Lanon.20
 	brasl %r14, core::panicking::panic_const::panic_const_div_overflow@PLT

@@ -20,12 +20,12 @@ expression: asm
 	addi sp, sp, 16
 	ret
 .LBB_4:
-.Lpcrel_hi12:
-	auipc a0, %pcrel_hi(.Lanon.19)
-	addi a0, a0, %pcrel_lo(.Lpcrel_hi12)
+.Lpcrel_hi13:
+	auipc a0, %pcrel_hi(.Lanon.20)
+	addi a0, a0, %pcrel_lo(.Lpcrel_hi13)
 	call core::panicking::panic_const::panic_const_div_by_zero
 .LBB_5:
-.Lpcrel_hi13:
-	auipc a0, %pcrel_hi(.Lanon.19)
-	addi a0, a0, %pcrel_lo(.Lpcrel_hi13)
+.Lpcrel_hi14:
+	auipc a0, %pcrel_hi(.Lanon.20)
+	addi a0, a0, %pcrel_lo(.Lpcrel_hi14)
 	call core::panicking::panic_const::panic_const_div_overflow

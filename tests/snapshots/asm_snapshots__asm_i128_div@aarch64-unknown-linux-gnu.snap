@@ -18,10 +18,10 @@ expression: asm
 	ldp x29, x30, [sp], #16
 	ret
 .LBB_4:
-	adrp x0, .Lanon.19
-	add x0, x0, :lo12:.Lanon.19
+	adrp x0, .Lanon.20
+	add x0, x0, :lo12:.Lanon.20
 	bl core::panicking::panic_const::panic_const_div_by_zero
 .LBB_5:
-	adrp x0, .Lanon.19
-	add x0, x0, :lo12:.Lanon.19
+	adrp x0, .Lanon.20
+	add x0, x0, :lo12:.Lanon.20
 	bl core::panicking::panic_const::panic_const_div_overflow

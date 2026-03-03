@@ -11,6 +11,6 @@ expression: asm
 	ldp x29, x30, [sp], #16
 	ret
 .LBB_2:
-	adrp x0, .Lanon.14
-	add x0, x0, :lo12:.Lanon.14
+	adrp x0, .Lanon.13
+	add x0, x0, :lo12:.Lanon.13
 	bl core::panicking::panic_const::panic_const_div_by_zero

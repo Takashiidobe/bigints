@@ -93,8 +93,8 @@ expression: asm
 	pop rbp
 	ret
 .LBB_8:
-	lea rdi, [rip + .Lanon.19]
-	lea rdx, [rip + .Lanon.21]
+	lea rdi, [rip + .Lanon.20]
+	lea rdx, [rip + .Lanon.22]
 	mov esi, 51
 	vzeroupper
 	call qword ptr [rip + core::panicking::panic_fmt@GOTPCREL]

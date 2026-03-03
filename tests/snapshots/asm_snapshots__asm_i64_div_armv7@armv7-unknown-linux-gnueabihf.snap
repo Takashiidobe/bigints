@@ -16,16 +16,16 @@ expression: asm
 	bl __aeabi_ldivmod
 	pop {r11, pc}
 .LBB_4:
-	ldr r0, .LCPI72_1
-.LPC72_1:
+	ldr r0, .LCPI73_1
+.LPC73_1:
 	add r0, pc, r0
 	mov lr, pc
 	b core::panicking::panic_const::panic_const_div_by_zero
 .LBB_5:
-	ldr r0, .LCPI72_0
-.LPC72_0:
+	ldr r0, .LCPI73_0
+.LPC73_0:
 	add r0, pc, r0
 	mov lr, pc
 	b core::panicking::panic_const::panic_const_div_overflow
-.LCPI72_0:
-.LCPI72_1:
+.LCPI73_0:
+.LCPI73_1:

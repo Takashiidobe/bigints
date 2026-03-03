@@ -12,7 +12,7 @@ expression: asm
 	addi sp, sp, 16
 	ret
 .LBB_2:
-.Lpcrel_hi8:
-	auipc a0, %pcrel_hi(.Lanon.14)
-	addi a0, a0, %pcrel_lo(.Lpcrel_hi8)
+.Lpcrel_hi7:
+	auipc a0, %pcrel_hi(.Lanon.13)
+	addi a0, a0, %pcrel_lo(.Lpcrel_hi7)
 	call core::panicking::panic_const::panic_const_div_by_zero

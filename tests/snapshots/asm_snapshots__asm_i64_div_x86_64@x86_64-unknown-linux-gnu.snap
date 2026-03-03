@@ -35,8 +35,8 @@ expression: asm
 	pop rcx
 	ret
 .LBB_6:
-	lea rdi, [rip + .Lanon.15]
+	lea rdi, [rip + .Lanon.16]
 	call qword ptr [rip + core::panicking::panic_const::panic_const_div_by_zero@GOTPCREL]
 .LBB_7:
-	lea rdi, [rip + .Lanon.15]
+	lea rdi, [rip + .Lanon.16]
 	call qword ptr [rip + core::panicking::panic_const::panic_const_div_overflow@GOTPCREL]

@@ -26,5 +26,5 @@ expression: asm
 	ret
 .LBB_5:
 	push rax
-	lea rdi, [rip + .Lanon.11]
+	lea rdi, [rip + .Lanon.13]
 	call qword ptr [rip + core::panicking::panic_const::panic_const_div_by_zero@GOTPCREL]

@@ -47,32 +47,6 @@ pub struct Uint128 {
     pub l: u64, // bits 0-63 (higher address)
 }
 
-impl Uint128 {
-    #[cfg(all(not(target_arch = "x86_64"), target_pointer_width = "32"))]
-    fn mul_u64_full(a: u64, b: u64) -> (u64, u64) {
-        let a0 = a as u32 as u64;
-        let a1 = (a >> 32) as u32 as u64;
-        let b0 = b as u32 as u64;
-        let b1 = (b >> 32) as u32 as u64;
-
-        let p0 = a0 * b0;
-        let p1 = a0 * b1;
-        let p2 = a1 * b0;
-        let p3 = a1 * b1;
-
-        let (middle, carry_mid) = p1.overflowing_add(p2);
-        let (low, carry_low) = p0.overflowing_add(middle << 32);
-        let mut high = p3
-            .wrapping_add(middle >> 32)
-            .wrapping_add((carry_mid as u64) << 32);
-        if carry_low {
-            high = high.wrapping_add(1);
-        }
-
-        (high, low)
-    }
-}
-
 impl std::ops::Add for Uint128 {
     type Output = Self;
 
@@ -129,45 +103,15 @@ impl std::ops::Mul for Uint128 {
     /// only contribute their low 64 bits to the result's high limb. The `h×h` term
     /// would only affect bits 128+ which we discard.
     ///
-    /// # x86_64: `mulx` intrinsic
+    /// # 64×64→128 multiplication
     ///
-    /// Uses `_mulx_u64` (BMI2) for the 64×64→128 multiplication:
-    /// - Single instruction: `mulx r64, r64, r/m64`
-    /// - Returns full 128-bit product in two registers
-    /// - Requires `target-feature=+bmi2` for optimal codegen (see `.cargo/config.toml`)
-    ///
-    /// # Fallback: 32-bit schoolbook
-    ///
-    /// On non-x86_64, `mul_u64_full` decomposes each 64-bit operand into two 32-bit
-    /// halves and uses four 32×32→64 multiplications:
-    ///
-    /// ```text
-    ///        a1 : a0      (a = a1<<32 | a0)
-    ///      × b1 : b0      (b = b1<<32 | b0)
-    ///     ──────────
-    ///             p0 = a0 × b0    [bits 0-63]
-    ///        p1 = a0 × b1         [bits 32-95]
-    ///        p2 = a1 × b0         [bits 32-95]
-    ///   p3 = a1 × b1              [bits 64-127]
-    /// ```
-    ///
-    /// These partial products are then combined with proper carry propagation.
+    /// Uses `u64::widening_mul` (nightly `bigint_helper_methods`) for the full-width
+    /// multiply. LLVM lowers this to the optimal instruction on each platform:
+    /// - x86_64: `mulx` (BMI2) or `mul`
+    /// - aarch64: `mul` + `umulh`
+    /// - riscv64: `mul` + `mulhu`
     fn mul(self, rhs: Self) -> Self::Output {
-        #[cfg(target_arch = "x86_64")]
-        let (p0_hi, p0_lo) = {
-            let mut hi = 0u64;
-            let lo = unsafe { core::arch::x86_64::_mulx_u64(self.l, rhs.l, &mut hi) };
-            (hi, lo)
-        };
-
-        #[cfg(all(not(target_arch = "x86_64"), target_pointer_width = "64"))]
-        let (p0_hi, p0_lo) = {
-            let full = self.l as u128 * rhs.l as u128;
-            ((full >> 64) as u64, full as u64)
-        };
-
-        #[cfg(all(not(target_arch = "x86_64"), target_pointer_width = "32"))]
-        let (p0_hi, p0_lo) = Self::mul_u64_full(self.l, rhs.l);
+        let (p0_lo, p0_hi) = self.l.widening_mul(rhs.l);
 
         let t1_lo = self.l.wrapping_mul(rhs.h);
         let t2_lo = self.h.wrapping_mul(rhs.l);

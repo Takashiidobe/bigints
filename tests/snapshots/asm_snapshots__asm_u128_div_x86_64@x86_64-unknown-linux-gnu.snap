@@ -11,5 +11,5 @@ expression: asm
 	pop rcx
 	ret
 .LBB_2:
-	lea rdi, [rip + .Lanon.13]
+	lea rdi, [rip + .Lanon.12]
 	call qword ptr [rip + core::panicking::panic_const::panic_const_div_by_zero@GOTPCREL]

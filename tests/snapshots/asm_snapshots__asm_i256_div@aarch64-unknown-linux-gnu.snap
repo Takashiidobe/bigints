@@ -100,9 +100,9 @@ expression: asm
 	mov x11, x13
 	b .LBB_6
 .LBB_11:
-	adrp x0, .Lanon.20
-	add x0, x0, :lo12:.Lanon.20
-	adrp x2, .Lanon.22
-	add x2, x2, :lo12:.Lanon.22
+	adrp x0, .Lanon.21
+	add x0, x0, :lo12:.Lanon.21
+	adrp x2, .Lanon.23
+	add x2, x2, :lo12:.Lanon.23
 	mov w1, #51
 	bl core::panicking::panic_fmt

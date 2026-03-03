@@ -110,11 +110,11 @@ expression: asm
 	sub a2, a2, a0
 	j .LBB_6
 .LBB_11:
-.Lpcrel_hi14:
-	auipc a0, %pcrel_hi(.Lanon.20)
 .Lpcrel_hi15:
-	auipc a1, %pcrel_hi(.Lanon.22)
-	addi a0, a0, %pcrel_lo(.Lpcrel_hi14)
-	addi a2, a1, %pcrel_lo(.Lpcrel_hi15)
+	auipc a0, %pcrel_hi(.Lanon.21)
+.Lpcrel_hi16:
+	auipc a1, %pcrel_hi(.Lanon.23)
+	addi a0, a0, %pcrel_lo(.Lpcrel_hi15)
+	addi a2, a1, %pcrel_lo(.Lpcrel_hi16)
 	li a1, 51
 	call core::panicking::panic_fmt

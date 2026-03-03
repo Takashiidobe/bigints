@@ -9,9 +9,9 @@ expression: asm
 	bl __aeabi_uldivmod
 	pop {r11, pc}
 .LBB_2:
-	ldr r0, .LCPI68_0
-.LPC68_0:
+	ldr r0, .LCPI69_0
+.LPC69_0:
 	add r0, pc, r0
 	mov lr, pc
 	b core::panicking::panic_const::panic_const_div_by_zero
-.LCPI68_0:
+.LCPI69_0:
